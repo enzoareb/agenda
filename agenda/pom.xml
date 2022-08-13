@@ -9,9 +9,14 @@
   
     <developers>
         <developer>
-            <id>9999999</id>
-            <name>Student Name</name>
-            <email>student@theirmail.com</email>
+            <id>1</id>
+            <name>Enzo Arebalos</name>
+            <email>arebalosenzo@gmail.com</email>
+        </developer>
+        <developer>
+            <id>2</id>
+            <name>Jose Luis Quiñones</name>
+            <email>jluisquino@gmail.com</email>
         </developer>
     </developers>
 
