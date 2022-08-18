@@ -17,6 +17,7 @@ public class PersonaDAOSQL implements PersonaDAO
 	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, email, Cumpleaños) VALUES(?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = "SELECT * FROM personas";
+	private static final String edit = "INSERT INTO personas(idPersona, nombre, telefono, email, Cumpleaños) VALUES(?, ?, ?, ?, ?) WHERE idPersona = ?";
 		
 	public boolean insert(PersonaDTO persona)
 	{
@@ -102,5 +103,40 @@ public class PersonaDAOSQL implements PersonaDAO
 		String email = resultSet.getString("Email");
 		String fechaCumpleaños = resultSet.getString("Cumpleaños");
 		return new PersonaDTO(id, nombre, tel,email,fechaCumpleaños);
+	}
+
+
+	//agrego funcion para editar contacto
+	public boolean edit(PersonaDTO persona_a_editar)
+	{
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isEditExitoso = false;
+		try
+		{
+			statement = conexion.prepareStatement(edit);
+			statement.setString(1, Integer.toString(persona_a_editar.getIdPersona()));
+			statement.setInt(1, persona_a_editar.getIdPersona());
+			statement.setString(2, persona_a_editar.getNombre());
+			statement.setString(3, persona_a_editar.getTelefono());
+			statement.setString(4, persona_a_editar.getEmail());
+			statement.setString(5, persona_a_editar.getFechaCumpleaños());
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isEditExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		return isEditExitoso;
 	}
 }
