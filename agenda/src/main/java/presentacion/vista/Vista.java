@@ -2,6 +2,7 @@ package presentacion.vista;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -25,7 +26,7 @@ public class Vista
 	private JButton btnBorrar;
 	private JButton btnReporte;
 	private DefaultTableModel modelPersonas;
-	private  String[] nombreColumnas = {"Nombre y apellido","Telefono"};
+	private  String[] nombreColumnas = {"Nombre y apellido","Telefono","Email","Cumpleaños"};
 
 	public Vista() 
 	{
@@ -137,7 +138,9 @@ public class Vista
 		{
 			String nombre = p.getNombre();
 			String tel = p.getTelefono();
-			Object[] fila = {nombre, tel};
+			String email = p.getEmail();
+			String fechaCumpleaños = p.getFechaCumpleaños();
+			Object[] fila = {nombre, tel, email, fechaCumpleaños};
 			this.getModelPersonas().addRow(fila);
 		}
 		
