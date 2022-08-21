@@ -16,6 +16,7 @@ public class VentanaPersona extends JFrame
 	private JTextField txtEmail;
 	private JTextField txtFechaCumpleaños;
 	private JButton btnAgregarPersona;
+	private JButton btnDomicilioPersona;
 	private static VentanaPersona INSTANCE;
 	
 	public static VentanaPersona getInstance()
@@ -39,6 +40,7 @@ public class VentanaPersona extends JFrame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 307, 223);
@@ -81,15 +83,25 @@ public class VentanaPersona extends JFrame
 		panel.add(txtFechaCumpleaños);
 		txtFechaCumpleaños.setColumns(10);
 		
-		btnAgregarPersona = new JButton("Agregar");
+		btnAgregarPersona = new JButton("Guardar");
 		btnAgregarPersona.setBounds(208, 192, 89, 23);
 		panel.add(btnAgregarPersona);
-		
+
+		btnDomicilioPersona = new JButton("Domicilio");
+		btnDomicilioPersona.setBounds(100, 192, 90, 23);
+		panel.add(btnDomicilioPersona);
+
 		this.setVisible(false);
 	}
 	
 	public void mostrarVentana()
 	{
+		this.setVisible(true);
+	}
+
+	public void mostrarVentana(String titulo, boolean estado) {
+		this.setTitle(titulo);
+		this.btnDomicilioPersona.setEnabled(estado);
 		this.setVisible(true);
 	}
 	
@@ -111,9 +123,35 @@ public class VentanaPersona extends JFrame
 		return txtFechaCumpleaños;
 	}
 
+	// Seters
+	public void setTxtNombre(JTextField nombre) 
+	{
+		this.txtNombre = nombre;
+	}
+
+	public void setTxtTelefono(JTextField telefono) 
+	{
+		this.txtTelefono = telefono;
+	}
+
+	public void setTxtEmail(JTextField email) {
+		this.txtEmail = email;
+	}
+
+	public void setTxtFechaCumpleaños(JTextField cumple) {
+		this.txtFechaCumpleaños = cumple;
+	}
+
+
 	public JButton getBtnAgregarPersona() 
 	{
 		return btnAgregarPersona;
+	}
+
+	// Domicilio
+	public JButton getBtnDomicilioPersona() 
+	{
+		return btnDomicilioPersona;
 	}
 
 	public void cerrar()
@@ -124,6 +162,8 @@ public class VentanaPersona extends JFrame
 		this.txtFechaCumpleaños.setText(null);
 		this.dispose();
 	}
+
+
 	
 }
 

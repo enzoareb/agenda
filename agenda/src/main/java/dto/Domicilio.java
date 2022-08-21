@@ -1,16 +1,28 @@
 package dto;
 
 public class Domicilio {
+    private int idPersona;
     private String calle;
     private String altura;
     private String piso;
+    private String depto;
     private String localidad;
 
-    public Domicilio(String calle, String altura, String piso, String localidad) {
+    public Domicilio(int idPersona,String calle, String altura, String piso, String depto, String localidad) {
+        this.idPersona = idPersona;
         this.calle = calle;
         this.altura = altura;
         this.piso = piso;
+        this.depto = depto;
         this.localidad = localidad;
+    }
+
+    public int getidPersona() {
+        return idPersona;
+    }
+
+    public void setidPersona(int idPersona) {
+        this.idPersona = idPersona;
     }
 
     public String getCalle() {
@@ -35,6 +47,14 @@ public class Domicilio {
 
     public void setPiso(String piso) {
         this.piso = piso;
+    }
+
+    public String getDepto() {
+        return depto;
+    }
+
+    public void setDepto(String depto) {
+        this.depto = depto;
     }
 
     public String getLocalidad() {

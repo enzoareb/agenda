@@ -10,6 +10,8 @@ public interface PersonaDAO
 	public boolean insert(PersonaDTO persona);
 
 	public boolean delete(PersonaDTO persona_a_eliminar);
+
+	public boolean edit(PersonaDTO persona_a_editar);
 	
 	public List<PersonaDTO> readAll();
 }

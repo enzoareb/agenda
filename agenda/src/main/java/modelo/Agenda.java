@@ -1,6 +1,8 @@
 package modelo;
 
 import java.util.List;
+
+import dto.Domicilio;
 import dto.PersonaDTO;
 import persistencia.dao.interfaz.DAOAbstractFactory;
 import persistencia.dao.interfaz.PersonaDAO;
@@ -29,5 +31,14 @@ public class Agenda
 	{
 		return this.persona.readAll();		
 	}
+
+	public void editarPersona(PersonaDTO persona_a_editar)
+	{
+		this.persona.edit(persona_a_editar);
+	}
+
+    public void agregarDomicilio(Domicilio nuevoDomicilio) {
+    }
+
 	
 }

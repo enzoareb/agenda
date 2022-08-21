@@ -24,6 +24,7 @@ public class Vista
 	private JTable tablaPersonas;
 	private JButton btnAgregar;
 	private JButton btnBorrar;
+	private JButton btnEditar;
 	private JButton btnReporte;
 	private DefaultTableModel modelPersonas;
 	private  String[] nombreColumnas = {"Nombre y apellido","Telefono","Email","Cumpleaños"};
@@ -41,6 +42,7 @@ public class Vista
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setTitle("AGENDA");
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 434, 262);
@@ -65,7 +67,8 @@ public class Vista
 		btnAgregar.setBounds(10, 228, 89, 23);
 		panel.add(btnAgregar);
 		
-		JButton btnEditar = new JButton("Editar");
+		//Botón Editar
+		btnEditar = new JButton("Editar");
 		btnEditar.setBounds(109, 228, 89, 23);
 		panel.add(btnEditar);
 		
@@ -101,6 +104,11 @@ public class Vista
 	public JButton getBtnAgregar() 
 	{
 		return btnAgregar;
+	}
+
+	public JButton getBtnEditar() 
+	{
+		return btnEditar;
 	}
 
 	public JButton getBtnBorrar() 
@@ -142,7 +150,13 @@ public class Vista
 			String fechaCumpleaños = p.getFechaCumpleaños();
 			Object[] fila = {nombre, tel, email, fechaCumpleaños};
 			this.getModelPersonas().addRow(fila);
+			//p.getIdPersona();
+		
 		}
 		
 	}
+
+
+
+
 }
