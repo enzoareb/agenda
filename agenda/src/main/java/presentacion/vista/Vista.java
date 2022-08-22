@@ -27,7 +27,7 @@ public class Vista
 	private JButton btnEditar;
 	private JButton btnReporte;
 	private DefaultTableModel modelPersonas;
-	private  String[] nombreColumnas = {"Nombre y apellido","Telefono","Email","Cumpleaños"};
+	private  String[] nombreColumnas = {"Id","Nombre y apellido","Telefono","Email","Cumpleaños"};
 
 	public Vista() 
 	{
@@ -144,11 +144,12 @@ public class Vista
 
 		for (PersonaDTO p : personasEnTabla)
 		{
+			int idpersona = p.getIdPersona();
 			String nombre = p.getNombre();
 			String tel = p.getTelefono();
 			String email = p.getEmail();
 			String fechaCumpleaños = p.getFechaCumpleaños();
-			Object[] fila = {nombre, tel, email, fechaCumpleaños};
+			Object[] fila = {idpersona,nombre, tel, email, fechaCumpleaños};
 			this.getModelPersonas().addRow(fila);
 			//p.getIdPersona();
 		

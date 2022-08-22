@@ -1,6 +1,7 @@
 package presentacion.vista;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 //import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,10 +18,8 @@ public class VentanaDomicilioPersona extends JFrame
 	private JTextField txtPiso;
 	private JTextField txtDepto;
 	private JTextField txtLocalidad;
-	//private JComboBox jcLocalidad; 
-	
-
-
+	private JTextField txtIdPersona;
+	private JComboBox<String> jcLocalidad; 
 	private JButton btnAgregarDomicilio;
 	
 	private static VentanaDomicilioPersona INSTANCE;
@@ -76,6 +75,11 @@ public class VentanaDomicilioPersona extends JFrame
 		txtCalle.setBounds(133, 8, 164, 20);
 		panel.add(txtCalle);
 		txtCalle.setColumns(10);
+
+		txtIdPersona = new JTextField();
+		txtCalle.setBounds(133, 30, 164, 20);
+		panel.add(txtCalle);
+		txtCalle.setColumns(10);
 		
 		txtAltura = new JTextField();
 		txtAltura.setBounds(133, 49, 164, 20);
@@ -92,14 +96,14 @@ public class VentanaDomicilioPersona extends JFrame
 		panel.add(txtDepto);
 		txtDepto.setColumns(10);
 
-		txtLocalidad = new JTextField();
-		txtLocalidad.setBounds(133, 169, 164, 20);
-		panel.add(txtLocalidad);
-		txtLocalidad.setColumns(10);
+		//txtLocalidad = new JTextField();
+		//txtLocalidad.setBounds(133, 169, 164, 20);
+		//panel.add(txtLocalidad);
+		//txtLocalidad.setColumns(10);
 
-		//jcLocalidad = new JComboBox<>();
-		//jcLocalidad.setBounds(133, 169, 164, 20);
-		//panel.add(jcLocalidad);
+		jcLocalidad = new JComboBox<>();
+		jcLocalidad.setBounds(133, 169, 164, 20);
+		panel.add(jcLocalidad);
 		
 		btnAgregarDomicilio = new JButton("Agregar Domicilio");
 		btnAgregarDomicilio.setBounds(133, 192, 164, 23);
@@ -114,9 +118,9 @@ public class VentanaDomicilioPersona extends JFrame
 		this.setVisible(true);
 	}
 	
-	//public JComboBox getJcLocalidad() {
-	//	return jcLocalidad;
-	//}
+	public JComboBox<String> getJcLocalidad() {
+		return jcLocalidad;
+	}
 
 	public JTextField getTxtCalle() 
 	{
@@ -144,6 +148,14 @@ public class VentanaDomicilioPersona extends JFrame
 	public JButton getBtnAgregarDomicilio() 
 	{
 		return btnAgregarDomicilio;
+	}
+
+	public JTextField getTxtIdPersona() {
+		return txtIdPersona;
+	}
+
+	public void setTxtIdPersona(JTextField txtIdPersona) {
+		this.txtIdPersona = txtIdPersona;
 	}
 
 	public void cerrar()

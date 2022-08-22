@@ -15,8 +15,11 @@ public class VentanaPersona extends JFrame
 	private JTextField txtTelefono;
 	private JTextField txtEmail;
 	private JTextField txtFechaCumpleaños;
+	private JTextField txtIdPersona;
 	private JButton btnAgregarPersona;
+	private JButton btnActualizarPersona;
 	private JButton btnDomicilioPersona;
+
 	private static VentanaPersona INSTANCE;
 	
 	public static VentanaPersona getInstance()
@@ -67,6 +70,13 @@ public class VentanaPersona extends JFrame
 		txtNombre.setBounds(133, 8, 164, 20);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
+
+		// IdPersona Oculto
+		txtIdPersona = new JTextField();
+		txtIdPersona.setBounds(133, 30, 164, 20);
+		txtIdPersona.setVisible(false);
+		panel.add(txtIdPersona);
+		txtIdPersona.setColumns(10);
 		
 		txtTelefono = new JTextField();
 		txtTelefono.setBounds(133, 49, 164, 20);
@@ -87,6 +97,10 @@ public class VentanaPersona extends JFrame
 		btnAgregarPersona.setBounds(208, 192, 89, 23);
 		panel.add(btnAgregarPersona);
 
+		btnActualizarPersona = new JButton("Actualizar");
+		btnActualizarPersona.setBounds(208, 192, 95, 23);
+		panel.add(btnActualizarPersona);
+
 		btnDomicilioPersona = new JButton("Domicilio");
 		btnDomicilioPersona.setBounds(100, 192, 90, 23);
 		panel.add(btnDomicilioPersona);
@@ -102,12 +116,19 @@ public class VentanaPersona extends JFrame
 	public void mostrarVentana(String titulo, boolean estado) {
 		this.setTitle(titulo);
 		this.btnDomicilioPersona.setEnabled(estado);
+		this.btnActualizarPersona.setVisible(estado);
+		this.btnAgregarPersona.setVisible(!estado);
 		this.setVisible(true);
 	}
 	
 	public JTextField getTxtNombre() 
 	{
 		return txtNombre;
+	}
+
+	public JTextField getTxtIdPersona() 
+	{
+		return txtIdPersona;
 	}
 
 	public JTextField getTxtTelefono() 
@@ -123,31 +144,15 @@ public class VentanaPersona extends JFrame
 		return txtFechaCumpleaños;
 	}
 
-	// Seters
-	public void setTxtNombre(JTextField nombre) 
-	{
-		this.txtNombre = nombre;
-	}
-
-	public void setTxtTelefono(JTextField telefono) 
-	{
-		this.txtTelefono = telefono;
-	}
-
-	public void setTxtEmail(JTextField email) {
-		this.txtEmail = email;
-	}
-
-	public void setTxtFechaCumpleaños(JTextField cumple) {
-		this.txtFechaCumpleaños = cumple;
-	}
-
-
 	public JButton getBtnAgregarPersona() 
 	{
 		return btnAgregarPersona;
 	}
 
+	public JButton getBtnActualizarPersona() 
+	{
+		return btnActualizarPersona;
+	}
 	// Domicilio
 	public JButton getBtnDomicilioPersona() 
 	{
@@ -160,7 +165,34 @@ public class VentanaPersona extends JFrame
 		this.txtTelefono.setText(null);
 		this.txtEmail.setText(null);
 		this.txtFechaCumpleaños.setText(null);
+		this.txtIdPersona.setText(null);
 		this.dispose();
+	}
+
+	// Seters
+    public void setTxtNombre(String nombre) {
+		this.txtNombre.setText(nombre);
+	}
+
+	public void setTxtIdPersona(String idPersona) {
+		this.txtNombre.setText(idPersona);
+	}
+
+    public void setTxtEmail(String email) {
+		this.txtEmail.setText(email);
+	}
+
+    public void setTxtTelefono(String telefono) {
+		this.txtTelefono.setText(telefono);
+    }
+
+    public void setTxtFechaCumpleaños(String fechaCumpleaños) {
+		this.txtFechaCumpleaños.setText(fechaCumpleaños);
+    }
+
+	public void setTxtIdPersona(Integer idPersona) {
+		String id = idPersona.toString();
+		this.txtIdPersona.setText(id);
 	}
 
 
