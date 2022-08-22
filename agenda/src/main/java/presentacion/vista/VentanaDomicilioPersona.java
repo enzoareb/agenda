@@ -1,5 +1,7 @@
 package presentacion.vista;
 
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 //import javax.swing.JComboBox;
@@ -8,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import dto.LocalidadDTO;
 
 public class VentanaDomicilioPersona extends JFrame 
 {
@@ -77,9 +81,9 @@ public class VentanaDomicilioPersona extends JFrame
 		txtCalle.setColumns(10);
 
 		txtIdPersona = new JTextField();
-		txtCalle.setBounds(133, 30, 164, 20);
-		panel.add(txtCalle);
-		txtCalle.setColumns(10);
+		txtIdPersona.setBounds(133, 30, 164, 20);
+		panel.add(txtIdPersona);
+		txtIdPersona.setColumns(10);
 		
 		txtAltura = new JTextField();
 		txtAltura.setBounds(133, 49, 164, 20);
@@ -113,8 +117,10 @@ public class VentanaDomicilioPersona extends JFrame
 		this.setVisible(false);
 	}
 	
-	public void mostrarVentanaDomicilio()
+	public void mostrarVentanaDomicilio(String titulo, Integer idPersona)
 	{
+		this.setTitle(titulo);
+		this.txtIdPersona.setText(idPersona.toString());
 		this.setVisible(true);
 	}
 	
@@ -165,8 +171,28 @@ public class VentanaDomicilioPersona extends JFrame
 		this.txtPiso.setText(null);
 		this.txtDepto.setText(null);
 		this.txtLocalidad.setText(null);
+		this.jcLocalidad.setSelectedItem(null);
 		this.dispose();
 	}
+
+
+	public void llenarCombo(List<LocalidadDTO> localidadEnTabla) {
+
+		for (LocalidadDTO l : localidadEnTabla)
+		{
+			int idlocalidad = l.getIdLocalidad();
+			String nombre = l.getNombre();
+			int idprovincia = l.getIdProvincia();
+			int idpais = l.getIdPais();
+			//String fila = {idlocalidad,nombre,};
+			this.jcLocalidad.addItem(nombre);
+			//this.getModelPersonas().addRow(fila);
+			
+		
+		}
+		
+	}
+
 	
 }
 

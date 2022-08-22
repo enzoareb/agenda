@@ -13,6 +13,7 @@ import presentacion.vista.VentanaDomicilioPersona;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
 import dto.DomicilioDTO;
+import dto.LocalidadDTO;
 import dto.PersonaDTO;
 
 public class Controlador implements ActionListener
@@ -22,6 +23,8 @@ public class Controlador implements ActionListener
 		private VentanaPersona ventanaPersona; 
 		private VentanaDomicilioPersona ventanaDomicilioPersona; 
 		private Agenda agenda;
+	
+		private List<LocalidadDTO> localidadesEnTabla;
 		
 		public Controlador(Vista vista, Agenda agenda)
 		{
@@ -38,14 +41,16 @@ public class Controlador implements ActionListener
 			this.ventanaPersona.getBtnActualizarPersona().addActionListener(p->editarPersona(p));
 			// Domicilio
 			this.ventanaDomicilioPersona = VentanaDomicilioPersona.getInstance();
-			this.ventanaDomicilioPersona.getBtnAgregarDomicilio().addActionListener(p->guardarDomicilioPersona(p));
+			this.ventanaDomicilioPersona.getBtnAgregarDomicilio().addActionListener(a->guardarDomicilioPersona(a));
 			
 			this.agenda = agenda;
 		}
 		
 		private void ventanaDomicilioPersona(ActionEvent a) {
-			this.ventanaDomicilioPersona.mostrarVentanaDomicilio();
-			// Aca hay que pasar idPersona
+			// Aca paso idPersona
+			int idPersona = Integer.parseInt(this.ventanaPersona.getTxtIdPersona().getText());
+			this.ventanaDomicilioPersona.mostrarVentanaDomicilio("AGREGAR DOMICILIO",idPersona);
+			
 		}
 
 		private void ventanaAgregarPersona(ActionEvent a) {
@@ -87,12 +92,13 @@ public class Controlador implements ActionListener
 			String altura = ventanaDomicilioPersona.getTxtAltura().getText();
 			String piso = ventanaDomicilioPersona.getTxtPiso().getText();
 			String depto = ventanaDomicilioPersona.getTxtDepto().getText();
-			//String localidad = ventanaDomicilioPersona.getJcLocalidad().getSelectedItem().toString();
-			String localidad = ventanaDomicilioPersona.getTxtLocalidad().getText();
+			String localidad = ventanaDomicilioPersona.getJcLocalidad().getSelectedItem().toString();
+			//String localidad = ventanaDomicilioPersona.getTxtLocalidad().getText();
+			//String localidad = "SAN MIGUEL";
 			DomicilioDTO nuevoDomicilio = new DomicilioDTO(0, idpersona, calle, altura,piso,depto,localidad);
 			this.agenda.agregarDomicilio(nuevoDomicilio);
-			this.refrescarTabla();
-			this.ventanaPersona.cerrar();
+			//this.refrescarTabla();
+			this.ventanaDomicilioPersona.cerrar();
 		}
 
 		private void mostrarReporte(ActionEvent r) {
@@ -130,12 +136,14 @@ public class Controlador implements ActionListener
 		{
 			this.refrescarTabla();
 			this.vista.show();
+			
 		}
 		
 		private void refrescarTabla()
 		{
 			this.personasEnTabla = agenda.obtenerPersonas();
 			this.vista.llenarTabla(this.personasEnTabla);
+			//this.ventanaDomicilioPersona.llenarCombo(this.localidadesEnTabla); // Cargar Combo Localidades
 		}
 
 		@Override

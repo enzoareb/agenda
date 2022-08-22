@@ -14,7 +14,7 @@ import dto.DomicilioDTO;
 
 public class DomicilioDAOSQL implements DomicilioDAO
 {
-	private static final String insert = "INSERT INTO domicilio(idDomicilio, idPersona, calle, altura, piso, depto,localidad) VALUES(?, ?, ?, ?, ?, ?, ?)";
+	private static final String insert = "INSERT INTO domicilio (idDomicilio, idPersona, calle, altura, piso, depto,localidad) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM domicilio WHERE idDomicilio = ?";
 	private static final String readall = "SELECT * FROM domicilio";
 	private static final String edit = "UPDATE domicilio SET idPersona=?, calle=?, altura=?, piso=?, depto=?, localidad=? WHERE iddomicilio = ?";
@@ -110,7 +110,7 @@ public class DomicilioDAOSQL implements DomicilioDAO
 	}
 
 
-	//agrego funcion para editar contacto
+	//agrego funcion para editar domicilio
 	public boolean edit(DomicilioDTO domicilio_a_editar)
 	{
 		PreparedStatement statement;
