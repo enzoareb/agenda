@@ -180,12 +180,12 @@ public class VentanaDomicilioPersona extends JFrame
 
 		for (LocalidadDTO l : localidadEnTabla)
 		{
-			int idlocalidad = l.getIdLocalidad();
+			//int idlocalidad = l.getIdLocalidad();
 			String nombre = l.getNombre();
 			//int idprovincia = l.getIdProvincia();
 			//int idpais = l.getIdPais();
 			//String fila = {idlocalidad,nombre,};
-			this.jcLocalidad.addItem(idlocalidad + ' '+nombre);
+			jcLocalidad.addItem(nombre);
 			
 			
 		
@@ -201,7 +201,6 @@ public class VentanaDomicilioPersona extends JFrame
 		this.txtPiso.setText(null);
 		this.txtDepto.setText(null);
 		this.jcLocalidad.setSelectedItem(null);
-		this.btnAgregarDomicilio.setEnabled(false);
 		this.dispose();
 	}
 
