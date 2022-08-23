@@ -1,5 +1,6 @@
 package presentacion.vista;
 
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,6 +17,7 @@ public class VentanaPersona extends JFrame
 	private JTextField txtEmail;
 	private JTextField txtFechaCumpleaños;
 	private JTextField txtIdPersona;
+	private JTextField txtDomicilio;
 	private JButton btnAgregarPersona;
 	private JButton btnActualizarPersona;
 	private JButton btnDomicilioPersona;
@@ -92,6 +94,11 @@ public class VentanaPersona extends JFrame
 		txtFechaCumpleaños.setBounds(133, 129, 164, 20);
 		panel.add(txtFechaCumpleaños);
 		txtFechaCumpleaños.setColumns(10);
+
+		txtDomicilio = new JTextField();
+		txtDomicilio.setBounds(133, 129, 164, 20);
+		panel.add(txtDomicilio);
+		txtDomicilio.setColumns(10);
 		
 		btnAgregarPersona = new JButton("Guardar");
 		btnAgregarPersona.setBounds(208, 192, 89, 23);
@@ -144,6 +151,10 @@ public class VentanaPersona extends JFrame
 		return txtFechaCumpleaños;
 	}
 
+	public JTextField getTxtDomicilio() {
+        return txtDomicilio;
+    }
+
 	public JButton getBtnAgregarPersona() 
 	{
 		return btnAgregarPersona;
@@ -194,6 +205,8 @@ public class VentanaPersona extends JFrame
 		String id = idPersona.toString();
 		this.txtIdPersona.setText(id);
 	}
+
+    
 
 
 	

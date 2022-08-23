@@ -13,7 +13,7 @@ import presentacion.vista.VentanaDomicilioPersona;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
 import dto.DomicilioDTO;
-import dto.LocalidadDTO;
+
 import dto.PersonaDTO;
 
 public class Controlador implements ActionListener
@@ -79,6 +79,7 @@ public class Controlador implements ActionListener
 			String tel = ventanaPersona.getTxtTelefono().getText();
 			String email = ventanaPersona.getTxtEmail().getText();
 			String fechaCumpleaños = ventanaPersona.getTxtFechaCumpleaños().getText();
+			//String domicilio = ventanaPersona.getTxtDomicilio().getText();
 			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel,email,fechaCumpleaños);
 			this.agenda.agregarPersona(nuevaPersona);
 			this.refrescarTabla();
@@ -126,6 +127,7 @@ public class Controlador implements ActionListener
 			String tel = ventanaPersona.getTxtTelefono().getText();
 			String email = ventanaPersona.getTxtEmail().getText();
 			String fechaCumpleaños = ventanaPersona.getTxtFechaCumpleaños().getText();
+			//String domicilio = ventanaPersona.getTxtDomicilio().getText();
 			PersonaDTO persona = new PersonaDTO(idpersona, nombre, tel,email,fechaCumpleaños);
 			this.agenda.editarPersona(persona);
 			this.refrescarTabla();

@@ -76,7 +76,12 @@ public class DomicilioDTO {
         this.localidad = localidad;
     }
 
+    @Override
+    public String toString() {
+        return calle+" "+altura;
+    }
 
+    
 
     
 
