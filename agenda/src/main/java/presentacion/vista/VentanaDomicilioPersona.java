@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import dto.LocalidadDTO;
-import modelo.Agenda;
+//import modelo.Agenda;
 
 public class VentanaDomicilioPersona extends JFrame 
 {
@@ -88,6 +88,7 @@ public class VentanaDomicilioPersona extends JFrame
 		txtIdPersona.setBounds(133, 30, 164, 20);
 		panel.add(txtIdPersona);
 		txtIdPersona.setColumns(10);
+		txtIdPersona.setVisible(false);
 		
 		txtAltura = new JTextField();
 		txtAltura.setBounds(133, 49, 164, 20);
@@ -199,8 +200,8 @@ public class VentanaDomicilioPersona extends JFrame
 		this.txtAltura.setText(null);
 		this.txtPiso.setText(null);
 		this.txtDepto.setText(null);
-		this.txtLocalidad.setText(null);
 		this.jcLocalidad.setSelectedItem(null);
+		this.btnAgregarDomicilio.setEnabled(false);
 		this.dispose();
 	}
 
