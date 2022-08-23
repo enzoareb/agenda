@@ -20,11 +20,11 @@ public class Controlador implements ActionListener
 {
 		private Vista vista;
 		private List<PersonaDTO> personasEnTabla;
+		//private List<LocalidadDTO> localidadesEnTabla;
 		private VentanaPersona ventanaPersona; 
 		private VentanaDomicilioPersona ventanaDomicilioPersona; 
 		private Agenda agenda;
-	
-		private List<LocalidadDTO> localidadesEnTabla;
+
 		
 		public Controlador(Vista vista, Agenda agenda)
 		{
@@ -41,7 +41,7 @@ public class Controlador implements ActionListener
 			this.ventanaPersona.getBtnActualizarPersona().addActionListener(p->editarPersona(p));
 			// Domicilio
 			this.ventanaDomicilioPersona = VentanaDomicilioPersona.getInstance();
-			this.ventanaDomicilioPersona.getBtnAgregarDomicilio().addActionListener(a->guardarDomicilioPersona(a));
+			this.ventanaDomicilioPersona.getBtnAgregarDomicilio().addActionListener(p->guardarDomicilioPersona(p));
 			
 			this.agenda = agenda;
 		}
@@ -143,6 +143,7 @@ public class Controlador implements ActionListener
 		{
 			this.personasEnTabla = agenda.obtenerPersonas();
 			this.vista.llenarTabla(this.personasEnTabla);
+			//this.localidadesEnTabla = agenda.obtenerLocalidad();
 			//this.ventanaDomicilioPersona.llenarCombo(this.localidadesEnTabla); // Cargar Combo Localidades
 		}
 

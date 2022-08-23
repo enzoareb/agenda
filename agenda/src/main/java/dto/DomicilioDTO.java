@@ -76,9 +76,7 @@ public class DomicilioDTO {
         this.localidad = localidad;
     }
 
-    public int getIdDomicilio() {
-        return 0;
-    }
+
 
     
 

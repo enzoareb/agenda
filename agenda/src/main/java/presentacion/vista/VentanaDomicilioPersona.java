@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import dto.LocalidadDTO;
+import modelo.Agenda;
 
 public class VentanaDomicilioPersona extends JFrame 
 {
@@ -25,6 +26,9 @@ public class VentanaDomicilioPersona extends JFrame
 	private JTextField txtIdPersona;
 	private JComboBox<String> jcLocalidad; 
 	private JButton btnAgregarDomicilio;
+//	private List<LocalidadDTO> localidadesEnTabla;
+	//private Agenda agenda;
+	
 	
 	private static VentanaDomicilioPersona INSTANCE;
 	
@@ -107,12 +111,17 @@ public class VentanaDomicilioPersona extends JFrame
 
 		jcLocalidad = new JComboBox<>();
 		jcLocalidad.setBounds(133, 169, 164, 20);
+		jcLocalidad.addItem("SAN MIGUEL");
+		jcLocalidad.addItem("MALVINAS");
+		jcLocalidad.addItem("MUÑIZ");
 		panel.add(jcLocalidad);
 		
 		btnAgregarDomicilio = new JButton("Agregar Domicilio");
 		btnAgregarDomicilio.setBounds(133, 192, 164, 23);
 		panel.add(btnAgregarDomicilio);
 
+		//this.localidadesEnTabla = agenda.obtenerLocalidad();
+		//this.llenarCombo(this.localidadesEnTabla); // Cargar Combo Localidades
 	
 		this.setVisible(false);
 	}
@@ -121,6 +130,7 @@ public class VentanaDomicilioPersona extends JFrame
 	{
 		this.setTitle(titulo);
 		this.txtIdPersona.setText(idPersona.toString());
+	
 		this.setVisible(true);
 	}
 	
@@ -164,6 +174,25 @@ public class VentanaDomicilioPersona extends JFrame
 		this.txtIdPersona = txtIdPersona;
 	}
 
+
+	public void llenarCombo(List<LocalidadDTO> localidadEnTabla) {
+
+		for (LocalidadDTO l : localidadEnTabla)
+		{
+			int idlocalidad = l.getIdLocalidad();
+			String nombre = l.getNombre();
+			//int idprovincia = l.getIdProvincia();
+			//int idpais = l.getIdPais();
+			//String fila = {idlocalidad,nombre,};
+			this.jcLocalidad.addItem(idlocalidad + ' '+nombre);
+			
+			
+		
+		}
+		
+	}
+
+
 	public void cerrar()
 	{
 		this.txtCalle.setText(null);
@@ -176,23 +205,7 @@ public class VentanaDomicilioPersona extends JFrame
 	}
 
 
-	public void llenarCombo(List<LocalidadDTO> localidadEnTabla) {
-
-		for (LocalidadDTO l : localidadEnTabla)
-		{
-			int idlocalidad = l.getIdLocalidad();
-			String nombre = l.getNombre();
-			int idprovincia = l.getIdProvincia();
-			int idpais = l.getIdPais();
-			//String fila = {idlocalidad,nombre,};
-			this.jcLocalidad.addItem(nombre);
-			//this.getModelPersonas().addRow(fila);
-			
-		
-		}
-		
-	}
-
+	
 	
 }
 
