@@ -28,12 +28,12 @@ public class DomicilioDAOSQL implements DomicilioDAO
 		{
 			statement = conexion.prepareStatement(insert);
 			statement.setInt(1, domicilio.getidDomicilio());
-			statement.setInt(2, domicilio.getidPersona());
+			
 			statement.setString(3, domicilio.getCalle());
 			statement.setString(4, domicilio.getAltura());
 			statement.setString(5, domicilio.getPiso());
 			statement.setString(6, domicilio.getDepto());
-			statement.setString(7, domicilio.getLocalidad());
+		//	statement.setString(7, domicilio.getLocalidad());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -100,13 +100,13 @@ public class DomicilioDAOSQL implements DomicilioDAO
 	private DomicilioDTO getDomicilioDTO(ResultSet resultSet) throws SQLException
 	{
 		int idDom = resultSet.getInt("idDomicilio");
-		int idPer = resultSet.getInt("idPersona");
+	//	int idPer = resultSet.getInt("idPersona");
 		String calle = resultSet.getString("Calle");
 		String altura = resultSet.getString("Altura");
 		String piso = resultSet.getString("Piso");
 		String depto = resultSet.getString("Depto");
-		String localidad = resultSet.getString("Localidad");
-		return new DomicilioDTO(idDom,idPer,calle,altura,piso,depto,localidad);
+	//	String localidad = resultSet.getString("Localidad");
+		return new DomicilioDTO(idDom,calle,altura,piso,depto);
 	}
 
 
@@ -122,12 +122,12 @@ public class DomicilioDAOSQL implements DomicilioDAO
 
 			//statement.setString(1, persona_a_editar.getIdPersona());
 			statement.setString(7, Integer.toString(domicilio_a_editar.getidDomicilio()));
-			statement.setString(1, Integer.toString(domicilio_a_editar.getidPersona()));
+		//	statement.setString(1, Integer.toString(domicilio_a_editar.getidPersona()));
 			statement.setString(2, domicilio_a_editar.getCalle());
 			statement.setString(3, domicilio_a_editar.getAltura());
 			statement.setString(4, domicilio_a_editar.getPiso());
 			statement.setString(5, domicilio_a_editar.getDepto());
-			statement.setString(6, domicilio_a_editar.getLocalidad());
+		//	statement.setString(6, domicilio_a_editar.getLocalidad());
 		
 
 			if(statement.executeUpdate() > 0)

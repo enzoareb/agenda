@@ -11,14 +11,14 @@ public class PersonaDTO
 	private String email;
 	private String fechaCumpleaños;
 
-	public PersonaDTO(int idPersona, String nombre, String telefono,String email, String fechaCumpleaños)
+	public PersonaDTO(int idPersona, String nombre, String telefono,String email, String fechaCumpleaños, DomicilioDTO domicilio)
 	{
 		this.idPersona = idPersona;
 		this.nombre = nombre;
 		this.telefono = telefono;
-	
 		this.email = email;
 		this.fechaCumpleaños= fechaCumpleaños;
+		this.domicilio = domicilio;
 	}
 	
 	public int getIdPersona() 

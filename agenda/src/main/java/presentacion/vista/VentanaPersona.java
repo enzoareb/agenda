@@ -17,7 +17,15 @@ public class VentanaPersona extends JFrame
 	private JTextField txtEmail;
 	private JTextField txtFechaCumpleaños;
 	private JTextField txtIdPersona;
+	private JTextField txtIdDomicilio;
 	private JTextField txtDomicilio;
+	private JTextField txtDomicilioCalle;
+	private JTextField txtDomicilioAltura;
+	private JTextField txtDomicilioPiso;
+	private JTextField txtDomicilioDpto;
+	private JTextField txtDomicilioLocalidad;
+
+
 	private JButton btnAgregarPersona;
 	private JButton btnActualizarPersona;
 	private JButton btnDomicilioPersona;
@@ -40,7 +48,7 @@ public class VentanaPersona extends JFrame
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 343, 283);
+		setBounds(100, 100, 643, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -48,7 +56,7 @@ public class VentanaPersona extends JFrame
 		
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 307, 223);
+		panel.setBounds(10, 11, 840, 853);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -61,12 +69,36 @@ public class VentanaPersona extends JFrame
 		panel.add(lblTelfono);
 
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(10, 93, 113, 14);
+		lblEmail.setBounds(325, 11, 113, 14);
 		panel.add(lblEmail);
 
 		JLabel lblFechaCumpleaños = new JLabel("Cumpleaños");
-		lblFechaCumpleaños.setBounds(10, 134, 113, 14);
+		lblFechaCumpleaños.setBounds(325, 52, 113, 14);
 		panel.add(lblFechaCumpleaños);
+
+		JLabel lblDomicilio = new JLabel("Domicilio");
+		lblDomicilio.setBounds(10, 93, 113, 14);
+		panel.add(lblDomicilio);
+		
+		JLabel lblDomicilioCalle = new JLabel("Calle");
+		lblDomicilioCalle.setBounds(10, 134, 113, 14);
+		panel.add(lblDomicilioCalle);
+		
+		JLabel lblDomicilioAltura = new JLabel("Altura");
+		lblDomicilioAltura.setBounds(10, 175, 113, 14);
+		panel.add(lblDomicilioAltura);
+		
+		JLabel lblDomicilioPiso = new JLabel("Piso");
+		lblDomicilioPiso.setBounds(325, 134, 113, 14);
+		panel.add(lblDomicilioPiso);
+
+		JLabel lblDomicilioDpto = new JLabel("Dpto");
+		lblDomicilioDpto.setBounds(325, 175, 113, 14);
+		panel.add(lblDomicilioDpto);
+		
+		JLabel lblDomicilioLocalidad = new JLabel("Localidad");
+		lblDomicilioLocalidad.setBounds(10, 216, 113, 14);
+		panel.add(lblDomicilioLocalidad);
 		
 		txtNombre = new JTextField();
 		txtNombre.setBounds(133, 8, 164, 20);
@@ -79,6 +111,13 @@ public class VentanaPersona extends JFrame
 		txtIdPersona.setVisible(false);
 		panel.add(txtIdPersona);
 		txtIdPersona.setColumns(10);
+
+		// IdDomicilio OCULTO
+		txtIdDomicilio = new JTextField();
+		txtIdDomicilio.setBounds(133, 50, 164, 20);
+		txtIdDomicilio.setVisible(false);
+		panel.add(txtIdDomicilio);
+		txtIdDomicilio.setColumns(30);
 		
 		txtTelefono = new JTextField();
 		txtTelefono.setBounds(133, 49, 164, 20);
@@ -86,12 +125,12 @@ public class VentanaPersona extends JFrame
 		txtTelefono.setColumns(10);
 
 		txtEmail = new JTextField();
-		txtEmail.setBounds(133, 89, 164, 20);
+		txtEmail.setBounds(425, 8, 164, 20);
 		panel.add(txtEmail);
 		txtEmail.setColumns(10);
 
 		txtFechaCumpleaños = new JTextField();
-		txtFechaCumpleaños.setBounds(133, 129, 164, 20);
+		txtFechaCumpleaños.setBounds(425, 49, 164, 20);
 		panel.add(txtFechaCumpleaños);
 		txtFechaCumpleaños.setColumns(10);
 
@@ -99,9 +138,34 @@ public class VentanaPersona extends JFrame
 		txtDomicilio.setBounds(133, 129, 164, 20);
 		panel.add(txtDomicilio);
 		txtDomicilio.setColumns(10);
+
+		txtDomicilioCalle = new JTextField();
+		txtDomicilioCalle.setBounds(133, 134, 164, 20);
+		panel.add(txtDomicilioCalle);
+		txtDomicilioCalle.setColumns(10);
+
+		txtDomicilioAltura = new JTextField();
+		txtDomicilioAltura.setBounds(133, 175, 164, 20);
+		panel.add(txtDomicilioAltura);
+		txtDomicilioAltura.setColumns(10);
+
+		txtDomicilioPiso = new JTextField();
+		txtDomicilioPiso.setBounds(425, 134, 164, 20);
+		panel.add(txtDomicilioPiso);
+		txtDomicilioPiso.setColumns(10);
+
+		txtDomicilioDpto = new JTextField();
+		txtDomicilioDpto.setBounds(425, 175, 164, 20);
+		panel.add(txtDomicilioDpto);
+		txtDomicilioDpto.setColumns(10);
 		
+		txtDomicilioLocalidad = new JTextField();
+		txtDomicilioLocalidad.setBounds(133, 216, 164, 20);
+		panel.add(txtDomicilioLocalidad);
+		txtDomicilioLocalidad.setColumns(10);
+
 		btnAgregarPersona = new JButton("Guardar");
-		btnAgregarPersona.setBounds(208, 192, 89, 23);
+		btnAgregarPersona.setBounds(480, 260, 100, 30);
 		panel.add(btnAgregarPersona);
 
 		btnActualizarPersona = new JButton("Actualizar");
@@ -109,7 +173,7 @@ public class VentanaPersona extends JFrame
 		panel.add(btnActualizarPersona);
 
 		btnDomicilioPersona = new JButton("Domicilio");
-		btnDomicilioPersona.setBounds(100, 192, 90, 23);
+		btnDomicilioPersona.setBounds(100, 250, 90, 23);
 		panel.add(btnDomicilioPersona);
 
 		this.setVisible(false);
@@ -138,6 +202,10 @@ public class VentanaPersona extends JFrame
 		return txtIdPersona;
 	}
 
+	public JTextField getTxtIdDomicilio(){
+		return txtIdDomicilio;
+	}
+
 	public JTextField getTxtTelefono() 
 	{
 		return txtTelefono;
@@ -151,9 +219,27 @@ public class VentanaPersona extends JFrame
 		return txtFechaCumpleaños;
 	}
 
-	public JTextField getTxtDomicilio() {
-        return txtDomicilio;
-    }
+	
+
+	public JTextField getTxtDomicilioCalle() {
+		return txtDomicilioCalle;
+	}
+
+	public JTextField getTxtDomicilioAltura() {
+		return txtDomicilioAltura;
+	}
+
+	public JTextField getTxtDomicilioPiso() {
+		return txtDomicilioPiso;
+	}
+
+	public JTextField getTxtDomicilioDpto() {
+		return txtDomicilioDpto;
+	}
+
+	public JTextField getTxtDomicilioLocalidad() {
+		return txtDomicilioLocalidad;
+	}
 
 	public JButton getBtnAgregarPersona() 
 	{
@@ -177,6 +263,10 @@ public class VentanaPersona extends JFrame
 		this.txtEmail.setText(null);
 		this.txtFechaCumpleaños.setText(null);
 		this.txtIdPersona.setText(null);
+		this.txtDomicilioAltura.setText(null);
+		this.txtDomicilioCalle.setText(null);
+		this.txtDomicilioPiso.setText(null);
+		this.txtDomicilioDpto.setText(null);
 		this.dispose();
 	}
 
@@ -205,6 +295,19 @@ public class VentanaPersona extends JFrame
 		String id = idPersona.toString();
 		this.txtIdPersona.setText(id);
 	}
+
+	public void setTxtDomicilioCalle(String domicilioCalle) {
+		this.txtDomicilioCalle.setText(domicilioCalle);
+    }
+	public void setTxtDomicilioAltura(String domicilioAltura) {
+		this.txtDomicilioAltura.setText(domicilioAltura);
+    }
+	public void setTxtDomicilioPiso(String domicilioPiso) {
+		this.txtDomicilioPiso.setText(domicilioPiso);
+    }
+	public void setTxtDomicilioDpto(String domicilioDpto) {
+		this.txtDomicilioDpto.setText(domicilioDpto);
+    }
 
     
 
