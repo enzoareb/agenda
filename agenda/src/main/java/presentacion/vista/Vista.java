@@ -13,10 +13,13 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import dto.PersonaDTO;
+import dto.PersonaDomicilioDTO;
+import modelo.Agenda;
 
 import javax.swing.JButton;
 
 import persistencia.conexion.Conexion;
+import persistencia.dao.interfaz.DomicilioDAO;
 
 public class Vista
 {
@@ -27,7 +30,8 @@ public class Vista
 	private JButton btnEditar;
 	private JButton btnReporte;
 	private DefaultTableModel modelPersonas;
-	private  String[] nombreColumnas = {"Id","Nombre y apellido","Telefono","Email","Cumpleaños","Domicilio","Contacto"};
+	//private  String[] nombreColumnas = {"Id","Nombre y apellido","Telefono","Email","Cumpleaños","Domicilio","Contacto"};
+	private  String[] nombreColumnas = {"Id","Nombre y apellido","Telefono","Email","Cumpleaños","Calle","Altura","Piso","Depto","Localidad","Contacto"};
 
 	public Vista() 
 	{
@@ -137,7 +141,7 @@ public class Vista
 	}
 
 
-	public void llenarTabla(List<PersonaDTO> personasEnTabla) {
+	public void llenarTabla111(List<PersonaDTO> personasEnTabla) {
 		this.getModelPersonas().setRowCount(0); //Para vaciar la tabla
 		this.getModelPersonas().setColumnCount(0);
 		this.getModelPersonas().setColumnIdentifiers(this.getNombreColumnas());
@@ -152,7 +156,38 @@ public class Vista
 		//	String domicilio = p.getDomicilio().toString();
 			Object[] fila = {idpersona,nombre, tel, email, fechaCumpleaños};
 			this.getModelPersonas().addRow(fila);
-			//p.getIdPersona();
+			
+		
+		}
+		
+	}
+
+	// Llenar Tabla. Controlador. 
+	public void llenarTabla(List<PersonaDomicilioDTO> personasEnTabla) {
+		this.getModelPersonas().setRowCount(0); //Para vaciar la tabla
+		this.getModelPersonas().setColumnCount(0);
+		this.getModelPersonas().setColumnIdentifiers(this.getNombreColumnas());
+
+		for (PersonaDomicilioDTO p : personasEnTabla)
+		{
+			int idpersona = p.getIdPersona();
+			String nombre = p.getNombre();
+			String tel = p.getTelefono();
+			String email = p.getEmail();
+			String fechaCumpleaños = p.getFechaCumpleaños();
+			String calle = p.getCalle();
+			String altura = p.getAltura();
+			String piso = p.getPiso();
+			String depto = p.getDepto();
+			//int local = p.getIdlocalidad();
+			String local = p.getLocalidad();				
+			String tipocontacto = p.getTipocontacto();
+
+			Object[] fila = {idpersona, nombre, tel,email,fechaCumpleaños,calle,altura,piso,depto,local,tipocontacto};
+			
+
+			this.getModelPersonas().addRow(fila);
+			
 		
 		}
 		

@@ -24,12 +24,18 @@ public class VentanaDomicilioPersona extends JFrame
 	private JTextField txtDepto;
 	private JTextField txtLocalidad;
 	private JTextField txtIdPersona;
+	private JTextField txtIdDomicilio;
+
+
 	private JComboBox<String> jcLocalidad; 
 	private JButton btnAgregarDomicilio;
 //	private List<LocalidadDTO> localidadesEnTabla;
 	//private Agenda agenda;
+
+	private JTextField txtTipoContacto;
 	
 	
+
 	private static VentanaDomicilioPersona INSTANCE;
 	
 	public static VentanaDomicilioPersona getInstance()
@@ -116,9 +122,14 @@ public class VentanaDomicilioPersona extends JFrame
 		jcLocalidad.addItem("MALVINAS");
 		jcLocalidad.addItem("MUÑIZ");
 		panel.add(jcLocalidad);
+
+		txtTipoContacto = new JTextField();
+		txtTipoContacto.setBounds(133, 209, 164, 20);
+		panel.add(txtTipoContacto);
+		txtTipoContacto.setColumns(10);
 		
 		btnAgregarDomicilio = new JButton("Agregar Domicilio");
-		btnAgregarDomicilio.setBounds(133, 192, 164, 23);
+		btnAgregarDomicilio.setBounds(133, 249, 164, 23);
 		panel.add(btnAgregarDomicilio);
 
 		//this.localidadesEnTabla = agenda.obtenerLocalidad();
@@ -174,6 +185,23 @@ public class VentanaDomicilioPersona extends JFrame
 	public void setTxtIdPersona(JTextField txtIdPersona) {
 		this.txtIdPersona = txtIdPersona;
 	}
+
+	public JTextField getTxtTipoContacto() {
+		return txtTipoContacto;
+	}
+
+	public void setTxtTipoContacto(JTextField txtTipoContacto) {
+		this.txtTipoContacto = txtTipoContacto;
+	}
+
+	public JTextField getTxtIdDomicilio() {
+		return txtIdDomicilio;
+	}
+
+	public void setTxtIdDomicilio(JTextField txtIdDomicilio) {
+		this.txtIdDomicilio = txtIdDomicilio;
+	}
+
 
 
 	public void llenarCombo(List<LocalidadDTO> localidadEnTabla) {

@@ -7,6 +7,8 @@ import persistencia.dao.interfaz.DAOAbstractFactory;
 import persistencia.dao.interfaz.DomicilioDAO;
 import persistencia.dao.interfaz.LocalidadDAO;
 import persistencia.dao.interfaz.PersonaDAO;
+import persistencia.dao.interfaz.PersonaDomicilioDAO;
+import persistencia.dao.interfaz.TipoContactoDAO;
 
 public class DAOSQLFactory implements DAOAbstractFactory 
 {
@@ -26,5 +28,16 @@ public class DAOSQLFactory implements DAOAbstractFactory
 	public LocalidadDAO createLocalidadDAO() 
 	{
 			return new LocalidadDAOSQL();
+	}
+
+	public PersonaDomicilioDAO createPersonaDomicilioDAO() 
+	{
+			return new PersonaDomicilioDAOSQL();
+	}
+
+
+	public TipoContactoDAO createTipoContactoDAO()
+	{
+			return new TipoContactoDAOSQL();
 	}
 }

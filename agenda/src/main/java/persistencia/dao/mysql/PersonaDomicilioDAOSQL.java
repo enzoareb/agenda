@@ -9,17 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import persistencia.conexion.Conexion;
-import persistencia.dao.interfaz.PersonaDAO;
-import dto.PersonaDTO;
+//import persistencia.dao.interfaz.PersonaDAO;
+import persistencia.dao.interfaz.PersonaDomicilioDAO;
+import dto.PersonaDomicilioDTO;
 
-public class PersonaDAOSQL implements PersonaDAO
+public class PersonaDomicilioDAOSQL implements PersonaDomicilioDAO
 {
-	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, email, Cumpleaños,idcontacto) VALUES(?, ?, ?, ?, ?, ?)";
-	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
-	private static final String readall = "SELECT * FROM personas";
-	private static final String edit = "UPDATE personas SET nombre=?, telefono=?, email=?, Cumpleaños=?, idcontacto=? WHERE idPersona = ?";
+	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, email, Cumpleaños) VALUES(?, ?, ?, ?, ?)";
+	private static final String delete = "delete personas,domicilio FROM personas inner join domicilio ON domicilio.idPersona = personas.idPersona  WHERE personas.idPersona = ?";
+	private static final String readall = "SELECT * FROM personas left join domicilio on personas.idPersona = domicilio.idPersona left join tipocontacto on personas.idContacto = tipocontacto.idtipocontacto left join localidad on domicilio.localidad = localidad.idlocalidad";
+	//private static final String readall = "SELECT personas.*, iddomicilio,calle,altura,piso,depto,localidad FROM personas, domicilio";
+	private static final String edit = "UPDATE personas SET nombre=?, telefono=?, email=?, Cumpleaños=? WHERE idPersona = ?";
 	
-	public boolean insert(PersonaDTO persona)
+	public boolean insert(PersonaDomicilioDTO personadomicilio)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -27,12 +29,11 @@ public class PersonaDAOSQL implements PersonaDAO
 		try
 		{
 			statement = conexion.prepareStatement(insert);
-			statement.setInt(1, persona.getIdPersona());
-			statement.setString(2, persona.getNombre());
-			statement.setString(3, persona.getTelefono());
-			statement.setString(4, persona.getEmail());
-			statement.setString(5, persona.getFechaCumpleaños());
-			//statement.setInt(6, persona.getid);
+			statement.setInt(1, personadomicilio.getIdPersona());
+			statement.setString(2, personadomicilio.getNombre());
+			statement.setString(3, personadomicilio.getTelefono());
+			statement.setString(4, personadomicilio.getEmail());
+			statement.setString(5, personadomicilio.getFechaCumpleaños());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -52,7 +53,7 @@ public class PersonaDAOSQL implements PersonaDAO
 		return isInsertExitoso;
 	}
 	
-	public boolean delete(PersonaDTO persona_a_eliminar)
+	public boolean delete(PersonaDomicilioDTO persona_a_eliminar)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -74,11 +75,13 @@ public class PersonaDAOSQL implements PersonaDAO
 		return isdeleteExitoso;
 	}
 	
-	public List<PersonaDTO> readAll()
+
+	
+	public List<PersonaDomicilioDTO> readAll()
 	{
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<PersonaDTO> personas = new ArrayList<PersonaDTO>();
+		ArrayList<PersonaDomicilioDTO> personasdomicilio = new ArrayList<PersonaDomicilioDTO>();
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
@@ -86,31 +89,43 @@ public class PersonaDAOSQL implements PersonaDAO
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
-				personas.add(getPersonaDTO(resultSet));
+				personasdomicilio.add(getPersonaDomicilioDTO(resultSet));
 			}
 		} 
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
-		return personas;
+		return personasdomicilio;
 	}
 	
-	private PersonaDTO getPersonaDTO(ResultSet resultSet) throws SQLException
+
+
+	private PersonaDomicilioDTO getPersonaDomicilioDTO(ResultSet resultSet) throws SQLException
 	{
 		int id = resultSet.getInt("idPersona");
 		String nombre = resultSet.getString("Nombre");
 		String tel = resultSet.getString("Telefono");
 		String email = resultSet.getString("Email");
 		String fechaCumpleaños = resultSet.getString("Cumpleaños");
-		int idContacto = resultSet.getInt("idcontacto");
+		//int iddomi = resultSet.getInt("idDomicilio");
+		String calle = resultSet.getString("calle");
+		String altura = resultSet.getString("altura");
+		String piso = resultSet.getString("piso");
+		String depto = resultSet.getString("depto");
+		//int local = resultSet.getInt("localidad");
+		String local = resultSet.getString("nombrelocalidad");
+		String tipocontacto = resultSet.getString("nombretipo");
 
-		return new PersonaDTO(id, nombre, tel,email,fechaCumpleaños,idContacto);
+		return new PersonaDomicilioDTO(id, nombre, tel,email,fechaCumpleaños,calle,altura,piso,depto,local,tipocontacto);
+		
+
+		//return new PersonaDomicilioDTO(id, nombre, tel,email,fechaCumpleaños,iddomi,calle,altura,piso,depto,local);
 	}
 
 
 	//agrego funcion para editar contacto
-	public boolean edit(PersonaDTO persona_a_editar)
+	public boolean edit(PersonaDomicilioDTO persona_a_editar)
 	{
 			PreparedStatement statement;
 			Connection conexion = Conexion.getConexion().getSQLConexion();

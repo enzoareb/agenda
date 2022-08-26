@@ -1,15 +1,22 @@
 package presentacion.vista;
 
 
+import java.util.List;
+
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import dto.LocalidadDTO;
+import dto.TipoContactoDTO;
+
 public class VentanaPersona extends JFrame 
 {
+
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNombre;
@@ -18,17 +25,17 @@ public class VentanaPersona extends JFrame
 	private JTextField txtFechaCumpleaños;
 	private JTextField txtIdPersona;
 	private JTextField txtIdDomicilio;
-	private JTextField txtDomicilio;
+	//private JTextField txtDomicilio;
 	private JTextField txtDomicilioCalle;
 	private JTextField txtDomicilioAltura;
 	private JTextField txtDomicilioPiso;
 	private JTextField txtDomicilioDpto;
-	private JTextField txtDomicilioLocalidad;
-
-
+	//private JTextField txtDomicilioLocalidad;
+	private JComboBox<String> jcLocalidad; 
+	private JComboBox<String> jcTipoContacto;
 	private JButton btnAgregarPersona;
 	private JButton btnActualizarPersona;
-	private JButton btnDomicilioPersona;
+	//private JButton btnDomicilioPersona;
 
 	private static VentanaPersona INSTANCE;
 	
@@ -108,14 +115,14 @@ public class VentanaPersona extends JFrame
 		// IdPersona Oculto
 		txtIdPersona = new JTextField();
 		txtIdPersona.setBounds(133, 30, 164, 20);
-		txtIdPersona.setVisible(false);
+		txtIdPersona.setVisible(true);
 		panel.add(txtIdPersona);
 		txtIdPersona.setColumns(10);
 
 		// IdDomicilio OCULTO
 		txtIdDomicilio = new JTextField();
-		txtIdDomicilio.setBounds(133, 50, 164, 20);
-		txtIdDomicilio.setVisible(false);
+		txtIdDomicilio.setBounds(133, 93, 164, 20);
+		txtIdDomicilio.setVisible(true);
 		panel.add(txtIdDomicilio);
 		txtIdDomicilio.setColumns(30);
 		
@@ -133,12 +140,12 @@ public class VentanaPersona extends JFrame
 		txtFechaCumpleaños.setBounds(425, 49, 164, 20);
 		panel.add(txtFechaCumpleaños);
 		txtFechaCumpleaños.setColumns(10);
-
+/*/
 		txtDomicilio = new JTextField();
-		txtDomicilio.setBounds(133, 129, 164, 20);
+		txtDomicilio.setBounds(133, 93, 164, 20);
 		panel.add(txtDomicilio);
 		txtDomicilio.setColumns(10);
-
+*/
 		txtDomicilioCalle = new JTextField();
 		txtDomicilioCalle.setBounds(133, 134, 164, 20);
 		panel.add(txtDomicilioCalle);
@@ -158,24 +165,41 @@ public class VentanaPersona extends JFrame
 		txtDomicilioDpto.setBounds(425, 175, 164, 20);
 		panel.add(txtDomicilioDpto);
 		txtDomicilioDpto.setColumns(10);
+
+		jcTipoContacto = new JComboBox<>();
+		jcTipoContacto.setBounds(425, 216, 164, 20);
+	/*	jcTipoContacto.addItem("TRABAJO");
+		jcTipoContacto.addItem("FAMILIA");
+		jcTipoContacto.addItem("AMIGOS");*/
+		panel.add(jcTipoContacto);
+	
 		
-		txtDomicilioLocalidad = new JTextField();
+	/* 	txtDomicilioLocalidad = new JTextField();
 		txtDomicilioLocalidad.setBounds(133, 216, 164, 20);
 		panel.add(txtDomicilioLocalidad);
 		txtDomicilioLocalidad.setColumns(10);
+	*/
+		jcLocalidad = new JComboBox<>();
+		jcLocalidad.setBounds(133, 216, 164, 20);
+		/*jcLocalidad.addItem("SAN MIGUEL");
+		jcLocalidad.addItem("HURLINGHAM");
+		jcLocalidad.addItem("MALVINAS");
+		jcLocalidad.addItem("MUÑIZ");*/
+		panel.add(jcLocalidad);
+
 
 		btnAgregarPersona = new JButton("Guardar");
 		btnAgregarPersona.setBounds(480, 260, 100, 30);
 		panel.add(btnAgregarPersona);
 
 		btnActualizarPersona = new JButton("Actualizar");
-		btnActualizarPersona.setBounds(208, 192, 95, 23);
+		btnActualizarPersona.setBounds(208, 260, 100, 30);
 		panel.add(btnActualizarPersona);
-
+/*
 		btnDomicilioPersona = new JButton("Domicilio");
 		btnDomicilioPersona.setBounds(100, 250, 90, 23);
 		panel.add(btnDomicilioPersona);
-
+*/
 		this.setVisible(false);
 	}
 	
@@ -186,9 +210,18 @@ public class VentanaPersona extends JFrame
 
 	public void mostrarVentana(String titulo, boolean estado) {
 		this.setTitle(titulo);
-		this.btnDomicilioPersona.setEnabled(estado);
+		//this.btnDomicilioPersona.setEnabled(estado);
 		this.btnActualizarPersona.setVisible(estado);
 		this.btnAgregarPersona.setVisible(!estado);
+		this.setVisible(true);
+	}
+
+	public void mostrarVentana(String titulo, boolean estado,List<LocalidadDTO> localidades) {
+		this.setTitle(titulo);
+		//this.btnDomicilioPersona.setEnabled(estado);
+		this.btnActualizarPersona.setVisible(estado);
+		this.btnAgregarPersona.setVisible(!estado);
+		//this.llenarComboLocalidades(localidades); Luis
 		this.setVisible(true);
 	}
 	
@@ -237,8 +270,24 @@ public class VentanaPersona extends JFrame
 		return txtDomicilioDpto;
 	}
 
-	public JTextField getTxtDomicilioLocalidad() {
-		return txtDomicilioLocalidad;
+	public JComboBox<String> getJcTipoContacto() {
+		return jcTipoContacto;
+	}
+
+	public void setJcTipoContacto(JComboBox<String> jcTipoContacto) {
+		this.jcTipoContacto = jcTipoContacto;
+	}
+
+	//public JTextField getTxtDomicilioLocalidad() {
+	//	return txtDomicilioLocalidad;
+	//}
+	
+	public JComboBox<String> getJcLocalidad() {
+		return jcLocalidad;
+	}
+
+	public void setJcLocalidad(JComboBox<String> jcLocalidad) {
+		this.jcLocalidad = jcLocalidad;
 	}
 
 	public JButton getBtnAgregarPersona() 
@@ -251,10 +300,10 @@ public class VentanaPersona extends JFrame
 		return btnActualizarPersona;
 	}
 	// Domicilio
-	public JButton getBtnDomicilioPersona() 
-	{
-		return btnDomicilioPersona;
-	}
+	//public JButton getBtnDomicilioPersona() 
+	//{
+	//	return btnDomicilioPersona;
+	//}
 
 	public void cerrar()
 	{
@@ -276,7 +325,12 @@ public class VentanaPersona extends JFrame
 	}
 
 	public void setTxtIdPersona(String idPersona) {
-		this.txtNombre.setText(idPersona);
+		this.txtIdPersona.setText(idPersona);
+	}
+
+	public void setTxtIdDomicilio(Integer idDomicilio) {
+		String id = idDomicilio.toString();
+		this.txtIdDomicilio.setText(id);
 	}
 
     public void setTxtEmail(String email) {
@@ -310,6 +364,42 @@ public class VentanaPersona extends JFrame
     }
 
     
+	// Parra llenar combo 
+	
+	public void llenarComboLocalidades(List<LocalidadDTO> localidades) {
+
+		for (LocalidadDTO p : localidades)
+		{
+			int idlocalidad = p.getIdLocalidad();
+			String nombrelocalidad = p.getNombre();
+			//int idProvincia = p.getIdProvincia();
+	  		//int idPais = p.getIdPais();
+
+			String fila = idlocalidad+" "+ nombrelocalidad;	//+" "+idProvincia+" "+idPais;
+
+			this.jcLocalidad.addItem(fila);
+		
+		}
+		
+	}
+
+	
+	// Parra llenar combo 
+	public void llenarComboTipos(List<TipoContactoDTO> tiposcontacto) {
+
+		for (TipoContactoDTO p : tiposcontacto)
+		{
+			int idtipo = p.getIdTipoContacto();
+			String nombretipo = p.getNombreTipo();
+
+			String fila = idtipo+" "+ nombretipo;	
+		
+			this.jcTipoContacto.addItem(fila);
+		
+		}
+		
+	}
+
 
 
 	

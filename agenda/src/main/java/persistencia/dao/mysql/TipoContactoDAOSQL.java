@@ -8,19 +8,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dto.LocalidadDTO;
+import dto.TipoContactoDTO;
 import persistencia.conexion.Conexion;
-import persistencia.dao.interfaz.LocalidadDAO;
+import persistencia.dao.interfaz.TipoContactoDAO;
 
 
-public class LocalidadDAOSQL implements LocalidadDAO
+public class TipoContactoDAOSQL implements TipoContactoDAO
 {
-	private static final String insert = "INSERT INTO localidad (idLocalidad, nombre,idprovincia, idpais) VALUES(?, ?, ?, ?)";
-	private static final String delete = "DELETE FROM localidad WHERE idLocalidad = ?";
-	private static final String readall = "SELECT * FROM localidad";
-	private static final String edit = "UPDATE localidad SET nombre=?,idProvincia=?, idpais=? WHERE idlocalidad = ?";
+	private static final String insert = "INSERT INTO tipocontacto (idtipocontacto, nombretipo) VALUES(?, ?)";
+	private static final String delete = "DELETE FROM tipocontacto WHERE idtipocontacto = ?";
+	private static final String readall = "SELECT * FROM tipocontacto";
+	private static final String edit = "UPDATE tipocontacto SET nombretipo=? WHERE idtipocontacto = ?";
 	
-	public boolean insert(LocalidadDTO localidad)
+	public boolean insert(TipoContactoDTO tipocontacto)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -28,10 +28,8 @@ public class LocalidadDAOSQL implements LocalidadDAO
 		try
 		{
 			statement = conexion.prepareStatement(insert);
-			statement.setString(1, localidad.getNombre());
-			statement.setInt(2, localidad.getIdProvincia());
-			statement.setInt(3, localidad.getIdPais());
-	
+			statement.setString(1, tipocontacto.getNombreTipo());
+		
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -51,7 +49,7 @@ public class LocalidadDAOSQL implements LocalidadDAO
 		return isInsertExitoso;
 	}
 	
-	public boolean delete(LocalidadDTO localidad_a_eliminar)
+	public boolean delete(TipoContactoDTO tipo_a_eliminar)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -59,7 +57,7 @@ public class LocalidadDAOSQL implements LocalidadDAO
 		try 
 		{
 			statement = conexion.prepareStatement(delete);
-			statement.setString(1, Integer.toString(localidad_a_eliminar.getIdLocalidad()));
+			statement.setString(1, Integer.toString(tipo_a_eliminar.getIdTipoContacto()));
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -73,11 +71,11 @@ public class LocalidadDAOSQL implements LocalidadDAO
 		return isdeleteExitoso;
 	}
 	
-	public List<LocalidadDTO> readAll()
+	public List<TipoContactoDTO> readAll()
 	{
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<LocalidadDTO> localidades = new ArrayList<LocalidadDTO>();
+		ArrayList<TipoContactoDTO> tipocontactos = new ArrayList<TipoContactoDTO>();
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
@@ -85,29 +83,27 @@ public class LocalidadDAOSQL implements LocalidadDAO
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
-				localidades.add(getLocalidadDTO(resultSet));
+				tipocontactos.add(getTipoContactoDTO(resultSet));
 			}
 		} 
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
-		return localidades;
+		return tipocontactos;
 	}
 	
-	private LocalidadDTO getLocalidadDTO(ResultSet resultSet) throws SQLException
+	private TipoContactoDTO getTipoContactoDTO(ResultSet resultSet) throws SQLException
 	{
-		int idLocal = resultSet.getInt("idlocalidad");
-		String nombre = resultSet.getString("nombrelocalidad");
-		int idProv = resultSet.getInt("idprovincia");
-		int idpais = resultSet.getInt("idpais");
+		int idTipocontacto = resultSet.getInt("idlocalidad");
+		String nombreTipo = resultSet.getString("nombrelocalidad");
 
-		return new LocalidadDTO(idLocal,nombre,idProv,idpais);
+		return new TipoContactoDTO(idTipocontacto,nombreTipo);
 	}
 
 
-	//agrego funcion para editar localidad
-	public boolean edit(LocalidadDTO localidad_a_editar)
+	//agrego funcion para editar tipo contacto
+	public boolean edit(TipoContactoDTO tipo_a_editar)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -116,10 +112,8 @@ public class LocalidadDAOSQL implements LocalidadDAO
 		{
 			statement = conexion.prepareStatement(edit);
 
-			statement.setString(4, Integer.toString(localidad_a_editar.getIdLocalidad()));
-			statement.setString(1, localidad_a_editar.getNombre());
-			statement.setString(2, Integer.toString(localidad_a_editar.getIdProvincia()));
-			statement.setString(3, Integer.toString(localidad_a_editar.getIdPais()));
+			statement.setString(2, Integer.toString(tipo_a_editar.getIdTipoContacto()));
+			statement.setString(1, tipo_a_editar.getNombreTipo());
 
 			if(statement.executeUpdate() > 0)
 			{
