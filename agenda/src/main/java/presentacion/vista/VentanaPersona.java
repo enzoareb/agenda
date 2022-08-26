@@ -25,17 +25,17 @@ public class VentanaPersona extends JFrame
 	private JTextField txtFechaCumpleaños;
 	private JTextField txtIdPersona;
 	private JTextField txtIdDomicilio;
-	//private JTextField txtDomicilio;
+
 	private JTextField txtDomicilioCalle;
 	private JTextField txtDomicilioAltura;
 	private JTextField txtDomicilioPiso;
 	private JTextField txtDomicilioDpto;
-	//private JTextField txtDomicilioLocalidad;
+
 	private JComboBox<String> jcLocalidad; 
 	private JComboBox<String> jcTipoContacto;
 	private JButton btnAgregarPersona;
 	private JButton btnActualizarPersona;
-	//private JButton btnDomicilioPersona;
+
 
 	private static VentanaPersona INSTANCE;
 	
@@ -168,23 +168,11 @@ public class VentanaPersona extends JFrame
 
 		jcTipoContacto = new JComboBox<>();
 		jcTipoContacto.setBounds(425, 216, 164, 20);
-	/*	jcTipoContacto.addItem("TRABAJO");
-		jcTipoContacto.addItem("FAMILIA");
-		jcTipoContacto.addItem("AMIGOS");*/
 		panel.add(jcTipoContacto);
 	
 		
-	/* 	txtDomicilioLocalidad = new JTextField();
-		txtDomicilioLocalidad.setBounds(133, 216, 164, 20);
-		panel.add(txtDomicilioLocalidad);
-		txtDomicilioLocalidad.setColumns(10);
-	*/
 		jcLocalidad = new JComboBox<>();
 		jcLocalidad.setBounds(133, 216, 164, 20);
-		/*jcLocalidad.addItem("SAN MIGUEL");
-		jcLocalidad.addItem("HURLINGHAM");
-		jcLocalidad.addItem("MALVINAS");
-		jcLocalidad.addItem("MUÑIZ");*/
 		panel.add(jcLocalidad);
 
 

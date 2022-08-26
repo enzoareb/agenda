@@ -12,14 +12,14 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import dto.PersonaDTO;
-import dto.PersonaDomicilioDTO;
-import modelo.Agenda;
 
+import dto.PersonaDomicilioDTO;
+
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 
 import persistencia.conexion.Conexion;
-import persistencia.dao.interfaz.DomicilioDAO;
+
 
 public class Vista
 {
@@ -28,9 +28,9 @@ public class Vista
 	private JButton btnAgregar;
 	private JButton btnBorrar;
 	private JButton btnEditar;
+	private JButton btnLocalidad;
 	private JButton btnReporte;
 	private DefaultTableModel modelPersonas;
-	//private  String[] nombreColumnas = {"Id","Nombre y apellido","Telefono","Email","Cumpleaños","Domicilio","Contacto"};
 	private  String[] nombreColumnas = {"Id","Nombre y apellido","Telefono","Email","Cumpleaños","Calle","Altura","Piso","Depto","Localidad","Contacto"};
 
 	public Vista() 
@@ -67,19 +67,23 @@ public class Vista
 		
 		spPersonas.setViewportView(tablaPersonas);
 		
-		btnAgregar = new JButton("Agregar");
-		btnAgregar.setBounds(20, 220, 100, 30);
+		btnAgregar = new JButton("Agregar Contacto");
+		btnAgregar.setBounds(10, 220, 160, 30);
 		panel.add(btnAgregar);
 		
 		//Botón Editar
-		btnEditar = new JButton("Editar");
-		btnEditar.setBounds(150, 220, 100, 30);
+		btnEditar = new JButton("Editar Contacto");
+		btnEditar.setBounds(180, 220, 150, 30);
 		panel.add(btnEditar);
 		
-		btnBorrar = new JButton("Borrar");
-		btnBorrar.setBounds(280, 220, 100, 30);
+		btnBorrar = new JButton("Borrar Contacto");
+		btnBorrar.setBounds(340, 220, 150, 30);
 		panel.add(btnBorrar);
 		
+		btnLocalidad = new JButton("Agregar Localidad");
+		btnLocalidad.setBounds(500, 220, 170, 30);
+		panel.add(btnLocalidad);
+
 		btnReporte = new JButton("Reporte");
 		btnReporte.setBounds(800, 220, 100, 30);
 		panel.add(btnReporte);
@@ -115,6 +119,10 @@ public class Vista
 		return btnEditar;
 	}
 
+	public AbstractButton getBtnLocalidad() {
+		return btnLocalidad;
+	}
+
 	public JButton getBtnBorrar() 
 	{
 		return btnBorrar;
@@ -140,28 +148,6 @@ public class Vista
 		return nombreColumnas;
 	}
 
-
-	public void llenarTabla111(List<PersonaDTO> personasEnTabla) {
-		this.getModelPersonas().setRowCount(0); //Para vaciar la tabla
-		this.getModelPersonas().setColumnCount(0);
-		this.getModelPersonas().setColumnIdentifiers(this.getNombreColumnas());
-
-		for (PersonaDTO p : personasEnTabla)
-		{
-			int idpersona = p.getIdPersona();
-			String nombre = p.getNombre();
-			String tel = p.getTelefono();
-			String email = p.getEmail();
-			String fechaCumpleaños = p.getFechaCumpleaños();
-		//	String domicilio = p.getDomicilio().toString();
-			Object[] fila = {idpersona,nombre, tel, email, fechaCumpleaños};
-			this.getModelPersonas().addRow(fila);
-			
-		
-		}
-		
-	}
-
 	// Llenar Tabla. Controlador. 
 	public void llenarTabla(List<PersonaDomicilioDTO> personasEnTabla) {
 		this.getModelPersonas().setRowCount(0); //Para vaciar la tabla
@@ -179,11 +165,10 @@ public class Vista
 			String altura = p.getAltura();
 			String piso = p.getPiso();
 			String depto = p.getDepto();
-			//int local = p.getIdlocalidad();
-			String local = p.getLocalidad();				
+			String localidad = p.getLocalidad();				
 			String tipocontacto = p.getTipocontacto();
 
-			Object[] fila = {idpersona, nombre, tel,email,fechaCumpleaños,calle,altura,piso,depto,local,tipocontacto};
+			Object[] fila = {idpersona, nombre, tel,email,fechaCumpleaños,calle,altura,piso,depto,localidad,tipocontacto};
 			
 
 			this.getModelPersonas().addRow(fila);

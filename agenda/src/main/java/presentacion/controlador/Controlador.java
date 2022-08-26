@@ -1,15 +1,11 @@
 package presentacion.controlador;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.util.List;
-
-
-
 import modelo.Agenda;
+import persistencia.dao.mysql.DomicilioDAOSQL;
 import presentacion.reportes.ReporteAgenda;
-import presentacion.vista.VentanaDomicilioPersona;
+import presentacion.vista.VentanaLocalidad;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
 import dto.DomicilioDTO;
@@ -20,10 +16,8 @@ public class Controlador implements ActionListener
 {
 		private Vista vista;
 		private List<PersonaDomicilioDTO> personasEnTabla;
-		//private List<PersonaDTO> personasEnTabla;
-		//private List<LocalidadDTO> localidadesEnTabla;
 		private VentanaPersona ventanaPersona; 
-		private VentanaDomicilioPersona ventanaDomicilioPersona; 
+		private VentanaLocalidad ventanaLocalidad; 
 		private Agenda agenda;
 
 		
@@ -36,13 +30,12 @@ public class Controlador implements ActionListener
 			this.ventanaPersona = VentanaPersona.getInstance();
 			// Guardar
 			this.ventanaPersona.getBtnAgregarPersona().addActionListener(p->guardarPersona(p));
-			//this.ventanaPersona.getBtnDomicilioPersona().addActionListener(a->ventanaDomicilioPersona(a));
 			// Editar
 			this.vista.getBtnEditar().addActionListener(a->ventanaEditarPersona(a));
 			this.ventanaPersona.getBtnActualizarPersona().addActionListener(p->editarPersona(p));
-			// Domicilio
-			this.ventanaDomicilioPersona = VentanaDomicilioPersona.getInstance();
-			this.ventanaDomicilioPersona.getBtnAgregarDomicilio().addActionListener(p->guardarDomicilioPersona(p));
+			// Localidad
+			this.vista.getBtnLocalidad().addActionListener(l->ventanaAgregarLocalidad(l));
+			this.ventanaLocalidad = ventanaLocalidad.getInstance();
 			
 			this.agenda = agenda;
 		}
@@ -54,11 +47,14 @@ public class Controlador implements ActionListener
 			
 	//	}
 
+		private void ventanaAgregarLocalidad(ActionEvent l) {
+			this.ventanaLocalidad.mostrarVentana("NUEVA LOCALIDAD", false);
+		}
+
 		private void ventanaAgregarPersona(ActionEvent a) {
 			this.ventanaPersona.llenarComboLocalidades(this.agenda.obtenerLocalidad());
 			this.ventanaPersona.llenarComboTipos(this.agenda.obtenerTipoContacto());
 			this.ventanaPersona.mostrarVentana("NUEVO CONTACTO",false);
-			
 		}
 		
 		// Para Editar Persona
@@ -72,11 +68,12 @@ public class Controlador implements ActionListener
 				this.ventanaPersona.setTxtTelefono(this.personasEnTabla.get(fila).getTelefono());
 				this.ventanaPersona.setTxtEmail(this.personasEnTabla.get(fila).getEmail());
 				this.ventanaPersona.setTxtFechaCumpleaños(this.personasEnTabla.get(fila).getFechaCumpleaños());
+				this.ventanaPersona.setTxtIdDomicilio(DomicilioDAOSQL.findByPerson(this.personasEnTabla.get(fila).getIdPersona()));
 				this.ventanaPersona.setTxtDomicilioCalle(this.personasEnTabla.get(fila).getCalle());
 				this.ventanaPersona.setTxtDomicilioAltura(this.personasEnTabla.get(fila).getAltura());
 				this.ventanaPersona.setTxtDomicilioPiso(this.personasEnTabla.get(fila).getPiso());
 				this.ventanaPersona.setTxtDomicilioDpto(this.personasEnTabla.get(fila).getDepto());
-				this.ventanaPersona.setTxtIdDomicilio(this.personasEnTabla.get(fila).getIdDireccion());
+				
 				//this.ventanaPersona.setJcLocalidad(this.personasEnTabla.get(fila));
 
 			}
@@ -89,8 +86,7 @@ public class Controlador implements ActionListener
 			String tel = ventanaPersona.getTxtTelefono().getText();
 			String email = ventanaPersona.getTxtEmail().getText();
 			String fechaCumpleaños = ventanaPersona.getTxtFechaCumpleaños().getText();
-			int idcontacto = ventanaPersona.getJcTipoContacto().getSelectedIndex();
-			//String domicilio = ventanaPersona.getTxtDomicilio().getText();
+			int idcontacto = ventanaPersona.getJcTipoContacto().getSelectedIndex()+1;
 			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel,email,fechaCumpleaños,idcontacto);
 			this.agenda.agregarPersona(nuevaPersona);
 			this.refrescarTabla();
@@ -99,21 +95,18 @@ public class Controlador implements ActionListener
 		}
 
 		private void guardarDomicilioPersona(ActionEvent p) {
-			int idpersona = Integer.parseInt(this.ventanaDomicilioPersona.getTxtIdPersona().getText());
-
-			String calle = this.ventanaDomicilioPersona.getTxtCalle().getText();
-			String altura = ventanaDomicilioPersona.getTxtAltura().getText();
-			String piso = ventanaDomicilioPersona.getTxtPiso().getText();
-			String depto = ventanaDomicilioPersona.getTxtDepto().getText();
-			int localidad = ventanaDomicilioPersona.getJcLocalidad().getSelectedIndex();
-			String tipocontacto = ventanaDomicilioPersona.getTxtTipoContacto().getText();
 			
-			//String localidad = ventanaDomicilioPersona.getTxtLocalidad().getText();
-			//String localidad = "SAN MIGUEL";
-			DomicilioDTO nuevoDomicilio = new DomicilioDTO(0, idpersona, calle, altura,piso,depto,localidad,tipocontacto);
+			int idpersona = personasEnTabla.get(personasEnTabla.size()-1).getIdPersona();
+			String calle = ventanaPersona.getTxtDomicilioCalle().getText();
+			String altura = ventanaPersona.getTxtDomicilioAltura().getText();
+			String piso = ventanaPersona.getTxtDomicilioPiso().getText();
+			String depto = ventanaPersona.getTxtDomicilioDpto().getText();
+			int idLocalidad = ventanaPersona.getJcLocalidad().getSelectedIndex()+1;
+			
+			DomicilioDTO nuevoDomicilio = new DomicilioDTO(0, idpersona, calle, altura,piso,depto,idLocalidad);
 			this.agenda.agregarDomicilio(nuevoDomicilio);
 			this.refrescarTabla();
-			this.ventanaDomicilioPersona.cerrar();
+			this.ventanaPersona.cerrar();
 		}
 
 		private void mostrarReporte(ActionEvent r) {
@@ -163,6 +156,7 @@ public class Controlador implements ActionListener
 			//this.personasEnTabla = agenda.obtenerPersonas();
 			//this.vista.llenarTabla(this.personasEnTabla);
 			this.vista.llenarTabla(this.personasEnTabla);
+			
 			
 			//this.localidadesEnTabla = agenda.obtenerLocalidad();
 			//this.ventanaDomicilioPersona.llenarCombo(this.localidadesEnTabla); // Cargar Combo Localidades

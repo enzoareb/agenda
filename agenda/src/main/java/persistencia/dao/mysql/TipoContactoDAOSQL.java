@@ -95,8 +95,8 @@ public class TipoContactoDAOSQL implements TipoContactoDAO
 	
 	private TipoContactoDTO getTipoContactoDTO(ResultSet resultSet) throws SQLException
 	{
-		int idTipocontacto = resultSet.getInt("idlocalidad");
-		String nombreTipo = resultSet.getString("nombrelocalidad");
+		int idTipocontacto = resultSet.getInt("idtipocontacto");
+		String nombreTipo = resultSet.getString("nombretipo");
 
 		return new TipoContactoDTO(idTipocontacto,nombreTipo);
 	}
