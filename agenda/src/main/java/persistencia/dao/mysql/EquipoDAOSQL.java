@@ -95,7 +95,7 @@ public class EquipoDAOSQL implements EquipoDAO{
 	private EquipoDTO getEquipoDTO(ResultSet resultSet) throws SQLException
 	{
 		int id = resultSet.getInt("idEquipo");
-		String nombre = resultSet.getString("nombre");
+		String nombre = resultSet.getString("nombreEquipo");
 
 		return new EquipoDTO(id, nombre);
 	}

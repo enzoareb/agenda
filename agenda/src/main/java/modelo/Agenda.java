@@ -45,6 +45,7 @@ public class Agenda
 		this.personaDAO.insert(nuevaPersona);
 	}
 
+
 	public void borrarPersona(int id_persona_a_eliminar) 
 	{
 		this.personaDAO.delete(id_persona_a_eliminar);

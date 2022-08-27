@@ -307,10 +307,10 @@ public class VentanaPersona extends JFrame
 		this.txtDomicilioCalle.setText(null);
 		this.txtDomicilioPiso.setText(null);
 		this.txtDomicilioDpto.setText(null);
-		this.jcLocalidad.setSelectedItem(null);
-		this.jcTipoContacto.setSelectedItem(null);
-		this.jcDeporte.setSelectedItem(null);
-		this.jcEquipo.setSelectedItem(null);
+	//	this.jcLocalidad.setSelectedItem(null);
+	//	this.jcTipoContacto.setSelectedItem(null);
+	//	this.jcDeporte.setSelectedItem(null);
+	//	this.jcEquipo.setSelectedItem(null);
 		this.dispose();
 	}
 
@@ -393,7 +393,7 @@ public class VentanaPersona extends JFrame
 				this.jcDeporte.addItem(deporte.getNombre());
 			}
 		}
-	public void llenarEquipo(List<EquipoDTO> equipoList) {
+	public void llenarComboEquipos(List<EquipoDTO> equipoList) {
 		for (EquipoDTO equipo : equipoList)
 		{
 			this.jcEquipo.addItem(equipo.getNombre());

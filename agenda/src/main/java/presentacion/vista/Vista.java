@@ -32,7 +32,7 @@ public class Vista
 	private JButton btnContactos;
 	private JButton btnReporte;
 	private DefaultTableModel modelPersonas;
-	private  String[] nombreColumnas = {"Id","Nombre y apellido","Telefono","Email","Cumpleaños","Calle","Altura","Piso","Depto","Localidad","Contacto"};
+	private  String[] nombreColumnas = {"Id","Nombre y apellido","Telefono","Email","Cumpleaños","Calle","Altura","Piso","Depto","Localidad","Contacto","Deporte","Equipo"};
 
 	public Vista() 
 	{
@@ -172,12 +172,12 @@ public class Vista
 			String depto = p.getDepto();
 			String localidad = p.getLocalidad();				
 			String tipocontacto = p.getTipocontacto();
+			String deporte = p.getDeporte();
+			String equipo = p.getEquipo();
 
-			Object[] fila = {idpersona, nombre, tel,email,fechaCumpleaños,calle,altura,piso,depto,localidad,tipocontacto};
-			
+			Object[] fila = {idpersona, nombre, tel,email,fechaCumpleaños,calle,altura,piso,depto,localidad,tipocontacto,deporte,equipo};
 
 			this.getModelPersonas().addRow(fila);
-			
 		
 		}
 		

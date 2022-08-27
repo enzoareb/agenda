@@ -1,6 +1,8 @@
 package presentacion.controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import java.util.List;
 import modelo.Agenda;
 
@@ -38,6 +40,10 @@ public class Controlador implements ActionListener
 			this.ventanaLocalidad = ventanaLocalidad.getInstance();
 			
 			this.agenda = agenda;
+			this.ventanaPersona.llenarComboLocalidades(this.agenda.obtenerLocalidad());
+			this.ventanaPersona.llenarComboTipos(this.agenda.obtenerTipoContacto());
+			this.ventanaPersona.llenarComboDeportes(this.agenda.obtenerDeporte());
+			this.ventanaPersona.llenarComboEquipos(this.agenda.obtenerEquipo());
 		}
 		
 	//	private void ventanaDomicilioPersona(ActionEvent a) {
@@ -52,10 +58,7 @@ public class Controlador implements ActionListener
 		}
 
 		private void ventanaAgregarPersona(ActionEvent a) {
-			this.ventanaPersona.llenarComboLocalidades(this.agenda.obtenerLocalidad());
-			this.ventanaPersona.llenarComboTipos(this.agenda.obtenerTipoContacto());
-			this.ventanaPersona.llenarComboDeportes(this.agenda.obtenerDeporte());
-			this.ventanaPersona.llenarEquipo(this.agenda.obtenerEquipo());
+		
 			this.ventanaPersona.mostrarVentana("NUEVO CONTACTO",false);
 		}
 		
@@ -76,10 +79,7 @@ public class Controlador implements ActionListener
 				this.ventanaPersona.setTxtDomicilioAltura(this.personasEnTabla.get(fila).getAltura());
 				this.ventanaPersona.setTxtDomicilioPiso(this.personasEnTabla.get(fila).getPiso());
 				this.ventanaPersona.setTxtDomicilioDpto(this.personasEnTabla.get(fila).getDepto());
-				this.ventanaPersona.llenarComboLocalidades(this.agenda.obtenerLocalidad());
-				this.ventanaPersona.llenarComboTipos(this.agenda.obtenerTipoContacto());
-				this.ventanaPersona.llenarComboDeportes(this.agenda.obtenerDeporte());
-				this.ventanaPersona.llenarEquipo(this.agenda.obtenerEquipo());
+		
 
 			}
 
@@ -92,7 +92,9 @@ public class Controlador implements ActionListener
 			String email = ventanaPersona.getTxtEmail().getText();
 			String fechaCumpleaños = ventanaPersona.getTxtFechaCumpleaños().getText();
 			int idcontacto = ventanaPersona.getJcTipoContacto().getSelectedIndex()+1;
-			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel,email,fechaCumpleaños,idcontacto);
+			int idDeporte = ventanaPersona.getJcDeporte().getSelectedIndex()+1;
+			int idEquipo = ventanaPersona.getJcEquipo().getSelectedIndex()+1;
+			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel,email,fechaCumpleaños,idcontacto,idDeporte,idEquipo);
 			this.agenda.agregarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.guardarDomicilioPersona(p);
@@ -100,8 +102,21 @@ public class Controlador implements ActionListener
 		}
 
 		private void guardarDomicilioPersona(ActionEvent p) {
-			
-			int idpersona = personasEnTabla.get(personasEnTabla.size()-1).getIdPersona();
+			List<PersonaDTO> personas = agenda.obtenerPersonas();
+			List<Integer> ids = new ArrayList<>();
+			for (PersonaDTO personaDTO : personas) {
+				ids.add(personaDTO.getIdPersona());
+			}
+			int mayor = ids.get(0);
+		// Recorrer arreglo y ver si no es así
+		// (comenzar desde el 1 porque el 0 ya lo tenemos contemplado arriba)
+		for (int x = 1; x < ids.size(); x++) {
+			if (ids.get(x) > mayor) {
+				mayor = ids.get(x);
+			}
+		}
+			//int idpersona = personasEnTabla.get(personasEnTabla.size()-1).getIdPersona();
+			int idpersona = mayor;
 			String calle = ventanaPersona.getTxtDomicilioCalle().getText();
 			String altura = ventanaPersona.getTxtDomicilioAltura().getText();
 			String piso = ventanaPersona.getTxtDomicilioPiso().getText();
@@ -141,9 +156,11 @@ public class Controlador implements ActionListener
 			String email = ventanaPersona.getTxtEmail().getText();
 			String fechaCumpleaños = ventanaPersona.getTxtFechaCumpleaños().getText();
 			int idcontacto = ventanaPersona.getJcTipoContacto().getSelectedIndex()+1;
-			PersonaDTO persona_a_editar = new PersonaDTO(idPersona, nombre, tel,email,fechaCumpleaños,idcontacto);
+			int idDeporte = ventanaPersona.getJcDeporte().getSelectedIndex()+1;
+			int idEquipo = ventanaPersona.getJcEquipo().getSelectedIndex()+1;
+			PersonaDTO persona_a_editar = new PersonaDTO(idPersona, nombre, tel,email,fechaCumpleaños,idcontacto,idDeporte,idEquipo);
 			this.agenda.editarPersona(persona_a_editar);
-			this.refrescarTabla();
+		//	this.refrescarTabla();
 			this.editarDomicilioPersona(h);
 			this.ventanaPersona.cerrar();
 	}

@@ -17,7 +17,7 @@ public class PersonaDomicilioDAOSQL implements PersonaDomicilioDAO
 {
 	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, email, Cumpleaños) VALUES(?, ?, ?, ?, ?)";
 	private static final String delete = "delete personas,domicilio FROM personas inner join domicilio ON domicilio.idPersona = personas.idPersona  WHERE personas.idPersona = ?";
-	private static final String readall = "SELECT * FROM personas left join domicilio on personas.idPersona = domicilio.idPersona left join tipocontacto on personas.idContacto = tipocontacto.idtipocontacto left join localidad on domicilio.localidad = localidad.idlocalidad";
+	private static final String readall = "SELECT * FROM personas left join domicilio on personas.idPersona = domicilio.idPersona left join tipocontacto on personas.idContacto = tipocontacto.idtipocontacto left join localidad on domicilio.localidad = localidad.idlocalidad left join deportes on personas.idDeporte = deportes.idDeporte left join equipos on personas.idEquipo = equipos.idEquipo"; 
 	//private static final String readall = "SELECT personas.*, iddomicilio,calle,altura,piso,depto,localidad FROM personas, domicilio";
 	private static final String edit = "UPDATE personas SET nombre=?, telefono=?, email=?, Cumpleaños=? WHERE idPersona = ?";
 	
@@ -117,7 +117,10 @@ public class PersonaDomicilioDAOSQL implements PersonaDomicilioDAO
 		String local = resultSet.getString("nombrelocalidad");
 		String tipocontacto = resultSet.getString("nombretipo");
 
-		return new PersonaDomicilioDTO(id, nombre, tel,email,fechaCumpleaños,calle,altura,piso,depto,local,tipocontacto);
+		String deporte = resultSet.getString("nombreDeporte");
+		String equipo = resultSet.getString("nombreEquipo");
+
+		return new PersonaDomicilioDTO(id, nombre, tel,email,fechaCumpleaños,calle,altura,piso,depto,local,tipocontacto,deporte,equipo);
 		
 
 		//return new PersonaDomicilioDTO(id, nombre, tel,email,fechaCumpleaños,iddomi,calle,altura,piso,depto,local);

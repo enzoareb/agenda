@@ -7,7 +7,6 @@ public class PersonaDomicilioDTO
 	private int idPersona;
 	private String nombre;
 	private String telefono;
-	//private DomicilioDTO domicilio;
 	private String email;
 	private String fechaCumpleaños;
 	private int iddireccion;
@@ -17,7 +16,8 @@ public class PersonaDomicilioDTO
 	private String depto;
 	private int idlocalidad;
 	private String localidad;
-
+	private String deporte;
+	private String equipo;
 
 	private String tipocontacto;
 
@@ -25,22 +25,21 @@ public class PersonaDomicilioDTO
 
 
 	//public PersonaDomicilioDTO(int idPersona, String nombre, String telefono,String email, String fechaCumpleaños, int iddireccion, String calle, String altura, String piso, String depto, String localidad)
-	public PersonaDomicilioDTO(int idPersona, String nombre, String telefono,String email, String fechaCumpleaños, String calle, String altura, String piso, String depto, String localidad,String tipocontacto)
+	public PersonaDomicilioDTO(int idPersona, String nombre, String telefono,String email, String fechaCumpleaños, String calle, String altura, String piso, String depto, String localidad,String tipocontacto,String deporte,String equipo)
 	{
 		this.idPersona = idPersona;
 		this.nombre = nombre;
 		this.telefono = telefono;
-	
 		this.email = email;
 		this.fechaCumpleaños= fechaCumpleaños;
-
-		//this.iddireccion = iddireccion;
 		this.calle = calle;
 		this.altura = altura;
 		this.piso = piso;
 		this.depto = depto;
 		this.localidad = localidad;
 		this.tipocontacto = tipocontacto;
+		this.deporte = deporte;
+		this.equipo = equipo;
 	}
 	
 	public int getIdPersona() 
@@ -90,14 +89,6 @@ public class PersonaDomicilioDTO
 		this.fechaCumpleaños = fechaCumpleaños;
 	}
 
-	//public DomicilioDTO getDomicilio() {
-	//	return domicilio;
-	//}
-
-	//public void setDomicilio(DomicilioDTO domicilio) {
-	//	this.domicilio = domicilio;
-	//}
-
 	public int getIdDireccion() 
 	{
 		return this.iddireccion;
@@ -107,7 +98,6 @@ public class PersonaDomicilioDTO
 	{
 		this.iddireccion = iddireccion;
 	}
-  
 
 	public String getCalle() 
 	{
@@ -149,15 +139,7 @@ public class PersonaDomicilioDTO
 		this.depto = depto;
 	}
 
-	/*public String getLocalidad() 
-	{
-		return this.localidad;
-	}
 
-	public void setLocalidad(String localidad) 
-	{
-		this.localidad = localidad;
-	}*/
 	
 	public int getIdlocalidad() {
 		return idlocalidad;
@@ -183,6 +165,24 @@ public class PersonaDomicilioDTO
 	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
 	}
+
+	public String getDeporte() {
+		return deporte;
+	}
+
+	public void setDeporte(String deporte) {
+		this.deporte = deporte;
+	}
+
+	public String getEquipo() {
+		return equipo;
+	}
+
+	public void setEquipo(String equipo) {
+		this.equipo = equipo;
+	}
+
+	
 
 	
 }

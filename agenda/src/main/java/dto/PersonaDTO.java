@@ -11,9 +11,11 @@ public class PersonaDTO
 	private String email;
 	private String fechaCumpleaños;
 	private int idcontacto;
+	private int idDeporte;
+	private int idEquipo;
 
 
-	public PersonaDTO(int idPersona, String nombre, String telefono,String email, String fechaCumpleaños,int idcontacto)
+	public PersonaDTO(int idPersona, String nombre, String telefono,String email, String fechaCumpleaños,int idcontacto,int idDeporte,int idEquipo)
 	{
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -22,6 +24,8 @@ public class PersonaDTO
 		this.email = email;
 		this.fechaCumpleaños= fechaCumpleaños;
 		this.idcontacto = idcontacto;
+		this.idDeporte = idDeporte;
+		this.idEquipo = idEquipo;
 	}
 	
 	public int getIdPersona() 
@@ -87,9 +91,20 @@ public class PersonaDTO
 		this.idcontacto = idcontacto;
 	}
 
+	public int getIdDeporte() {
+		return idDeporte;
+	}
 
-	
-	
+	public void setIdDeporte(int idDeporte) {
+		this.idDeporte = idDeporte;
+	}
 
+	public int getIdEquipo() {
+		return idEquipo;
+	}
+
+	public void setIdEquipo(int idEquipo) {
+		this.idEquipo = idEquipo;
+	}
 	
 }

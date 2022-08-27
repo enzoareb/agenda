@@ -95,7 +95,7 @@ public class DeporteDAOSQL implements DeporteDAO{
 	private DeporteDTO getDeporteDTO(ResultSet resultSet) throws SQLException
 	{
 		int id = resultSet.getInt("idDeporte");
-		String nombre = resultSet.getString("nombre");
+		String nombre = resultSet.getString("nombreDeporte");
 
 		return new DeporteDTO(id, nombre);
 	}
