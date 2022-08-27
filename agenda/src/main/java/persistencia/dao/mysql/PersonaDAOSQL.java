@@ -52,7 +52,7 @@ public class PersonaDAOSQL implements PersonaDAO
 		return isInsertExitoso;
 	}
 	
-	public boolean delete(PersonaDTO persona_a_eliminar)
+	public boolean delete(int id_persona_a_eliminar)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -60,7 +60,7 @@ public class PersonaDAOSQL implements PersonaDAO
 		try 
 		{
 			statement = conexion.prepareStatement(delete);
-			statement.setString(1, Integer.toString(persona_a_eliminar.getIdPersona()));
+			statement.setString(1, Integer.toString(id_persona_a_eliminar));
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();

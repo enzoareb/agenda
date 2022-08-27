@@ -37,9 +37,9 @@ public class Agenda
 		this.persona.insert(nuevaPersona);
 	}
 
-	public void borrarPersona(PersonaDTO persona_a_eliminar) 
+	public void borrarPersona(int id_persona_a_eliminar) 
 	{
-		this.persona.delete(persona_a_eliminar);
+		this.persona.delete(id_persona_a_eliminar);
 	}
 	
 	public List<PersonaDTO> obtenerPersonas()
@@ -57,9 +57,9 @@ public class Agenda
 		this.domicilio.insert(nuevoDomicilio);
     }
 
-	public void borrarDomicilio(DomicilioDTO domicilio_a_eliminar) 
+	public void borrarDomicilio(int id_domicilio_a_eliminar) 
 	{
-		this.domicilio.delete(domicilio_a_eliminar);
+		this.domicilio.delete(id_domicilio_a_eliminar);
 	}
 	
 	public List<DomicilioDTO> obtenerDomicilio()
@@ -92,7 +92,7 @@ public class Agenda
 	{
 		this.localidad.edit(localidad_a_editar);
 	}
-
+/* */
 	
 	//// 
 	public void agregarPersonaDomicilio(PersonaDomicilioDTO nuevaPersonaDomicilio)
@@ -136,4 +136,7 @@ public class Agenda
 		this.tipocontacto.edit(tipo_a_editar);
 	}
 	
+	public Integer findDomicilioByIdPerson(int idpersona){
+		return this.domicilio.findDomicilioByIdPerson(idpersona);
+	}
 }

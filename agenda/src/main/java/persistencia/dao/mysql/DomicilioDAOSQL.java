@@ -17,7 +17,7 @@ public class DomicilioDAOSQL implements DomicilioDAO
 	private static final String insert = "INSERT INTO domicilio(idDomicilio, idPersona, calle, altura, piso, depto, localidad) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM domicilio WHERE idDomicilio = ?";
 	private static final String readall = "SELECT * FROM domicilio";
-	private static final String findByPerson = "SELECT * FROM domicilio WHERE idPersona = ?";
+	private static final String findDomiciliiByIdPerson = "SELECT * FROM domicilio WHERE idPersona = ?";
 	private static final String edit = "UPDATE domicilio SET idPersona=?, calle=?, altura=?, piso=?, depto=?, localidad=? WHERE iddomicilio = ?";
 	
 	public boolean insert(DomicilioDTO domicilio)
@@ -55,7 +55,7 @@ public class DomicilioDAOSQL implements DomicilioDAO
 		return isInsertExitoso;
 	}
 	
-	public boolean delete(DomicilioDTO domicilio_a_eliminar)
+	public boolean delete(int id_domicilio_a_eliminar)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -63,7 +63,7 @@ public class DomicilioDAOSQL implements DomicilioDAO
 		try 
 		{
 			statement = conexion.prepareStatement(delete);
-			statement.setString(1, Integer.toString(domicilio_a_eliminar.getidDomicilio()));
+			statement.setString(1, Integer.toString(id_domicilio_a_eliminar));
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -99,25 +99,28 @@ public class DomicilioDAOSQL implements DomicilioDAO
 		return domicilios;
 	}
 
-	public static Integer findByPerson(int idPersona)
+	public Integer findDomicilioByIdPerson(int idPersona)
 	{
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		Integer domicilio = null;
+		Integer iddomicilio = null;
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
-			statement = conexion.getSQLConexion().prepareStatement(findByPerson);
+			statement = conexion.getSQLConexion().prepareStatement(findDomiciliiByIdPerson);
 			statement.setString(1,Integer.toString(idPersona));
 			resultSet = statement.executeQuery();
-			domicilio = resultSet.getInt("idDomicilio");
+			while(resultSet.next())
+			{
+				iddomicilio = resultSet.getInt("idDomicilio");
+			}
 			
 		} 
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
-		return domicilio;
+		return iddomicilio;
 	}
 	
 	private DomicilioDTO getDomicilioDTO(ResultSet resultSet) throws SQLException

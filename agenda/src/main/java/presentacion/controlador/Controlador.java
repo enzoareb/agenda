@@ -63,22 +63,23 @@ public class Controlador implements ActionListener
 			int[] filasSeleccionadas = this.vista.getTablaPersonas().getSelectedRows();
 			for (int fila : filasSeleccionadas)
 			{
-				this.ventanaPersona.setTxtIdPersona(this.personasEnTabla.get(fila).getIdPersona());
+				int idPersona = this.personasEnTabla.get(fila).getIdPersona();
+				this.ventanaPersona.setTxtIdPersona(idPersona);
 				this.ventanaPersona.setTxtNombre(this.personasEnTabla.get(fila).getNombre());
 				this.ventanaPersona.setTxtTelefono(this.personasEnTabla.get(fila).getTelefono());
 				this.ventanaPersona.setTxtEmail(this.personasEnTabla.get(fila).getEmail());
 				this.ventanaPersona.setTxtFechaCumpleaños(this.personasEnTabla.get(fila).getFechaCumpleaños());
-				this.ventanaPersona.setTxtIdDomicilio(DomicilioDAOSQL.findByPerson(this.personasEnTabla.get(fila).getIdPersona()));
+				this.ventanaPersona.setTxtIdDomicilio(this.agenda.findDomicilioByIdPerson(idPersona));
 				this.ventanaPersona.setTxtDomicilioCalle(this.personasEnTabla.get(fila).getCalle());
 				this.ventanaPersona.setTxtDomicilioAltura(this.personasEnTabla.get(fila).getAltura());
 				this.ventanaPersona.setTxtDomicilioPiso(this.personasEnTabla.get(fila).getPiso());
 				this.ventanaPersona.setTxtDomicilioDpto(this.personasEnTabla.get(fila).getDepto());
-				
-				//this.ventanaPersona.setJcLocalidad(this.personasEnTabla.get(fila));
+				this.ventanaPersona.llenarComboLocalidades(this.agenda.obtenerLocalidad());
+				this.ventanaPersona.llenarComboTipos(this.agenda.obtenerTipoContacto());
 
 			}
 
-			this.ventanaPersona.mostrarVentana("EDITAR CONTACTO",true);
+			this.ventanaPersona.mostrarVentana("EDITAR CONTACTO",false);
 		}
 
 		private void guardarPersona(ActionEvent p) {
@@ -119,28 +120,44 @@ public class Controlador implements ActionListener
 			int[] filasSeleccionadas = this.vista.getTablaPersonas().getSelectedRows();
 			for (int fila : filasSeleccionadas)
 			{
-				//this.agenda.borrarPersona(this.personasEnTabla.get(fila));
-				
+				int idPersona = this.personasEnTabla.get(fila).getIdPersona();
+				int idDomicilio = this.agenda.findDomicilioByIdPerson(idPersona);
+				this.agenda.borrarPersona(idPersona);
+				this.agenda.borrarDomicilio(idDomicilio);
 			}
-			
 			this.refrescarTabla();
 		}
 
 		//Editar Persona
 		private void editarPersona(ActionEvent p) {
-		
-			String id = this.ventanaPersona.getTxtIdPersona().getText(); 
-			int idpersona = Integer.parseInt(id.trim());
+
+			int idPersona = Integer.parseInt(this.ventanaPersona.getTxtIdPersona().getText());
 			String nombre = this.ventanaPersona.getTxtNombre().getText();
 			String tel = ventanaPersona.getTxtTelefono().getText();
 			String email = ventanaPersona.getTxtEmail().getText();
 			String fechaCumpleaños = ventanaPersona.getTxtFechaCumpleaños().getText();
-			int idcontacto = ventanaPersona.getJcTipoContacto().getSelectedIndex();
-			//String domicilio = ventanaPersona.getTxtDomicilio().getText();
-			PersonaDTO persona = new PersonaDTO(idpersona, nombre, tel,email,fechaCumpleaños,idcontacto);
-			this.agenda.editarPersona(persona);
+			int idcontacto = ventanaPersona.getJcTipoContacto().getSelectedIndex()+1;
+			PersonaDTO persona_a_editar = new PersonaDTO(idPersona, nombre, tel,email,fechaCumpleaños,idcontacto);
+			this.agenda.editarPersona(persona_a_editar);
 			this.refrescarTabla();
+			this.editarDomicilioPersona(p);
 			this.ventanaPersona.cerrar();
+	}
+
+		private void editarDomicilioPersona(ActionEvent p) {
+			
+		int idDomicilio = Integer.parseInt(this.ventanaPersona.getTxtIdDomicilio().getText());
+		int idPersona = Integer.parseInt(this.ventanaPersona.getTxtIdPersona().getText());
+		String calle = ventanaPersona.getTxtDomicilioCalle().getText();
+		String altura = ventanaPersona.getTxtDomicilioAltura().getText();
+		String piso = ventanaPersona.getTxtDomicilioPiso().getText();
+		String depto = ventanaPersona.getTxtDomicilioDpto().getText();
+		int idLocalidad = ventanaPersona.getJcLocalidad().getSelectedIndex()+1;
+		
+		DomicilioDTO domicilio_a_editar = new DomicilioDTO(idDomicilio, idPersona, calle, altura,piso,depto,idLocalidad);
+		this.agenda.editarDomicilio(domicilio_a_editar);
+		this.refrescarTabla();
+		this.ventanaPersona.cerrar();
 	}
 		
 		public void inicializar()
