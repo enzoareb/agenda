@@ -181,7 +181,7 @@ public class VentanaPersona extends JFrame
 		panel.add(btnAgregarPersona);
 
 		btnActualizarPersona = new JButton("Actualizar");
-		btnActualizarPersona.setBounds(208, 260, 100, 30);
+		btnActualizarPersona.setBounds(460, 260, 130, 30);
 		panel.add(btnActualizarPersona);
 /*
 		btnDomicilioPersona = new JButton("Domicilio");
@@ -198,18 +198,15 @@ public class VentanaPersona extends JFrame
 
 	public void mostrarVentana(String titulo, boolean estado) {
 		this.setTitle(titulo);
-		//this.btnDomicilioPersona.setEnabled(estado);
 		this.btnActualizarPersona.setVisible(estado);
 		this.btnAgregarPersona.setVisible(!estado);
 		this.setVisible(true);
 	}
 
-	public void mostrarVentana(String titulo, boolean estado,List<LocalidadDTO> localidades) {
+	public void mostrarVentana2(String titulo, boolean estado) {
 		this.setTitle(titulo);
-		//this.btnDomicilioPersona.setEnabled(estado);
-		this.btnActualizarPersona.setVisible(estado);
-		this.btnAgregarPersona.setVisible(!estado);
-		//this.llenarComboLocalidades(localidades); Luis
+		this.btnActualizarPersona.setVisible(!estado);
+		this.btnAgregarPersona.setVisible(estado);
 		this.setVisible(true);
 	}
 	
@@ -287,11 +284,7 @@ public class VentanaPersona extends JFrame
 	{
 		return btnActualizarPersona;
 	}
-	// Domicilio
-	//public JButton getBtnDomicilioPersona() 
-	//{
-	//	return btnDomicilioPersona;
-	//}
+	
 
 	public void cerrar()
 	{

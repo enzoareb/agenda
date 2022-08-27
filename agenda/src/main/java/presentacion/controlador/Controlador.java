@@ -3,7 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import modelo.Agenda;
-import persistencia.dao.mysql.DomicilioDAOSQL;
+
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.VentanaLocalidad;
 import presentacion.vista.VentanaPersona;
@@ -31,11 +31,11 @@ public class Controlador implements ActionListener
 			// Guardar
 			this.ventanaPersona.getBtnAgregarPersona().addActionListener(p->guardarPersona(p));
 			// Editar
-			this.vista.getBtnEditar().addActionListener(a->ventanaEditarPersona(a));
-			this.ventanaPersona.getBtnActualizarPersona().addActionListener(p->editarPersona(p));
+			this.vista.getBtnEditar().addActionListener(e->ventanaEditarPersona(e));
+			this.ventanaPersona.getBtnActualizarPersona().addActionListener(h->editarPersona(h));
 			// Localidad
 			this.vista.getBtnLocalidad().addActionListener(l->ventanaAgregarLocalidad(l));
-			this.ventanaLocalidad = ventanaLocalidad.getInstance();
+		//	this.ventanaLocalidad = ventanaLocalidad.getInstance();
 			
 			this.agenda = agenda;
 		}
@@ -58,7 +58,7 @@ public class Controlador implements ActionListener
 		}
 		
 		// Para Editar Persona
-		private void ventanaEditarPersona(ActionEvent a) {
+		private void ventanaEditarPersona(ActionEvent e) {
 			
 			int[] filasSeleccionadas = this.vista.getTablaPersonas().getSelectedRows();
 			for (int fila : filasSeleccionadas)
@@ -79,7 +79,7 @@ public class Controlador implements ActionListener
 
 			}
 
-			this.ventanaPersona.mostrarVentana("EDITAR CONTACTO",false);
+			this.ventanaPersona.mostrarVentana2("EDITAR CONTACTO",false);
 		}
 
 		private void guardarPersona(ActionEvent p) {
@@ -129,7 +129,7 @@ public class Controlador implements ActionListener
 		}
 
 		//Editar Persona
-		private void editarPersona(ActionEvent p) {
+		private void editarPersona(ActionEvent h) {
 
 			int idPersona = Integer.parseInt(this.ventanaPersona.getTxtIdPersona().getText());
 			String nombre = this.ventanaPersona.getTxtNombre().getText();
@@ -140,11 +140,11 @@ public class Controlador implements ActionListener
 			PersonaDTO persona_a_editar = new PersonaDTO(idPersona, nombre, tel,email,fechaCumpleaños,idcontacto);
 			this.agenda.editarPersona(persona_a_editar);
 			this.refrescarTabla();
-			this.editarDomicilioPersona(p);
+			this.editarDomicilioPersona(h);
 			this.ventanaPersona.cerrar();
 	}
 
-		private void editarDomicilioPersona(ActionEvent p) {
+		private void editarDomicilioPersona(ActionEvent h) {
 			
 		int idDomicilio = Integer.parseInt(this.ventanaPersona.getTxtIdDomicilio().getText());
 		int idPersona = Integer.parseInt(this.ventanaPersona.getTxtIdPersona().getText());
@@ -157,7 +157,7 @@ public class Controlador implements ActionListener
 		DomicilioDTO domicilio_a_editar = new DomicilioDTO(idDomicilio, idPersona, calle, altura,piso,depto,idLocalidad);
 		this.agenda.editarDomicilio(domicilio_a_editar);
 		this.refrescarTabla();
-		this.ventanaPersona.cerrar();
+		
 	}
 		
 		public void inicializar()

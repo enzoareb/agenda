@@ -18,7 +18,7 @@ public class DomicilioDAOSQL implements DomicilioDAO
 	private static final String delete = "DELETE FROM domicilio WHERE idDomicilio = ?";
 	private static final String readall = "SELECT * FROM domicilio";
 	private static final String findDomiciliiByIdPerson = "SELECT * FROM domicilio WHERE idPersona = ?";
-	private static final String edit = "UPDATE domicilio SET idPersona=?, calle=?, altura=?, piso=?, depto=?, localidad=? WHERE iddomicilio = ?";
+	private static final String edit = "UPDATE domicilio SET calle=?, altura=?, piso=?, depto=?, localidad=? WHERE idDomicilio = ?";
 	
 	public boolean insert(DomicilioDTO domicilio)
 	{
@@ -146,17 +146,13 @@ public class DomicilioDAOSQL implements DomicilioDAO
 		try
 		{
 			statement = conexion.prepareStatement(edit);
-
-			//statement.setString(1, persona_a_editar.getIdPersona());
-			statement.setString(8, Integer.toString(domicilio_a_editar.getidDomicilio()));
-			statement.setString(1, Integer.toString(domicilio_a_editar.getidPersona()));
-			statement.setString(2, domicilio_a_editar.getCalle());
-			statement.setString(3, domicilio_a_editar.getAltura());
-			statement.setString(4, domicilio_a_editar.getPiso());
-			statement.setString(5, domicilio_a_editar.getDepto());
-			statement.setInt(6, domicilio_a_editar.getIdLocalidad());
 			
-		
+			statement.setString(1, domicilio_a_editar.getCalle());
+			statement.setString(2, domicilio_a_editar.getAltura());
+			statement.setString(3, domicilio_a_editar.getPiso());
+			statement.setString(4, domicilio_a_editar.getDepto());
+			statement.setInt(5, domicilio_a_editar.getIdLocalidad());
+			statement.setInt(6, domicilio_a_editar.getidDomicilio());
 
 			if(statement.executeUpdate() > 0)
 			{
