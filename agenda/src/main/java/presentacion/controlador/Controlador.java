@@ -35,7 +35,7 @@ public class Controlador implements ActionListener
 			this.ventanaPersona.getBtnActualizarPersona().addActionListener(h->editarPersona(h));
 			// Localidad
 			this.vista.getBtnLocalidad().addActionListener(l->ventanaAgregarLocalidad(l));
-		//	this.ventanaLocalidad = ventanaLocalidad.getInstance();
+			this.ventanaLocalidad = ventanaLocalidad.getInstance();
 			
 			this.agenda = agenda;
 		}
@@ -54,6 +54,8 @@ public class Controlador implements ActionListener
 		private void ventanaAgregarPersona(ActionEvent a) {
 			this.ventanaPersona.llenarComboLocalidades(this.agenda.obtenerLocalidad());
 			this.ventanaPersona.llenarComboTipos(this.agenda.obtenerTipoContacto());
+			this.ventanaPersona.llenarComboDeportes(this.agenda.obtenerDeporte());
+			this.ventanaPersona.llenarEquipo(this.agenda.obtenerEquipo());
 			this.ventanaPersona.mostrarVentana("NUEVO CONTACTO",false);
 		}
 		
@@ -76,6 +78,8 @@ public class Controlador implements ActionListener
 				this.ventanaPersona.setTxtDomicilioDpto(this.personasEnTabla.get(fila).getDepto());
 				this.ventanaPersona.llenarComboLocalidades(this.agenda.obtenerLocalidad());
 				this.ventanaPersona.llenarComboTipos(this.agenda.obtenerTipoContacto());
+				this.ventanaPersona.llenarComboDeportes(this.agenda.obtenerDeporte());
+				this.ventanaPersona.llenarEquipo(this.agenda.obtenerEquipo());
 
 			}
 
