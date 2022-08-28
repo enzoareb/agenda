@@ -14,11 +14,12 @@ import dto.PersonaDTO;
 
 public class PersonaDAOSQL implements PersonaDAO
 {
-	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, email, Cumpleaños,idcontacto) VALUES(?, ?, ?, ?, ?, ?)";
+	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, email, Cumpleaños,idcontacto,idDeporte,idEquipo) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = "SELECT * FROM personas";
-	private static final String edit = "UPDATE personas SET nombre=?, telefono=?, email=?, Cumpleaños=?, idcontacto=? WHERE idPersona = ?";
-	
+	private static final String edit = "UPDATE personas SET nombre=?, telefono=?, email=?, Cumpleaños=?, idcontacto=?, idDeporte=?, idEquipo=? WHERE idPersona = ?";
+
+
 	public boolean insert(PersonaDTO persona)
 	{
 		PreparedStatement statement;
@@ -33,6 +34,8 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setString(4, persona.getEmail());
 			statement.setString(5, persona.getFechaCumpleaños());
 			statement.setInt(6, persona.getIdcontacto());
+			statement.setInt(7, persona.getIdDeporte());
+			statement.setInt(8, persona.getIdEquipo());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -104,10 +107,13 @@ public class PersonaDAOSQL implements PersonaDAO
 		String email = resultSet.getString("Email");
 		String fechaCumpleaños = resultSet.getString("Cumpleaños");
 		int idContacto = resultSet.getInt("idcontacto");
+		int idDeporte = resultSet.getInt("idDeporte");
+		int idEquipo = resultSet.getInt("idEquipo");
 
-		return new PersonaDTO(id, nombre, tel,email,fechaCumpleaños,idContacto);
+		return new PersonaDTO(id, nombre, tel,email,fechaCumpleaños,idContacto,idDeporte,idEquipo);
 	}
 
+	
 
 	//agrego funcion para editar contacto
 	public boolean edit(PersonaDTO persona_a_editar)
@@ -125,7 +131,9 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setString(3, persona_a_editar.getEmail());
 			statement.setString(4, persona_a_editar.getFechaCumpleaños());
 			statement.setInt(5, persona_a_editar.getIdcontacto());
-			statement.setInt(6, persona_a_editar.getIdPersona());		
+			statement.setInt(6, persona_a_editar.getIdDeporte());
+			statement.setInt(7, persona_a_editar.getIdEquipo());
+			statement.setInt(8, persona_a_editar.getIdPersona());		
 
 			if(statement.executeUpdate() > 0)
 			{
