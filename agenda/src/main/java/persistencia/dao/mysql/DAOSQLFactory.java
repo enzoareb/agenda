@@ -8,8 +8,11 @@ import persistencia.dao.interfaz.DeporteDAO;
 import persistencia.dao.interfaz.DomicilioDAO;
 import persistencia.dao.interfaz.EquipoDAO;
 import persistencia.dao.interfaz.LocalidadDAO;
+import persistencia.dao.interfaz.LocalidadProvinciaDAO;
+import persistencia.dao.interfaz.PaisDAO;
 import persistencia.dao.interfaz.PersonaDAO;
 import persistencia.dao.interfaz.PersonaDomicilioDAO;
+import persistencia.dao.interfaz.ProvinciaDAO;
 import persistencia.dao.interfaz.TipoContactoDAO;
 
 public class DAOSQLFactory implements DAOAbstractFactory 
@@ -53,5 +56,20 @@ public class DAOSQLFactory implements DAOAbstractFactory
 	public EquipoDAO createEquipoDAO() {
 	
 		return new EquipoDAOSQL();
+	}
+
+	public LocalidadProvinciaDAO createLocalidadProvinciaDAO() 
+	{
+			return new LocalidadProvinciaDAOSQL();
+	}
+
+	public ProvinciaDAO createProvinciaDAO() 
+	{
+			return new ProvinciaDAOSQL();
+	}
+
+	public PaisDAO createPaisDAO() 
+	{
+			return new PaisDAOSQL();
 	}
 }

@@ -7,14 +7,17 @@ import java.util.List;
 import modelo.Agenda;
 
 import presentacion.reportes.ReporteAgenda;
+import presentacion.vista.VentanaEditarLocalidad;
 import presentacion.vista.VentanaLocalidad;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
 //import presentacion.vista.VistaLocalidades;
 import dto.DomicilioDTO;
 import dto.LocalidadDTO;
+import dto.LocalidadProvinciaDTO;
 import dto.PersonaDTO;
 import dto.PersonaDomicilioDTO;
+import dto.ProvinciaDTO;
 
 public class Controlador implements ActionListener
 {
@@ -22,9 +25,10 @@ public class Controlador implements ActionListener
 		private List<PersonaDomicilioDTO> personasEnTabla;
 		private VentanaPersona ventanaPersona; 
 		private VentanaLocalidad ventanaLocalidad; 
-		//private VistaLocalidades vistaLocalidades;
+		
 		private Agenda agenda;
-		private List<LocalidadDTO> localidadesEnTabla;
+		private List<LocalidadProvinciaDTO> localidadesEnTabla;
+		private VentanaEditarLocalidad ventanaeditarlocalidad;
 
 		
 		public Controlador(Vista vista, Agenda agenda)
@@ -40,7 +44,7 @@ public class Controlador implements ActionListener
 			this.vista.getBtnEditar().addActionListener(e->ventanaEditarPersona(e));
 			this.ventanaPersona.getBtnActualizarPersona().addActionListener(h->editarPersona(h));
 			// Localidad
-			this.vista.getBtnLocalidad().addActionListener(a->ventanaAgregarLocalidad(a));
+			this.vista.getBtnLocalidad().addActionListener(a->ventanaMostrarLocalidad(a));
 			//this.vistaLocalidades = VistaLocalidades.getInstance();
 			//this.vistaLocalidades.getBtnAgregar().addActionListener(a->ventanaAgregarLocalidad(a));
 			this.ventanaLocalidad = VentanaLocalidad.getInstance();
@@ -50,6 +54,16 @@ public class Controlador implements ActionListener
 			this.ventanaPersona.llenarComboTipos(this.agenda.obtenerTipoContacto());
 			this.ventanaPersona.llenarComboDeportes(this.agenda.obtenerDeporte());
 			this.ventanaPersona.llenarComboEquipos(this.agenda.obtenerEquipo());
+
+			this.ventanaeditarlocalidad = VentanaEditarLocalidad.getInstance();
+			this.ventanaLocalidad.getBtnAgregar().addActionListener(a->ventanaAgregarLocalidad(a));
+
+			this.ventanaeditarlocalidad.llenarComboProvincias(this.agenda.obtenerProvincia());
+			this.ventanaeditarlocalidad.llenarComboPaises(this.agenda.obtenerPais());
+
+			//Guardar Localidad
+			this.ventanaeditarlocalidad.getBtnAgregarLocalidad().addActionListener(p->guardarLocalidad(p));
+
 		}
 		
 	//	private void ventanaDomicilioPersona(ActionEvent a) {
@@ -59,11 +73,17 @@ public class Controlador implements ActionListener
 			
 	//	}
 
-		private void ventanaAgregarLocalidad(ActionEvent l) {
-			this.localidadesEnTabla = agenda.obtenerLocalidad();
+		private void ventanaMostrarLocalidad(ActionEvent l) {
+			this.localidadesEnTabla = agenda.obtenerLocalidadProvincia();
 			this.ventanaLocalidad.llenarTabla(this.localidadesEnTabla);
 			this.ventanaLocalidad.mostrarVentana("LOCALIDADES", false);
 			//this.vistaLocalidades.mostrarVentana("LOCALIDADES");
+		}
+
+		private void ventanaAgregarLocalidad(ActionEvent l) {
+			//this.localidadesEnTabla = agenda.obtenerLocalidadProvincia();
+			//this.ventanaLocalidad.llenarTabla(this.localidadesEnTabla);
+			this.ventanaeditarlocalidad.mostrarVentana("NUEVA LOCALIDAD", false);
 		}
 
 		private void ventanaAgregarPersona(ActionEvent a) {
@@ -137,6 +157,53 @@ public class Controlador implements ActionListener
 			this.refrescarTabla();
 			this.ventanaPersona.cerrar();
 		}
+
+
+		private void guardarLocalidad(ActionEvent p) {
+			String nombre = this.ventanaeditarlocalidad.getTxtNombre().getText();
+			int idprov = this.ventanaeditarlocalidad.getJcprovincia().getSelectedIndex()+1;
+			int idpais = this.ventanaeditarlocalidad.getJcpais().getSelectedIndex()+1;
+
+			LocalidadDTO nuevaLocalidad = new LocalidadDTO(0, nombre,idprov,idpais);
+			this.agenda.agregarLocalidad(nuevaLocalidad);
+			this.refrescarTabla();
+			//this.guardarProvincia();
+			this.ventanaeditarlocalidad.cerrar();
+		}
+
+
+		private void guardarProvincia(ActionEvent p) {
+			/* 
+			List<ProvinciaDTO> provincias = agenda.obtenerProvincia();
+			List<Integer> ids = new ArrayList<>();
+			for (ProvinciaDTO provinciaDTO : provincias) {
+				ids.add(provinciaDTO.getIdProvincia());
+			}
+			int mayor = ids.get(0);
+
+			for (int x = 1; x < ids.size(); x++) {
+				if (ids.get(x) > mayor) {
+					mayor = ids.get(x);
+				}
+			}
+			//int idpersona = personasEnTabla.get(personasEnTabla.size()-1).getIdPersona();
+			int idlocalidad = mayor;*/
+			String nombrelocalidad = ventanaeditarlocalidad.getTxtNombre().getText();
+			//String altura = ventanaPersona.getTxtDomicilioAltura().getText();
+			//String piso = ventanaPersona.getTxtDomicilioPiso().getText();
+			//String depto = ventanaPersona.getTxtDomicilioDpto().getText();
+			int idprovincia = ventanaeditarlocalidad.getJcprovincia().getSelectedIndex()+1;
+			int idpais = ventanaeditarlocalidad.getJcpais().getSelectedIndex()+1;
+			
+			LocalidadDTO nuevaLocalidad = new LocalidadDTO(0, nombrelocalidad,idprovincia, idpais);
+			this.agenda.agregarLocalidad(nuevaLocalidad);
+			this.refrescarTabla();
+			this.ventanaeditarlocalidad.cerrar();
+		}
+
+
+
+
 
 		private void mostrarReporte(ActionEvent r) {
 			ReporteAgenda reporte = new ReporteAgenda(agenda.obtenerPersonas());

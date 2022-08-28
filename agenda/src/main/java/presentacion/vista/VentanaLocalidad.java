@@ -3,7 +3,6 @@ package presentacion.vista;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,7 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import dto.LocalidadDTO;
+//import dto.LocalidadDTO;
+import dto.LocalidadProvinciaDTO;
 
 
 public class VentanaLocalidad extends JFrame 
@@ -22,7 +22,8 @@ public class VentanaLocalidad extends JFrame
 	private JPanel contentPane;
 	private JTextField txtLocalidad;
 	private JButton btnAgregar;
-
+	private JButton btnEditar;
+	private JButton btnBorrar;
 	private JTable tablaLocalidades;
 	private DefaultTableModel modelLocalidades;
 	private  String[] nombreColumnas = {"Id","Nombre","Provincia","Pais"};
@@ -71,6 +72,14 @@ public class VentanaLocalidad extends JFrame
 		btnAgregar.setBounds(10, 220, 100, 23);
 		panel.add(btnAgregar);
 
+		btnEditar = new JButton("Editar");
+		btnEditar.setBounds(120, 220, 100, 23);
+		panel.add(btnEditar);
+
+		btnBorrar = new JButton("Borrar");
+		btnBorrar.setBounds(230, 220, 100, 23);
+		panel.add(btnBorrar);
+
 		JScrollPane spPersonas = new JScrollPane();
 		spPersonas.setBounds(10, 11, 400, 200);
 		panel.add(spPersonas);
@@ -111,19 +120,21 @@ public class VentanaLocalidad extends JFrame
 		return nombreColumnas;
 	}
 
-	public void llenarTabla(List<LocalidadDTO> localidadesEnTabla) {
+	public void llenarTabla(List<LocalidadProvinciaDTO> localidadesEnTabla) {
 		this.getModelLocalidades().setRowCount(0); //Para vaciar la tabla
 		this.getModelLocalidades().setColumnCount(0);
 		this.getModelLocalidades().setColumnIdentifiers(this.getNombreColumnas());
 
-		for (LocalidadDTO p : localidadesEnTabla)
+		for (LocalidadProvinciaDTO p : localidadesEnTabla)
 		{
 			int idlocalidad = p.getIdLocalidad();
 			String nombre = p.getNombre();
 			int idprovincia = p.getIdProvincia();
 			int idpais = p.getIdPais();
+			String nombreprovincia = p.getNombreProvincia();
+			String nombrepais = p.getNombrePais();
 
-			Object[] fila = {idlocalidad, nombre, idprovincia, idpais};
+			Object[] fila = {idlocalidad, nombre, nombreprovincia, nombrepais,idprovincia,idpais};
 			
 
 			this.getModelLocalidades().addRow(fila);
@@ -133,7 +144,16 @@ public class VentanaLocalidad extends JFrame
 		
 	}
 		
-	
+	public JButton getBtnAgregar() {
+		return btnAgregar;
+	}
+	public JButton getBtnEditar() {
+		return btnEditar;
+	}
+
+	public JButton getBtnBorrar() {
+		return btnBorrar;
+	}
 
 
 	public void cerrar()

@@ -6,16 +6,22 @@ import dto.DeporteDTO;
 import dto.DomicilioDTO;
 import dto.EquipoDTO;
 import dto.LocalidadDTO;
+import dto.LocalidadProvinciaDTO;
+import dto.PaisDTO;
 import dto.PersonaDTO;
 import dto.PersonaDomicilioDTO;
+import dto.ProvinciaDTO;
 import dto.TipoContactoDTO;
 import persistencia.dao.interfaz.DAOAbstractFactory;
 import persistencia.dao.interfaz.DeporteDAO;
 import persistencia.dao.interfaz.DomicilioDAO;
 import persistencia.dao.interfaz.EquipoDAO;
 import persistencia.dao.interfaz.LocalidadDAO;
+import persistencia.dao.interfaz.LocalidadProvinciaDAO;
+import persistencia.dao.interfaz.PaisDAO;
 import persistencia.dao.interfaz.PersonaDAO;
 import persistencia.dao.interfaz.PersonaDomicilioDAO;
+import persistencia.dao.interfaz.ProvinciaDAO;
 import persistencia.dao.interfaz.TipoContactoDAO;
 
 
@@ -28,6 +34,9 @@ public class Agenda
 	private TipoContactoDAO tipocontactoDao;
 	private DeporteDAO deporteDAO;
 	private EquipoDAO equipoDAO;
+	private LocalidadProvinciaDAO localidadprovincia;
+	private ProvinciaDAO provincia;
+	private PaisDAO pais;
 	
 	public Agenda(DAOAbstractFactory metodo_persistencia)
 	{
@@ -38,6 +47,9 @@ public class Agenda
 		this.deporteDAO = metodo_persistencia.createDeporteDAO();
 		this.equipoDAO = metodo_persistencia.createEquipoDAO();
 		this.personadomicilio = metodo_persistencia.createPersonaDomicilioDAO();
+		this.localidadprovincia = metodo_persistencia.createLocalidadProvinciaDAO();
+		this.provincia = metodo_persistencia.createProvinciaDAO();
+		this.pais = metodo_persistencia.createPaisDAO();
 	}
 	
 	public void agregarPersona(PersonaDTO nuevaPersona)
@@ -169,4 +181,19 @@ public class Agenda
 	{
 		return this.personadomicilio.readAll();		
 	}
+
+	public List<LocalidadProvinciaDTO> obtenerLocalidadProvincia()
+	{
+		return this.localidadprovincia.readAll();		
+	}
+
+	public List<ProvinciaDTO> obtenerProvincia()
+	{
+		return this.provincia.readAll();		
+	}
+
+    public List<PaisDTO> obtenerPais() {
+        return this.pais.readAll();
+    }
+
 }

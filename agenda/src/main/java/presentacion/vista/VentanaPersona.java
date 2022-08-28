@@ -59,7 +59,7 @@ public class VentanaPersona extends JFrame
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 643, 375);
+		setBounds(100, 100, 643, 340);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -67,7 +67,7 @@ public class VentanaPersona extends JFrame
 		
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 840, 853);
+		panel.setBounds(10, 11, 840, 350);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		

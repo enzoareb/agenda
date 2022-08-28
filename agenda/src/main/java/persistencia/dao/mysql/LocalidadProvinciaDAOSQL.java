@@ -9,15 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.LocalidadDTO;
+import dto.LocalidadProvinciaDTO;
 import persistencia.conexion.Conexion;
-import persistencia.dao.interfaz.LocalidadDAO;
+//import persistencia.dao.interfaz.LocalidadDAO;
+import persistencia.dao.interfaz.LocalidadProvinciaDAO;
 
 
-public class LocalidadDAOSQL implements LocalidadDAO
+public class LocalidadProvinciaDAOSQL implements LocalidadProvinciaDAO
 {
-	private static final String insert = "INSERT INTO localidad (idlocalidad, nombrelocalidad,idprovincia, idpais) VALUES(?, ?, ?, ?)";
+	private static final String insert = "INSERT INTO localidad (idlocalidad, nombrlocalidad,idprovincia, idpais) VALUES(?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM localidad WHERE idLocalidad = ?";
-	private static final String readall = "SELECT * FROM localidad";
+	private static final String readall = "SELECT * FROM localidad left join provincia on localidad.idprovincia = provincia.idprovincia left join pais on localidad.idpais = pais.idpais";
 	private static final String edit = "UPDATE localidad SET nombre=?,idProvincia=?, idpais=? WHERE idlocalidad = ?";
 	
 	public boolean insert(LocalidadDTO localidad)
@@ -28,10 +30,9 @@ public class LocalidadDAOSQL implements LocalidadDAO
 		try
 		{
 			statement = conexion.prepareStatement(insert);
-			statement.setInt(1,localidad.getIdLocalidad());
-			statement.setString(2, localidad.getNombre());
-			statement.setInt(3, localidad.getIdProvincia());
-			statement.setInt(4, localidad.getIdPais());
+			statement.setString(1, localidad.getNombre());
+			statement.setInt(2, localidad.getIdProvincia());
+			statement.setInt(3, localidad.getIdPais());
 	
 			if(statement.executeUpdate() > 0)
 			{
@@ -74,11 +75,11 @@ public class LocalidadDAOSQL implements LocalidadDAO
 		return isdeleteExitoso;
 	}
 	
-	public List<LocalidadDTO> readAll()
+	public List<LocalidadProvinciaDTO> readAll()
 	{
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<LocalidadDTO> localidades = new ArrayList<LocalidadDTO>();
+		ArrayList<LocalidadProvinciaDTO> localidadesProvincia = new ArrayList<LocalidadProvinciaDTO>();
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
@@ -86,24 +87,26 @@ public class LocalidadDAOSQL implements LocalidadDAO
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
-				localidades.add(getLocalidadDTO(resultSet));
+				localidadesProvincia.add(getLocalidadProvinciaDTO(resultSet));
 			}
 		} 
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
-		return localidades;
+		return localidadesProvincia;
 	}
 	
-	private LocalidadDTO getLocalidadDTO(ResultSet resultSet) throws SQLException
+	private LocalidadProvinciaDTO getLocalidadProvinciaDTO(ResultSet resultSet) throws SQLException
 	{
 		int idLocal = resultSet.getInt("idlocalidad");
 		String nombre = resultSet.getString("nombrelocalidad");
 		int idProv = resultSet.getInt("idprovincia");
 		int idpais = resultSet.getInt("idpais");
+		String nombreProv = resultSet.getString("nombreProvincia");
+		String nombrePais = resultSet.getString("nombrePais");
 
-		return new LocalidadDTO(idLocal,nombre,idProv,idpais);
+		return new LocalidadProvinciaDTO(idLocal,nombre,idProv,idpais,nombreProv,nombrePais);
 	}
 
 

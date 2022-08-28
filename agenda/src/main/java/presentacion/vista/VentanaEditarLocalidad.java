@@ -11,10 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dto.DeporteDTO;
-import dto.EquipoDTO;
-import dto.LocalidadDTO;
-import dto.TipoContactoDTO;
+import dto.PaisDTO;
+import dto.ProvinciaDTO;
 
 public class VentanaEditarLocalidad extends JFrame 
 {
@@ -22,25 +20,18 @@ public class VentanaEditarLocalidad extends JFrame
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNombre;
-	private JTextField txtTelefono;
-	private JTextField txtEmail;
-	private JTextField txtFechaCumpleaños;
-	private JTextField txtIdPersona;
-	private JTextField txtIdDomicilio;
+	
+	private JTextField txtIdLocalidad;
+	private JTextField txtIdProvincia;
+	private JTextField txtIdPais;
 
-	private JTextField txtDomicilioCalle;
-	private JTextField txtDomicilioAltura;
-	private JTextField txtDomicilioPiso;
-	private JTextField txtDomicilioDpto;
+	private JComboBox<String> jcprovincia; 
+	private JComboBox<String> jcpais;
 
-	private JComboBox<String> jcLocalidad; 
-	private JComboBox<String> jcTipoContacto;
-	private JComboBox<String> jcDeporte; 
-	private JComboBox<String> jcEquipo;
-	private JButton btnAgregarPersona;
-	private JButton btnActualizarPersona;
+	private JButton btnAgregarLocalidad;
+	private JButton btnActualizarLocalidad;
 
-
+	
 	private static VentanaEditarLocalidad INSTANCE;
 	
 	public static VentanaEditarLocalidad getInstance()
@@ -59,7 +50,7 @@ public class VentanaEditarLocalidad extends JFrame
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 643, 375);
+		setBounds(100, 100, 400, 370);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -67,139 +58,74 @@ public class VentanaEditarLocalidad extends JFrame
 		
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 840, 853);
+		panel.setBounds(10, 11, 400, 853);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNombreYApellido = new JLabel("Nombre");
-		lblNombreYApellido.setBounds(10, 11, 113, 14);
-		panel.add(lblNombreYApellido);
+		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre.setBounds(10, 11, 113, 14);
+		panel.add(lblNombre);
 		
-		JLabel lblTelfono = new JLabel("IdLocalidad");
-		lblTelfono.setBounds(10, 52, 113, 14);
-		panel.add(lblTelfono);
+		JLabel lblIdLocalidad = new JLabel("IdLocalidad");
+		lblIdLocalidad.setBounds(10, 33, 113, 14);
+		panel.add(lblIdLocalidad);
 
-		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(325, 11, 113, 14);
-		panel.add(lblEmail);
+		JLabel lblIdProvincia = new JLabel("IdProvincia");
+		lblIdProvincia.setBounds(10, 55, 113, 14);
+		panel.add(lblIdProvincia);
 
-		JLabel lblFechaCumpleaños = new JLabel("Cumpleaños");
-		lblFechaCumpleaños.setBounds(325, 52, 113, 14);
-		panel.add(lblFechaCumpleaños);
+		JLabel lblIdPais = new JLabel("IdPais");
+		lblIdPais.setBounds(10, 77, 113, 14);
+		panel.add(lblIdPais);
 
-		JLabel lblDomicilio = new JLabel("Domicilio");
-		lblDomicilio.setBounds(10, 93, 113, 14);
-		panel.add(lblDomicilio);
-		
-		JLabel lblDomicilioCalle = new JLabel("Calle");
-		lblDomicilioCalle.setBounds(10, 134, 113, 14);
-		panel.add(lblDomicilioCalle);
-		
-		JLabel lblDomicilioAltura = new JLabel("Altura");
-		lblDomicilioAltura.setBounds(10, 175, 113, 14);
-		panel.add(lblDomicilioAltura);
-		
-		JLabel lblDomicilioPiso = new JLabel("Piso");
-		lblDomicilioPiso.setBounds(325, 134, 113, 14);
-		panel.add(lblDomicilioPiso);
+		JLabel lblProvincia = new JLabel("IdProvincia");
+		lblProvincia.setBounds(10, 99, 113, 14);
+		panel.add(lblProvincia);
 
-		JLabel lblDomicilioDpto = new JLabel("Dpto");
-		lblDomicilioDpto.setBounds(325, 175, 113, 14);
-		panel.add(lblDomicilioDpto);
-		
-		JLabel lblDomicilioLocalidad = new JLabel("Localidad");
-		lblDomicilioLocalidad.setBounds(10, 216, 113, 14);
-		panel.add(lblDomicilioLocalidad);
-
-		JLabel lblTipoContacto = new JLabel("Tipo Contacto");
-		lblTipoContacto.setBounds(325, 216, 113, 14);
-		panel.add(lblTipoContacto);
-		
-		JLabel lblDeporte = new JLabel("Deporte");
-		lblDeporte.setBounds(10, 257, 113, 14);
-		panel.add(lblDeporte);
-
-		JLabel lblEquipo = new JLabel("Equipo Futbol");
-		lblEquipo.setBounds(325, 257, 113, 14);
-		panel.add(lblEquipo);
+		JLabel lblPais = new JLabel("IdPais");
+		lblPais.setBounds(10, 121, 113, 14);
+		panel.add(lblPais);
 
 		txtNombre = new JTextField();
-		txtNombre.setBounds(133, 8, 164, 20);
+		txtNombre.setBounds(133, 11, 164, 20);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
 
-		// IdPersona Oculto
-		txtIdPersona = new JTextField();
-		txtIdPersona.setBounds(133, 30, 164, 20);
-		txtIdPersona.setVisible(false);
-		panel.add(txtIdPersona);
-		txtIdPersona.setColumns(10);
+		// IdLocalidad Oculto
+		txtIdLocalidad = new JTextField();
+		txtIdLocalidad.setBounds(133, 33, 164, 20);
+		txtIdLocalidad.setVisible(true);
+		panel.add(txtIdLocalidad);
+		txtIdLocalidad.setColumns(10);
 
-		// IdDomicilio OCULTO
-		txtIdDomicilio = new JTextField();
-		txtIdDomicilio.setBounds(133, 93, 164, 20);
-		txtIdDomicilio.setVisible(false);
-		panel.add(txtIdDomicilio);
-		txtIdDomicilio.setColumns(30);
+		// IdProvincia OCULTO
+		txtIdProvincia = new JTextField();
+		txtIdProvincia.setBounds(133, 55, 164, 20);
+		txtIdProvincia.setVisible(true);
+		panel.add(txtIdProvincia);
+		txtIdProvincia.setColumns(30);
 		
-		txtTelefono = new JTextField();
-		txtTelefono.setBounds(133, 49, 164, 20);
-		panel.add(txtTelefono);
-		txtTelefono.setColumns(10);
+		//IdPais OCULTO
+		txtIdPais = new JTextField();
+		txtIdPais.setBounds(133, 77, 164, 20);
+		panel.add(txtIdPais);
+		txtIdPais.setColumns(10);
 
-		txtEmail = new JTextField();
-		txtEmail.setBounds(430, 8, 164, 20);
-		panel.add(txtEmail);
-		txtEmail.setColumns(10);
+		jcprovincia = new JComboBox<>();
+		jcprovincia.setBounds(133, 99, 164, 20);
+		panel.add(jcprovincia);
 
-		txtFechaCumpleaños = new JTextField();
-		txtFechaCumpleaños.setBounds(430, 49, 164, 20);
-		panel.add(txtFechaCumpleaños);
-		txtFechaCumpleaños.setColumns(10);
+		jcpais = new JComboBox<>();
+		jcpais.setBounds(133, 121, 164, 20);
+		panel.add(jcpais);
 
-		txtDomicilioCalle = new JTextField();
-		txtDomicilioCalle.setBounds(133, 134, 164, 20);
-		panel.add(txtDomicilioCalle);
-		txtDomicilioCalle.setColumns(10);
+		btnAgregarLocalidad = new JButton("Guardar");
+		btnAgregarLocalidad.setBounds(133, 270, 100, 30);
+		panel.add(btnAgregarLocalidad);
 
-		txtDomicilioAltura = new JTextField();
-		txtDomicilioAltura.setBounds(133, 175, 164, 20);
-		panel.add(txtDomicilioAltura);
-		txtDomicilioAltura.setColumns(10);
-
-		txtDomicilioPiso = new JTextField();
-		txtDomicilioPiso.setBounds(430, 134, 164, 20);
-		panel.add(txtDomicilioPiso);
-		txtDomicilioPiso.setColumns(10);
-
-		txtDomicilioDpto = new JTextField();
-		txtDomicilioDpto.setBounds(430, 175, 164, 20);
-		panel.add(txtDomicilioDpto);
-		txtDomicilioDpto.setColumns(10);
-		
-		jcLocalidad = new JComboBox<>();
-		jcLocalidad.setBounds(133, 216, 164, 20);
-		panel.add(jcLocalidad);
-
-		jcTipoContacto = new JComboBox<>();
-		jcTipoContacto.setBounds(430, 216, 164, 20);
-		panel.add(jcTipoContacto);
-
-		jcDeporte = new JComboBox<>();
-		jcDeporte.setBounds(133, 257, 164, 20);
-		panel.add(jcDeporte);
-
-		jcEquipo = new JComboBox<>();
-		jcEquipo.setBounds(430, 257, 164, 20);
-		panel.add(jcEquipo);
-
-		btnAgregarPersona = new JButton("Guardar");
-		btnAgregarPersona.setBounds(490, 290, 100, 30);
-		panel.add(btnAgregarPersona);
-
-		btnActualizarPersona = new JButton("Actualizar");
-		btnActualizarPersona.setBounds(460, 290, 130, 30);
-		panel.add(btnActualizarPersona);
+		btnActualizarLocalidad = new JButton("Actualizar");
+		btnActualizarLocalidad.setBounds(133, 270, 130, 30);
+		panel.add(btnActualizarLocalidad);
 
 		this.setVisible(false);
 	}
@@ -211,15 +137,15 @@ public class VentanaEditarLocalidad extends JFrame
 
 	public void mostrarVentana(String titulo, boolean estado) {
 		this.setTitle(titulo);
-		this.btnActualizarPersona.setVisible(estado);
-		this.btnAgregarPersona.setVisible(!estado);
+		this.btnActualizarLocalidad.setVisible(estado);
+		this.btnAgregarLocalidad.setVisible(!estado);
 		this.setVisible(true);
 	}
 
 	public void mostrarVentana2(String titulo, boolean estado) {
 		this.setTitle(titulo);
-		this.btnActualizarPersona.setVisible(!estado);
-		this.btnAgregarPersona.setVisible(estado);
+		this.btnActualizarLocalidad.setVisible(!estado);
+		this.btnAgregarLocalidad.setVisible(estado);
 		this.setVisible(true);
 	}
 	
@@ -228,77 +154,56 @@ public class VentanaEditarLocalidad extends JFrame
 		return txtNombre;
 	}
 
-	public JTextField getTxtIdPersona() 
-	{
-		return txtIdPersona;
+	public JTextField getTxtIdProvincia() {
+		return txtIdProvincia;
 	}
 
-	public JTextField getTxtIdDomicilio(){
-		return txtIdDomicilio;
+	public void setTxtIdProvincia(JTextField txtIdProvincia) {
+		this.txtIdProvincia = txtIdProvincia;
+	}
+	public JTextField getTxtIdPais() {
+		return txtIdPais;
 	}
 
-	public JTextField getTxtTelefono() 
-	{
-		return txtTelefono;
+	public void setTxtIdPais(JTextField txtIdPais) {
+		this.txtIdPais = txtIdPais;
 	}
 
-	public JTextField getTxtEmail() {
-		return txtEmail;
+	public JComboBox<String> getJcpais() {
+		return jcpais;
 	}
 
-	public JTextField getTxtFechaCumpleaños() {
-		return txtFechaCumpleaños;
+	public void setJcpais(JComboBox<String> jcpais) {
+		this.jcpais = jcpais;
 	}
+	public JComboBox<String> getJcprovincia() {
+		return jcprovincia;
+	}
+
+	public void setJcprovincia(JComboBox<String> jcprovincia) {
+		this.jcprovincia = jcprovincia;
+	}
+
+	public JButton getBtnAgregarLocalidad() {
+		return btnAgregarLocalidad;
+	}
+
+
+	public JButton getBtnActualizarLocalidad() {
+		return btnActualizarLocalidad;
+	}
+
+
 
 	
-
-	public JTextField getTxtDomicilioCalle() {
-		return txtDomicilioCalle;
-	}
-
-	public JTextField getTxtDomicilioAltura() {
-		return txtDomicilioAltura;
-	}
-
-	public JTextField getTxtDomicilioPiso() {
-		return txtDomicilioPiso;
-	}
-
-	public JTextField getTxtDomicilioDpto() {
-		return txtDomicilioDpto;
-	}
-
-	public JComboBox<String> getJcLocalidad() {
-		return jcLocalidad;
-	}
-
-	public JComboBox<String> getJcTipoContacto() {
-		return jcTipoContacto;
-	}
 	
 
-	public JComboBox<String> getJcDeporte() {
-		return jcDeporte;
-	}
-
-	public JComboBox<String> getJcEquipo() {
-		return jcEquipo;
-	}
-
-	public JButton getBtnAgregarPersona() 
-	{
-		return btnAgregarPersona;
-	}
-
-	public JButton getBtnActualizarPersona() 
-	{
-		return btnActualizarPersona;
-	}
 	
 
 	public void cerrar()
 	{
 		this.txtNombre.setText(null);
+		/* 
 		this.txtTelefono.setText(null);
 		this.txtEmail.setText(null);
 		this.txtFechaCumpleaños.setText(null);
@@ -311,6 +216,7 @@ public class VentanaEditarLocalidad extends JFrame
 		this.jcTipoContacto.setSelectedItem(null);
 		this.jcDeporte.setSelectedItem(null);
 		this.jcEquipo.setSelectedItem(null);
+		*/
 		this.dispose();
 	}
 
@@ -319,86 +225,25 @@ public class VentanaEditarLocalidad extends JFrame
 		this.txtNombre.setText(nombre);
 	}
 
-	public void setTxtIdPersona(String idPersona) {
-		this.txtIdPersona.setText(idPersona);
-	}
-
-	public void setTxtIdDomicilio(Integer idDomicilio) {
-		String id = idDomicilio.toString();
-		this.txtIdDomicilio.setText(id);
-	}
-
-    public void setTxtEmail(String email) {
-		this.txtEmail.setText(email);
-	}
-
-    public void setTxtTelefono(String telefono) {
-		this.txtTelefono.setText(telefono);
-    }
-
-    public void setTxtFechaCumpleaños(String fechaCumpleaños) {
-		this.txtFechaCumpleaños.setText(fechaCumpleaños);
-    }
-
-	public void setTxtIdPersona(Integer idPersona) {
-		String id = idPersona.toString();
-		this.txtIdPersona.setText(id);
-	}
-
-	public void setTxtDomicilioCalle(String domicilioCalle) {
-		this.txtDomicilioCalle.setText(domicilioCalle);
-    }
-	public void setTxtDomicilioAltura(String domicilioAltura) {
-		this.txtDomicilioAltura.setText(domicilioAltura);
-    }
-	public void setTxtDomicilioPiso(String domicilioPiso) {
-		this.txtDomicilioPiso.setText(domicilioPiso);
-    }
-	public void setTxtDomicilioDpto(String domicilioDpto) {
-		this.txtDomicilioDpto.setText(domicilioDpto);
-    }
-	public void setJcTipoContacto(JComboBox<String> jcTipoContacto) {
-		this.jcTipoContacto = jcTipoContacto;
-	}
-	public void setJcLocalidad(JComboBox<String> jcLocalidad) {
-		this.jcLocalidad = jcLocalidad;
-	}
-	public void setJcDeporte(JComboBox<String> jcDeporte) {
-		this.jcDeporte = jcDeporte;
-	}
-
-	public void setJcEquipo(JComboBox<String> jcEquipo) {
-		this.jcEquipo = jcEquipo;
-	}
-    
+	
 	// Parra llenar combo 
 	
-	public void llenarComboLocalidades(List<LocalidadDTO> localidades) {
-		for (LocalidadDTO localidad : localidades)
+	public void llenarComboPaises(List<PaisDTO> paises) {
+		for (PaisDTO pais : paises)
 		{
-			this.jcLocalidad.addItem(localidad.getNombre());
+			this.jcpais.addItem(pais.getNombrePais());
 		}
 	}
 
 	// Parra llenar combo 
-	public void llenarComboTipos(List<TipoContactoDTO> tiposcontactolList) {
-		for (TipoContactoDTO tipoContacto : tiposcontactolList)
+	public void llenarComboProvincias(List<ProvinciaDTO> provinciaList) {
+		for (ProvinciaDTO provincia : provinciaList)
 		{
-			this.jcTipoContacto.addItem(tipoContacto.getNombreTipo());
+			this.jcprovincia.addItem(provincia.getNombreProvincia());
 		}
 	} 
-	public void llenarComboDeportes(List<DeporteDTO> deporteslList) {
-			for (DeporteDTO deporte : deporteslList)
-			{
-				this.jcDeporte.addItem(deporte.getNombre());
-			}
-		}
-	public void llenarEquipo(List<EquipoDTO> equipoList) {
-		for (EquipoDTO equipo : equipoList)
-		{
-			this.jcEquipo.addItem(equipo.getNombre());
-		}
-	}
+	
+
 	
 }
 

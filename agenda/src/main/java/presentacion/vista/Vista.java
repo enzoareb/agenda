@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 import dto.PersonaDomicilioDTO;
 
-import javax.swing.AbstractButton;
+//import javax.swing.AbstractButton;
 import javax.swing.JButton;
 
 import persistencia.conexion.Conexion;

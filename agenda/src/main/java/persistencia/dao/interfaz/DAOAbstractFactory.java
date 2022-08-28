@@ -10,4 +10,7 @@ public interface DAOAbstractFactory
 	public TipoContactoDAO createTipoContactoDAO();
     public DeporteDAO createDeporteDAO();
 	public EquipoDAO createEquipoDAO();
+	public LocalidadProvinciaDAO createLocalidadProvinciaDAO();
+	public ProvinciaDAO createProvinciaDAO();
+    public PaisDAO createPaisDAO();
 }
