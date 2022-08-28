@@ -7,8 +7,11 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import dto.LocalidadDTO;
 
@@ -17,10 +20,12 @@ public class VentanaLocalidad extends JFrame
 { 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
 	private JTextField txtLocalidad;
-
 	private JButton btnAgregar;
+
+	private JTable tablaLocalidades;
+	private DefaultTableModel modelLocalidades;
+	private  String[] nombreColumnas = {"Id","Nombre","Provincia","Pais"};
 
 	private static VentanaLocalidad INSTANCE;
 	
@@ -40,29 +45,46 @@ public class VentanaLocalidad extends JFrame
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 343, 150);
+		setBounds(100, 100, 500, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 307, 125);
+		panel.setBounds(10, 11, 500, 307);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblLocalidad = new JLabel("Localidad");
 		lblLocalidad.setBounds(10, 11, 113, 14);
+		lblLocalidad.setVisible(false);
 		panel.add(lblLocalidad);
 
 		txtLocalidad = new JTextField();
 		txtLocalidad.setBounds(133, 8, 164, 20);
+		txtLocalidad.setVisible(false);
 		panel.add(txtLocalidad);
 		txtLocalidad.setColumns(10);
 		
 		btnAgregar = new JButton("Agregar");
-		btnAgregar.setBounds(133, 50, 100, 23);
+		btnAgregar.setBounds(10, 220, 100, 23);
 		panel.add(btnAgregar);
+
+		JScrollPane spPersonas = new JScrollPane();
+		spPersonas.setBounds(10, 11, 400, 200);
+		panel.add(spPersonas);
+
+		modelLocalidades = new DefaultTableModel(null,nombreColumnas);
+		tablaLocalidades = new JTable(modelLocalidades);
+		
+		tablaLocalidades.getColumnModel().getColumn(0).setPreferredWidth(103);
+		tablaLocalidades.getColumnModel().getColumn(0).setResizable(false);
+		tablaLocalidades.getColumnModel().getColumn(1).setPreferredWidth(200);
+		tablaLocalidades.getColumnModel().getColumn(1).setResizable(false);
+		
+		spPersonas.setViewportView(tablaLocalidades);
+
 	
 		this.setVisible(false);
 	}
@@ -74,7 +96,42 @@ public class VentanaLocalidad extends JFrame
 		this.setVisible(true);
 	}
 
+	public DefaultTableModel getModelLocalidades() 
+	{
+		return modelLocalidades;
+	}
+	
+	public JTable getTablaLocalidades()
+	{
+		return tablaLocalidades;
+	}
 
+	public String[] getNombreColumnas() 
+	{
+		return nombreColumnas;
+	}
+
+	public void llenarTabla(List<LocalidadDTO> localidadesEnTabla) {
+		this.getModelLocalidades().setRowCount(0); //Para vaciar la tabla
+		this.getModelLocalidades().setColumnCount(0);
+		this.getModelLocalidades().setColumnIdentifiers(this.getNombreColumnas());
+
+		for (LocalidadDTO p : localidadesEnTabla)
+		{
+			int idlocalidad = p.getIdLocalidad();
+			String nombre = p.getNombre();
+			int idprovincia = p.getIdProvincia();
+			int idpais = p.getIdPais();
+
+			Object[] fila = {idlocalidad, nombre, idprovincia, idpais};
+			
+
+			this.getModelLocalidades().addRow(fila);
+			
+		
+		}
+		
+	}
 		
 	
 

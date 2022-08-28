@@ -81,11 +81,11 @@ public class Vista
 		btnBorrar.setBounds(340, 220, 150, 30);
 		panel.add(btnBorrar);
 		
-		btnLocalidad = new JButton("Editar Localidades");
+		btnLocalidad = new JButton("Localidades");
 		btnLocalidad.setBounds(10, 260, 170, 30);
 		panel.add(btnLocalidad);
 
-		btnContactos = new JButton("Editar Tipo Contacto");
+		btnContactos = new JButton("Tipos Contacto");
 		btnContactos.setBounds(190, 260, 200, 30);
 		panel.add(btnContactos);
 
@@ -124,7 +124,7 @@ public class Vista
 		return btnEditar;
 	}
 
-	public AbstractButton getBtnLocalidad() {
+	public JButton getBtnLocalidad() {
 		return btnLocalidad;
 	}
 

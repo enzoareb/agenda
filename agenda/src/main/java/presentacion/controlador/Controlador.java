@@ -8,7 +8,9 @@ import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.VentanaLocalidad;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
+//import presentacion.vista.VistaLocalidades;
 import dto.DomicilioDTO;
+import dto.LocalidadDTO;
 import dto.PersonaDTO;
 import dto.PersonaDomicilioDTO;
 
@@ -18,7 +20,9 @@ public class Controlador implements ActionListener
 		private List<PersonaDomicilioDTO> personasEnTabla;
 		private VentanaPersona ventanaPersona; 
 		private VentanaLocalidad ventanaLocalidad; 
+		//private VistaLocalidades vistaLocalidades;
 		private Agenda agenda;
+		private List<LocalidadDTO> localidadesEnTabla;
 
 		
 		public Controlador(Vista vista, Agenda agenda)
@@ -34,8 +38,10 @@ public class Controlador implements ActionListener
 			this.vista.getBtnEditar().addActionListener(e->ventanaEditarPersona(e));
 			this.ventanaPersona.getBtnActualizarPersona().addActionListener(h->editarPersona(h));
 			// Localidad
-			this.vista.getBtnLocalidad().addActionListener(l->ventanaAgregarLocalidad(l));
-			this.ventanaLocalidad = ventanaLocalidad.getInstance();
+			this.vista.getBtnLocalidad().addActionListener(a->ventanaAgregarLocalidad(a));
+			//this.vistaLocalidades = VistaLocalidades.getInstance();
+			//this.vistaLocalidades.getBtnAgregar().addActionListener(a->ventanaAgregarLocalidad(a));
+			this.ventanaLocalidad = VentanaLocalidad.getInstance();
 			
 			this.agenda = agenda;
 		}
@@ -48,7 +54,10 @@ public class Controlador implements ActionListener
 	//	}
 
 		private void ventanaAgregarLocalidad(ActionEvent l) {
-			this.ventanaLocalidad.mostrarVentana("NUEVA LOCALIDAD", false);
+			this.localidadesEnTabla = agenda.obtenerLocalidad();
+			this.ventanaLocalidad.llenarTabla(this.localidadesEnTabla);
+			this.ventanaLocalidad.mostrarVentana("LOCALIDADES", false);
+			//this.vistaLocalidades.mostrarVentana("LOCALIDADES");
 		}
 
 		private void ventanaAgregarPersona(ActionEvent a) {
@@ -177,6 +186,8 @@ public class Controlador implements ActionListener
 			//this.personasEnTabla = agenda.obtenerPersonas();
 			//this.vista.llenarTabla(this.personasEnTabla);
 			this.vista.llenarTabla(this.personasEnTabla);
+			//this.localidadesEnTabla = agenda.obtenerLocalidad();
+			//this.ventanaLocalidad.llenarTabla(this.localidadesEnTabla);
 			
 			
 			//this.localidadesEnTabla = agenda.obtenerLocalidad();
