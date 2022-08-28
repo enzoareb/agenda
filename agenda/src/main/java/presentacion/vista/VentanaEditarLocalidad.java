@@ -158,16 +158,16 @@ public class VentanaEditarLocalidad extends JFrame
 		return txtIdProvincia;
 	}
 
-	public void setTxtIdProvincia(JTextField txtIdProvincia) {
-		this.txtIdProvincia = txtIdProvincia;
-	}
+	//public void setTxtIdProvincia(JTextField txtIdProvincia) {
+	//	this.txtIdProvincia = txtIdProvincia;
+	//}
 	public JTextField getTxtIdPais() {
 		return txtIdPais;
 	}
 
-	public void setTxtIdPais(JTextField txtIdPais) {
-		this.txtIdPais = txtIdPais;
-	}
+	//public void setTxtIdPais(JTextField txtIdPais) {
+	//	this.txtIdPais = txtIdPais;
+	//}
 
 	public JComboBox<String> getJcpais() {
 		return jcpais;
@@ -192,6 +192,27 @@ public class VentanaEditarLocalidad extends JFrame
 	public JButton getBtnActualizarLocalidad() {
 		return btnActualizarLocalidad;
 	}
+
+	public JTextField getTxtIdLocalidad() {
+		return txtIdLocalidad;
+	}
+
+	public void setTxtIdLocalidad(String idLocalidad) {
+		this.txtIdLocalidad.setText(idLocalidad);
+	}
+
+	public void setTxtIdProvincia(String idProvincia) {
+		this.txtIdProvincia.setText(idProvincia);
+	}
+
+	public void setTxtIdPais(String idPais) {
+		this.txtIdPais.setText(idPais);
+	}
+
+
+	//public void setTxtIdLocalidad(JTextField txtIdLocalidad) {
+	//	this.txtIdLocalidad = txtIdLocalidad;
+//	}
 
 
 

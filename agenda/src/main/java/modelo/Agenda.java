@@ -98,9 +98,9 @@ public class Agenda
 		this.localidadDAO.insert(nuevaLocalidad);
 	}
 
-	public void borrarLocalidad(LocalidadDTO localidad_a_eliminar) 
+	public void borrarLocalidad(int id_localidad_a_eliminar) 
 	{
-		this.localidadDAO.delete(localidad_a_eliminar);
+		this.localidadDAO.delete(id_localidad_a_eliminar);
 	}
 	
 	public List<LocalidadDTO> obtenerLocalidad()
