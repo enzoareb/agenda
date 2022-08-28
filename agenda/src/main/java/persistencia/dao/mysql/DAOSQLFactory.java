@@ -45,13 +45,13 @@ public class DAOSQLFactory implements DAOAbstractFactory
 
 	@Override
 	public DeporteDAO createDeporteDAO() {
-		// TODO Auto-generated method stub
+	
 		return new DeporteDAOSQL();
 	}
 
 	@Override
 	public EquipoDAO createEquipoDAO() {
-		// TODO Auto-generated method stub
+	
 		return new EquipoDAOSQL();
 	}
 }
