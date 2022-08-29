@@ -7,6 +7,7 @@ import java.util.List;
 import modelo.Agenda;
 
 import presentacion.reportes.ReporteAgenda;
+import presentacion.reportes.ReporteDeporte;
 import presentacion.vista.VentanaEditarLocalidad;
 import presentacion.vista.VentanaLocalidad;
 import presentacion.vista.VentanaPersona;
@@ -37,6 +38,7 @@ public class Controlador implements ActionListener
 			this.vista.getBtnAgregar().addActionListener(a->ventanaAgregarPersona(a));
 			this.vista.getBtnBorrar().addActionListener(s->borrarPersona(s));
 			this.vista.getBtnReporte().addActionListener(r->mostrarReporte(r));
+			this.vista.getBtnReporteDeporte().addActionListener(r->mostrarReporteDeporte(r));
 			this.ventanaPersona = VentanaPersona.getInstance();
 			// Guardar
 			this.ventanaPersona.getBtnAgregarPersona().addActionListener(p->guardarPersona(p));
@@ -176,7 +178,7 @@ public class Controlador implements ActionListener
 			this.ventanaeditarlocalidad.cerrar();
 		}
 
-
+/* 
 		private void guardarProvincia(ActionEvent p) {
 
 			String nombrelocalidad = ventanaeditarlocalidad.getTxtNombre().getText();
@@ -188,7 +190,7 @@ public class Controlador implements ActionListener
 			this.agenda.agregarLocalidad(nuevaLocalidad);
 			this.refrescarTabla();
 			this.ventanaeditarlocalidad.cerrar();
-		}
+		}*/
 
 
 		// Para Editar Localidad
@@ -208,9 +210,14 @@ public class Controlador implements ActionListener
 		}
 
 
-
+ 
 		private void mostrarReporte(ActionEvent r) {
 			ReporteAgenda reporte = new ReporteAgenda(agenda.obtenerPersonas());
+			reporte.mostrar();	
+		}
+
+		private void mostrarReporteDeporte(ActionEvent r) {
+			ReporteDeporte reporte = new ReporteDeporte(agenda.obtenerPersonasDomicilio());
 			reporte.mostrar();	
 		}
 
