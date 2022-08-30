@@ -118,10 +118,6 @@ public class Agenda
 		this.tipocontactoDao.insert(nuevoTipoContacto);
 	}
 
-	public void borrarTipoContacto(TipoContactoDTO tipo_a_eliminar) 
-	{
-		this.tipocontactoDao.delete(tipo_a_eliminar);
-	}
 	
 	public List<TipoContactoDTO> obtenerTipoContacto()
 	{
@@ -165,6 +161,11 @@ public class Agenda
 	public void borrarEquipo(int id_equipo_a_eliminar) 
 	{
 		this.equipoDAO.delete(id_equipo_a_eliminar);
+	}
+
+	public void borrarTipoContacto(int tipo_a_eliminar) 
+	{
+		this.tipocontactoDao.delete(tipo_a_eliminar);
 	}
 	
 	public List<EquipoDTO> obtenerEquipo()

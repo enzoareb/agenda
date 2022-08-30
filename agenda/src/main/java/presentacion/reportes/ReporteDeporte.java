@@ -1,11 +1,11 @@
 package presentacion.reportes;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
+//import java.text.SimpleDateFormat;
+//import java.util.Date;
+//import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 import org.apache.log4j.Logger;
 
@@ -25,15 +25,15 @@ public class ReporteDeporte
 	private JasperViewer reporteViewer;
 	private JasperPrint	reporteLleno;
 	private Logger log = Logger.getLogger(ReporteDeporte.class);
-	//Recibe la lista de personas para armar el reporte
+	//Recibe la lista de personas para armar el reporte   File.separator
     public ReporteDeporte(List<PersonaDomicilioDTO> personas)
     {
     	//Hardcodeado
-		Map<String, Object> parametersMap = new HashMap<String, Object>();
-		parametersMap.put("Fecha", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));		
+		//Map<String, Object> parametersMap = new HashMap<String, Object>();
+		//parametersMap.put("Fecha", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));		
     	try		{
-			this.reporte = (JasperReport) JRLoader.loadObjectFromFile( "reportes" + File.separator + "ReporteDeporte.jasper" );
-			this.reporteLleno = JasperFillManager.fillReport(this.reporte, parametersMap, 
+			this.reporte = (JasperReport) JRLoader.loadObjectFromFile("reportes"+File.separator + "ReporteDeporte.jasper");
+			this.reporteLleno = JasperFillManager.fillReport(this.reporte, null, 
 					new JRBeanCollectionDataSource(personas));
     		log.info("Se cargó correctamente el reporte");
 		}

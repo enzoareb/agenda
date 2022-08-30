@@ -144,6 +144,10 @@ public class Vista
 		return btnReporte;
 	}
 
+	public JButton getBtnContactos() 
+	{
+		return btnContactos;
+	}
 	public JButton getBtnReporteDeporte() 
 	{
 		return btnReporteDeporte;

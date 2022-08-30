@@ -8,7 +8,7 @@ public interface TipoContactoDAO
 	
 	public boolean insert(TipoContactoDTO domicilio);
 
-	public boolean delete(TipoContactoDTO domicilio_a_eliminar);
+	public boolean delete(int tipo_a_eliminar);
 
 	public boolean edit(TipoContactoDTO domicilio_a_editar);
 	

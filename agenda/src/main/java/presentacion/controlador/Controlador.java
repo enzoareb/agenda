@@ -9,8 +9,10 @@ import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.reportes.ReporteDeporte;
 import presentacion.vista.VentanaEditarLocalidad;
+import presentacion.vista.VentanaEditarTipoContacto;
 import presentacion.vista.VentanaLocalidad;
 import presentacion.vista.VentanaPersona;
+import presentacion.vista.VentanaTipoContacto;
 import presentacion.vista.Vista;
 //import presentacion.vista.VistaLocalidades;
 import dto.DomicilioDTO;
@@ -19,6 +21,7 @@ import dto.LocalidadProvinciaDTO;
 import dto.PersonaDTO;
 import dto.PersonaDomicilioDTO;
 //import dto.ProvinciaDTO;
+import dto.TipoContactoDTO;
 
 public class Controlador implements ActionListener
 {
@@ -26,10 +29,13 @@ public class Controlador implements ActionListener
 		private List<PersonaDomicilioDTO> personasEnTabla;
 		private VentanaPersona ventanaPersona; 
 		private VentanaLocalidad ventanaLocalidad; 
+		private VentanaTipoContacto ventanaTipoContacto; 
 		
 		private Agenda agenda;
 		private List<LocalidadProvinciaDTO> localidadesEnTabla;
+		private List<TipoContactoDTO> tiposContactoEnTabla;
 		private VentanaEditarLocalidad ventanaeditarlocalidad;
+		private VentanaEditarTipoContacto ventanaeditartipocontacto;
 
 		
 		public Controlador(Vista vista, Agenda agenda)
@@ -50,7 +56,18 @@ public class Controlador implements ActionListener
 			//this.vistaLocalidades = VistaLocalidades.getInstance();
 			//this.vistaLocalidades.getBtnAgregar().addActionListener(a->ventanaAgregarLocalidad(a));
 			this.ventanaLocalidad = VentanaLocalidad.getInstance();
+
+			this.vista.getBtnContactos().addActionListener(a->ventanaMostrarTipoContacto(a));
+			this.ventanaTipoContacto = VentanaTipoContacto.getInstance();
+			this.ventanaTipoContacto.getBtnAgregar().addActionListener(p->ventanaAgregarTipoContacto(p));
+
+			this.ventanaeditartipocontacto = VentanaEditarTipoContacto.getInstance();
+			this.ventanaeditartipocontacto.getBtnAgregarTipoContacto().addActionListener(a->guardarTipoContacto(a));
 			
+			this.ventanaTipoContacto.getBtnEditar().addActionListener(a->ventanaEditarTipoContacto(a));
+			this.ventanaeditartipocontacto.getBtnActualizarTipoContacto().addActionListener(a->actualizarTipoContacto(a));
+			this.ventanaTipoContacto.getBtnBorrar().addActionListener(b->borrarTipoContacto(b));
+
 			this.agenda = agenda;
 			this.ventanaPersona.llenarComboLocalidades(this.agenda.obtenerLocalidad());
 			this.ventanaPersona.llenarComboTipos(this.agenda.obtenerTipoContacto());
@@ -74,23 +91,71 @@ public class Controlador implements ActionListener
 
 		}
 		
-	//	private void ventanaDomicilioPersona(ActionEvent a) {
-			// Aca paso idPersona
-	//		int idPersona = Integer.parseInt(this.ventanaPersona.getTxtIdPersona().getText());
-	//		this.ventanaDomicilioPersona.mostrarVentanaDomicilio("AGREGAR DOMICILIO",idPersona);
+
+
+		private void ventanaMostrarTipoContacto(ActionEvent l) {
+			this.tiposContactoEnTabla = agenda.obtenerTipoContacto();
+			this.ventanaTipoContacto.llenarTabla(this.tiposContactoEnTabla);
+			this.ventanaTipoContacto.mostrarVentana("TIPOS DE CONTACTO", false);
+		}
+
+		private void guardarTipoContacto(ActionEvent p) {
+			String nombre = this.ventanaeditartipocontacto.getTxtNombre().getText();
+			TipoContactoDTO nuevoTipocontacto = new  TipoContactoDTO(0, nombre);
+			this.agenda.agregarTipoContacto(nuevoTipocontacto);
+			this.refrescarTablaTipoContacto();
+			this.ventanaeditartipocontacto.cerrar();
+		}
+
+				// Para Editar Tipo Contacto
+				private void ventanaEditarTipoContacto(ActionEvent e) {
 			
-	//	}
+					int[] filasSeleccionadas = this.ventanaTipoContacto.getTablaTipoContacto().getSelectedRows();
+						for (int fila : filasSeleccionadas)
+						{
+							this.ventanaeditartipocontacto.setTxtIdTipoContacto(String.valueOf(this.tiposContactoEnTabla.get(fila).getIdTipoContacto()));
+							this.ventanaeditartipocontacto.setTxtNombre(this.tiposContactoEnTabla.get(fila).getNombreTipo());
+				
+						}
+				
+					this.ventanaeditartipocontacto.mostrarVentana2("EDITAR TIPO CONTACTO",false);
+				}
+
+	//Actualizar Tipo Contacto
+	private void actualizarTipoContacto(ActionEvent p) {
+
+		int idTipoContacto = Integer.parseInt(this.ventanaeditartipocontacto.getTxtIdTipoContacto().getText());
+		String nombre = this.ventanaeditartipocontacto.getTxtNombre().getText();
+		TipoContactoDTO tipo_a_editar = new TipoContactoDTO(idTipoContacto, nombre);
+		this.agenda.editarTipoContacto(tipo_a_editar);
+		this.refrescarTablaTipoContacto();
+		this.ventanaeditartipocontacto.cerrar();
+	}
+
+	public void borrarTipoContacto(ActionEvent s)
+	{
+		int[] filasSeleccionadas = this.ventanaTipoContacto.getTablaTipoContacto().getSelectedRows();
+		for (int fila : filasSeleccionadas)
+		{
+			int idTipocontacto = this.tiposContactoEnTabla.get(fila).getIdTipoContacto();
+			this.agenda.borrarTipoContacto(idTipocontacto);
+			
+		}
+		this.refrescarTablaTipoContacto();
+	}
+
 
 		private void ventanaMostrarLocalidad(ActionEvent l) {
 			this.localidadesEnTabla = agenda.obtenerLocalidadProvincia();
 			this.ventanaLocalidad.llenarTabla(this.localidadesEnTabla);
 			this.ventanaLocalidad.mostrarVentana("LOCALIDADES", false);
-			//this.vistaLocalidades.mostrarVentana("LOCALIDADES");
+		}
+
+		private void ventanaAgregarTipoContacto(ActionEvent l) {
+			this.ventanaeditartipocontacto.mostrarVentana("NUEVO TIPO CONTACTO", false);
 		}
 
 		private void ventanaAgregarLocalidad(ActionEvent l) {
-			//this.localidadesEnTabla = agenda.obtenerLocalidadProvincia();
-			//this.ventanaLocalidad.llenarTabla(this.localidadesEnTabla);
 			this.ventanaeditarlocalidad.mostrarVentana("NUEVA LOCALIDAD", false);
 		}
 
@@ -117,7 +182,6 @@ public class Controlador implements ActionListener
 				this.ventanaPersona.setTxtDomicilioPiso(this.personasEnTabla.get(fila).getPiso());
 				this.ventanaPersona.setTxtDomicilioDpto(this.personasEnTabla.get(fila).getDepto());
 		
-
 			}
 
 			this.ventanaPersona.mostrarVentana2("EDITAR CONTACTO",false);
@@ -177,6 +241,8 @@ public class Controlador implements ActionListener
 			this.refrescarTablaLocalidades();
 			this.ventanaeditarlocalidad.cerrar();
 		}
+
+
 
 /* 
 		private void guardarProvincia(ActionEvent p) {
@@ -279,7 +345,7 @@ public class Controlador implements ActionListener
 		this.agenda.editarLocalidad(localidad_a_editar);
 		this.refrescarTablaLocalidades();
 		this.ventanaeditarlocalidad.cerrar();
-}
+	}
 		
 		public void inicializar()
 		{
@@ -293,6 +359,12 @@ public class Controlador implements ActionListener
 			this.personasEnTabla = agenda.obtenerPersonasDomicilio();
 			this.vista.llenarTabla(this.personasEnTabla);
 			//this.ventanaDomicilioPersona.llenarCombo(this.localidadesEnTabla); // Cargar Combo Localidades
+		}
+
+		private void refrescarTablaTipoContacto()
+		{
+			this.tiposContactoEnTabla = agenda.obtenerTipoContacto();
+			this.ventanaTipoContacto.llenarTabla(this.tiposContactoEnTabla);
 		}
 
 		private void refrescarTablaLocalidades()

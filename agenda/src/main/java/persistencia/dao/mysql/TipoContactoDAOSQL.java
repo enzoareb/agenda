@@ -28,7 +28,8 @@ public class TipoContactoDAOSQL implements TipoContactoDAO
 		try
 		{
 			statement = conexion.prepareStatement(insert);
-			statement.setString(1, tipocontacto.getNombreTipo());
+			statement.setInt(1, tipocontacto.getIdTipoContacto());
+			statement.setString(2, tipocontacto.getNombreTipo());
 		
 			if(statement.executeUpdate() > 0)
 			{
@@ -49,7 +50,7 @@ public class TipoContactoDAOSQL implements TipoContactoDAO
 		return isInsertExitoso;
 	}
 	
-	public boolean delete(TipoContactoDTO tipo_a_eliminar)
+	public boolean delete(int tipo_a_eliminar)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -57,7 +58,7 @@ public class TipoContactoDAOSQL implements TipoContactoDAO
 		try 
 		{
 			statement = conexion.prepareStatement(delete);
-			statement.setString(1, Integer.toString(tipo_a_eliminar.getIdTipoContacto()));
+			statement.setString(1, Integer.toString(tipo_a_eliminar)); 
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
