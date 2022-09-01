@@ -85,6 +85,7 @@ public class VentanaEditarTipoContacto extends JFrame
 	
 	public void mostrarVentana()
 	{
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 
@@ -92,6 +93,7 @@ public class VentanaEditarTipoContacto extends JFrame
 		this.setTitle(titulo);
 		this.btnActualizarTipoContacto.setVisible(estado);
 		this.btnAgregarTipoContacto.setVisible(!estado);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 

@@ -103,6 +103,7 @@ public class VentanaLocalidad extends JFrame
 		this.setTitle(titulo);
 		this.btnAgregar.setVisible(!estado);
 		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 	}
 
 	public DefaultTableModel getModelLocalidades() 

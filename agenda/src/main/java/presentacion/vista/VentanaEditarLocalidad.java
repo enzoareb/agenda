@@ -136,6 +136,7 @@ public class VentanaEditarLocalidad extends JFrame
 	
 	public void mostrarVentana()
 	{
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 
@@ -143,6 +144,7 @@ public class VentanaEditarLocalidad extends JFrame
 		this.setTitle(titulo);
 		this.btnActualizarLocalidad.setVisible(estado);
 		this.btnAgregarLocalidad.setVisible(!estado);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 
@@ -150,6 +152,7 @@ public class VentanaEditarLocalidad extends JFrame
 		this.setTitle(titulo);
 		this.btnActualizarLocalidad.setVisible(!estado);
 		this.btnAgregarLocalidad.setVisible(estado);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 	

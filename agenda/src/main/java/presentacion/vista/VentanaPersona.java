@@ -213,13 +213,16 @@ public class VentanaPersona extends JFrame
 		this.setTitle(titulo);
 		this.btnActualizarPersona.setVisible(estado);
 		this.btnAgregarPersona.setVisible(!estado);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+		
 	}
 
 	public void mostrarVentana2(String titulo, boolean estado) {
 		this.setTitle(titulo);
 		this.btnActualizarPersona.setVisible(!estado);
 		this.btnAgregarPersona.setVisible(estado);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 	

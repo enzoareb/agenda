@@ -51,10 +51,12 @@ public class VentanaTipoContacto extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 500, 307);
 		contentPane.add(panel);
 		panel.setLayout(null);
+		
 		
 		JLabel lblLocalidad = new JLabel("Localidad");
 		lblLocalidad.setBounds(10, 11, 113, 14);
@@ -101,6 +103,7 @@ public class VentanaTipoContacto extends JFrame
 	{
 		this.setTitle(titulo);
 		this.btnAgregar.setVisible(!estado);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 

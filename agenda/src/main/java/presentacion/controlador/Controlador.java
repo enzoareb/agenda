@@ -8,6 +8,7 @@ import modelo.Agenda;
 
 import presentacion.reportes.ReporteAgenda;
 import presentacion.reportes.ReporteDeporte;
+import presentacion.vista.VentanaConexion;
 import presentacion.vista.VentanaEditarLocalidad;
 import presentacion.vista.VentanaEditarTipoContacto;
 import presentacion.vista.VentanaLocalidad;
@@ -36,6 +37,7 @@ public class Controlador implements ActionListener
 		private List<TipoContactoDTO> tiposContactoEnTabla;
 		private VentanaEditarLocalidad ventanaeditarlocalidad;
 		private VentanaEditarTipoContacto ventanaeditartipocontacto;
+		private VentanaConexion conn;
 
 		
 		public Controlador(Vista vista, Agenda agenda)
@@ -46,6 +48,8 @@ public class Controlador implements ActionListener
 			this.vista.getBtnReporte().addActionListener(r->mostrarReporte(r));
 			this.vista.getBtnReporteDeporte().addActionListener(r->mostrarReporteDeporte(r));
 			this.ventanaPersona = VentanaPersona.getInstance();
+			this.conn =  new VentanaConexion();
+			conn.getBtnConectar().addActionListener(a->mostrarAgenda(a));
 			// Guardar
 			this.ventanaPersona.getBtnAgregarPersona().addActionListener(p->guardarPersona(p));
 			// Editar
@@ -93,11 +97,20 @@ public class Controlador implements ActionListener
 		
 
 
+		private Object mostrarAgenda(ActionEvent a) {
+		
+			return null;
+		}
+
+
+
 		private void ventanaMostrarTipoContacto(ActionEvent l) {
 			this.tiposContactoEnTabla = agenda.obtenerTipoContacto();
 			this.ventanaTipoContacto.llenarTabla(this.tiposContactoEnTabla);
 			this.ventanaTipoContacto.mostrarVentana("TIPOS DE CONTACTO", false);
 		}
+
+
 
 		private void guardarTipoContacto(ActionEvent p) {
 			String nombre = this.ventanaeditartipocontacto.getTxtNombre().getText();
@@ -149,6 +162,7 @@ public class Controlador implements ActionListener
 			this.localidadesEnTabla = agenda.obtenerLocalidadProvincia();
 			this.ventanaLocalidad.llenarTabla(this.localidadesEnTabla);
 			this.ventanaLocalidad.mostrarVentana("LOCALIDADES", false);
+			//this.ventanaLocalidad.mostrarVentana("LOCALIDADES", false);
 		}
 
 		private void ventanaAgregarTipoContacto(ActionEvent l) {
@@ -283,7 +297,7 @@ public class Controlador implements ActionListener
 		}
 
 		private void mostrarReporteDeporte(ActionEvent r) {
-			ReporteDeporte reporte = new ReporteDeporte(agenda.obtenerPersonasDomicilio());
+			ReporteDeporte reporte = new ReporteDeporte();
 			reporte.mostrar();	
 		}
 
