@@ -50,7 +50,7 @@ public class VentanaEditarLocalidad extends JFrame
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 400, 370);
+		setBounds(100, 100, 330, 230);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -63,7 +63,7 @@ public class VentanaEditarLocalidad extends JFrame
 		panel.setLayout(null);
 		
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(10, 11, 113, 14);
+		lblNombre.setBounds(10, 10, 113, 14);
 		panel.add(lblNombre);
 		
 		JLabel lblIdLocalidad = new JLabel("IdLocalidad");
@@ -81,16 +81,16 @@ public class VentanaEditarLocalidad extends JFrame
 		lblIdPais.setVisible(false);
 		panel.add(lblIdPais);
 
-		JLabel lblProvincia = new JLabel("IdProvincia");
-		lblProvincia.setBounds(10, 55, 113, 14);
+		JLabel lblProvincia = new JLabel("Provincia");
+		lblProvincia.setBounds(10, 50, 113, 14);
 		panel.add(lblProvincia);
 
-		JLabel lblPais = new JLabel("IdPais");
-		lblPais.setBounds(10, 121, 113, 14);
+		JLabel lblPais = new JLabel("Pais");
+		lblPais.setBounds(10, 90, 113, 14);
 		panel.add(lblPais);
 
 		txtNombre = new JTextField();
-		txtNombre.setBounds(133, 11, 164, 20);
+		txtNombre.setBounds(133, 10, 164, 20);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
 
@@ -116,19 +116,19 @@ public class VentanaEditarLocalidad extends JFrame
 		txtIdPais.setColumns(10);
 
 		jcprovincia = new JComboBox<>();
-		jcprovincia.setBounds(133, 55, 164, 20);
+		jcprovincia.setBounds(133, 50, 164, 20);
 		panel.add(jcprovincia);
 
 		jcpais = new JComboBox<>();
-		jcpais.setBounds(133, 121, 164, 20);
+		jcpais.setBounds(133, 90, 164, 20);
 		panel.add(jcpais);
 
 		btnAgregarLocalidad = new JButton("Guardar");
-		btnAgregarLocalidad.setBounds(133, 270, 100, 30);
+		btnAgregarLocalidad.setBounds(120, 130, 100, 30);
 		panel.add(btnAgregarLocalidad);
 
 		btnActualizarLocalidad = new JButton("Actualizar");
-		btnActualizarLocalidad.setBounds(133, 270, 130, 30);
+		btnActualizarLocalidad.setBounds(120, 130, 130, 30);
 		panel.add(btnActualizarLocalidad);
 
 		this.setVisible(false);

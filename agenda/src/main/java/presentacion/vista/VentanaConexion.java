@@ -7,9 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-
-public class VentanaConexion extends JFrame 
-{
+public class VentanaConexion extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -17,107 +15,86 @@ public class VentanaConexion extends JFrame
 	private JTextField txtUsuario;
 	private JTextField txtContraseña;
 	private JButton btnConectar;
-	//private JButton btnSalir;
 
-	
-/* 
 	private static VentanaConexion INSTANCE;
-	
-	public static VentanaConexion getInstance()
-	{
-		if(INSTANCE == null)
-		{
-			INSTANCE = new VentanaConexion(); 	
+
+	public static VentanaConexion getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new VentanaConexion();
 			return new VentanaConexion();
-		}
-		else
+		} else
 			return INSTANCE;
 	}
-*/
-	public VentanaConexion() 
-	{
+
+	public VentanaConexion() {
 		super();
-		
+
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 400, 210);
+		setBounds(100, 100, 330, 200);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		
+		setResizable(false);
+
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 400, 210);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		JLabel lblServidor = new JLabel("Servidor");
-		lblServidor.setBounds(10, 11, 113, 14);
+		lblServidor.setBounds(10, 10, 113, 14);
 		panel.add(lblServidor);
-		
+
 		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setBounds(10, 33, 113, 14);
+		lblUsuario.setBounds(10, 40, 113, 14);
 		lblUsuario.setVisible(true);
 		panel.add(lblUsuario);
 
 		JLabel lblContraseña = new JLabel("Contraseña");
-		lblContraseña.setBounds(10, 55, 113, 14);
+		lblContraseña.setBounds(10, 70, 113, 14);
 		lblContraseña.setVisible(true);
 		panel.add(lblContraseña);
 
-
 		txtServidor = new JTextField();
-		txtServidor.setBounds(133, 11, 164, 20);
+		txtServidor.setBounds(133, 10, 164, 20);
 		panel.add(txtServidor);
 		txtServidor.setColumns(10);
 		txtServidor.setText("localhost");
 
 		txtUsuario = new JTextField();
-		txtUsuario.setBounds(133, 33, 164, 20);
+		txtUsuario.setBounds(133, 40, 164, 20);
 		txtUsuario.setVisible(true);
 		panel.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		txtUsuario.setText("root");
 
 		txtContraseña = new JTextField();
-		txtContraseña.setBounds(133, 55, 164, 20);
+		txtContraseña.setBounds(133, 70, 164, 20);
 		txtContraseña.setVisible(true);
 		panel.add(txtContraseña);
 		txtContraseña.setColumns(30);
-		txtContraseña.setText(" ");		
+		txtContraseña.setText(" ");
 
 		btnConectar = new JButton("Conectar");
-		btnConectar.setBounds(133, 100, 100, 30);
+		btnConectar.setBounds(110, 105, 100, 30);
 		panel.add(btnConectar);
-/* 
-		btnSalir = new JButton("Salir");
-		btnSalir.setBounds(133, 270, 130, 30);
-		panel.add(btnSalir);
-		btnSalir.setVisible(false);
-		*/
-	}
-	
 
-	public void mostrarVentana()
-	{
+		this.setVisible(false);
+
+	}
+
+	public void mostrarVentana() {
+		setTitle("CONEXION DEL SERVIDOR");
+		setLocationRelativeTo(null);
+
 		this.setVisible(true);
 	}
 
-	/* 
-	public void mostrarVentana(String titulo, boolean estado) {
-		this.setTitle(titulo);
-		this.btnActualizarLocalidad.setVisible(estado);
-		this.btnAgregarLocalidad.setVisible(!estado);
-		this.setVisible(true);
+	public void cerrarVentana() {
+		this.setVisible(false);
 	}
 
-	public void mostrarVentana2(String titulo, boolean estado) {
-		this.setTitle(titulo);
-		this.btnActualizarLocalidad.setVisible(!estado);
-		this.btnAgregarLocalidad.setVisible(estado);
-		this.setVisible(true);
-	}*/
-	
 	public JTextField getTxtServidor() {
 		return txtServidor;
 	}
@@ -125,10 +102,10 @@ public class VentanaConexion extends JFrame
 	public JTextField getTxtUsuario() {
 		return txtUsuario;
 	}
+
 	public JTextField getTxtContraseña() {
 		return txtContraseña;
 	}
-
 
 	public JButton getBtnConectar() {
 		return btnConectar;
@@ -146,11 +123,7 @@ public class VentanaConexion extends JFrame
 		this.txtContraseña.setText(pass);
 	}
 
-
-
-
-	public void cerrar()
-	{
+	public void cerrar() {
 		this.txtServidor.setText(null);
 		this.txtUsuario.setText(null);
 		this.txtContraseña.setText(null);
@@ -158,9 +131,4 @@ public class VentanaConexion extends JFrame
 		this.dispose();
 	}
 
-	
-	
-
-	
 }
-

@@ -46,11 +46,12 @@ public class VentanaLocalidad extends JFrame
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 500, 350);
+		setBounds(100, 100, 440, 310);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setResizable(false);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 500, 307);
@@ -69,15 +70,15 @@ public class VentanaLocalidad extends JFrame
 		txtLocalidad.setColumns(10);
 		
 		btnAgregar = new JButton("Agregar");
-		btnAgregar.setBounds(10, 220, 100, 23);
+		btnAgregar.setBounds(50, 220, 100, 25);
 		panel.add(btnAgregar);
 
 		btnEditar = new JButton("Editar");
-		btnEditar.setBounds(120, 220, 100, 23);
+		btnEditar.setBounds(160, 220, 100, 25);
 		panel.add(btnEditar);
 
 		btnBorrar = new JButton("Borrar");
-		btnBorrar.setBounds(230, 220, 100, 23);
+		btnBorrar.setBounds(270, 220, 100, 25);
 		panel.add(btnBorrar);
 
 		JScrollPane spPersonas = new JScrollPane();

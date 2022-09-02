@@ -39,7 +39,7 @@ public class VentanaEditarTipoContacto extends JFrame
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 400, 200);
+		setBounds(100, 100, 350, 150);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -61,7 +61,7 @@ public class VentanaEditarTipoContacto extends JFrame
 		panel.add(lblIdTipoContacto);
 
 		txtNombre = new JTextField();
-		txtNombre.setBounds(133, 11, 164, 20);
+		txtNombre.setBounds(133, 10, 164, 20);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
 
@@ -73,11 +73,11 @@ public class VentanaEditarTipoContacto extends JFrame
 		txtIdTipoContacto.setColumns(10);
 
 		btnAgregarTipoContacto = new JButton("Guardar");
-		btnAgregarTipoContacto.setBounds(133, 100, 100, 30);
+		btnAgregarTipoContacto.setBounds(133, 40, 100, 30);
 		panel.add(btnAgregarTipoContacto);
 
 		btnActualizarTipoContacto = new JButton("Actualizar");
-		btnActualizarTipoContacto.setBounds(133, 100, 130, 30);
+		btnActualizarTipoContacto.setBounds(133, 40, 130, 30);
 		panel.add(btnActualizarTipoContacto);
 
 		this.setVisible(false);
