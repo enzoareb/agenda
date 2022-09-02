@@ -119,6 +119,7 @@ public class PersonaDomicilioDAOSQL implements PersonaDomicilioDAO
 
 		String deporte = resultSet.getString("nombreDeporte");
 		String equipo = resultSet.getString("nombreEquipo");
+	
 
 		return new PersonaDomicilioDTO(id, nombre, tel,email,fechaCumpleaños,calle,altura,piso,depto,local,tipocontacto,deporte,equipo);
 		

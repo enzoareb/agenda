@@ -40,6 +40,7 @@ public class PersonaDomicilioDTO
 		this.tipocontacto = tipocontacto;
 		this.deporte = deporte;
 		this.equipo = equipo;
+	
 	}
 	
 	public int getIdPersona() 

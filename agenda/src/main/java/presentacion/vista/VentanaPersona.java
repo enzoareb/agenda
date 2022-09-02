@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -27,6 +28,7 @@ public class VentanaPersona extends JFrame
 	private JTextField txtFechaCumpleaños;
 	private JTextField txtIdPersona;
 	private JTextField txtIdDomicilio;
+	private JTextField txtIdDeporte;
 
 	private JTextField txtDomicilioCalle;
 	private JTextField txtDomicilioAltura;
@@ -64,6 +66,7 @@ public class VentanaPersona extends JFrame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setResizable(false);
 		
 		
 		JPanel panel = new JPanel();
@@ -185,6 +188,13 @@ public class VentanaPersona extends JFrame
 		jcTipoContacto.setBounds(430, 216, 164, 20);
 		panel.add(jcTipoContacto);
 
+		// IdDeporte Oculto
+		txtIdDeporte = new JTextField();
+		txtIdDeporte.setBounds(133, 230, 164, 20);
+		txtIdDeporte.setVisible(false);
+		panel.add(txtIdDeporte);
+		txtIdDeporte.setColumns(10);
+
 		jcDeporte = new JComboBox<>();
 		jcDeporte.setBounds(133, 257, 164, 20);
 		panel.add(jcDeporte);
@@ -209,10 +219,26 @@ public class VentanaPersona extends JFrame
 		this.setVisible(true);
 	}
 
+	public void mostrarMensaje() {
+		JOptionPane.showMessageDialog(null, "Debe seleccionar un registro a editar", "Editar Contacto",
+				JOptionPane.WARNING_MESSAGE);
+		
+	}
+
 	public void mostrarVentana(String titulo, boolean estado) {
 		this.setTitle(titulo);
+		this.txtNombre.setText(null);
+		this.txtTelefono.setText(null);
+		this.txtEmail.setText(null);
+		this.txtFechaCumpleaños.setText(null);
+		this.txtIdPersona.setText(null);
+		this.txtDomicilioAltura.setText(null);
+		this.txtDomicilioCalle.setText(null);
+		this.txtDomicilioPiso.setText(null);
+		this.txtDomicilioDpto.setText(null);
 		this.btnActualizarPersona.setVisible(estado);
 		this.btnAgregarPersona.setVisible(!estado);
+
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		
@@ -297,7 +323,14 @@ public class VentanaPersona extends JFrame
 	{
 		return btnActualizarPersona;
 	}
-	
+
+	public JTextField getTxtIdDeporte() {
+		return txtIdDeporte;
+	}
+
+	public void setTxtIdDeporte(String idDeporte) {
+		this.txtIdDeporte.setText(idDeporte);
+	}
 
 	public void cerrar()
 	{

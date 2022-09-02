@@ -3,9 +3,12 @@ package presentacion.vista;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import persistencia.conexion.Conexion;
 
 public class VentanaConexion extends JFrame {
 
@@ -89,6 +92,12 @@ public class VentanaConexion extends JFrame {
 		setLocationRelativeTo(null);
 
 		this.setVisible(true);
+	}
+
+	public void mostrarMensajeError() {
+		JOptionPane.showMessageDialog(null, "Los datos ingresados no son correctos", "Error Conexion",
+				JOptionPane.ERROR_MESSAGE);
+		Conexion.getConexion().cerrarConexion();
 	}
 
 	public void cerrarVentana() {
