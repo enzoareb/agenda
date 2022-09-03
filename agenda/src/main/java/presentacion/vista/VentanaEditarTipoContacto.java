@@ -4,6 +4,7 @@ package presentacion.vista;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -44,6 +45,7 @@ public class VentanaEditarTipoContacto extends JFrame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setResizable(false);
 		
 		
 		JPanel panel = new JPanel();
@@ -91,6 +93,7 @@ public class VentanaEditarTipoContacto extends JFrame
 
 	public void mostrarVentana(String titulo, boolean estado) {
 		this.setTitle(titulo);
+		this.setTxtNombre(null);
 		this.btnActualizarTipoContacto.setVisible(estado);
 		this.btnAgregarTipoContacto.setVisible(!estado);
 		this.setLocationRelativeTo(null);
@@ -102,6 +105,12 @@ public class VentanaEditarTipoContacto extends JFrame
 		this.btnActualizarTipoContacto.setVisible(!estado);
 		this.btnAgregarTipoContacto.setVisible(estado);
 		this.setVisible(true);
+	}
+
+	public void mostrarMensaje() {
+		JOptionPane.showMessageDialog(null, "Debe seleccionar un registro a editar", "Editar Tipo Contacto",
+				JOptionPane.WARNING_MESSAGE);
+	
 	}
 	
 	public JTextField getTxtNombre() 

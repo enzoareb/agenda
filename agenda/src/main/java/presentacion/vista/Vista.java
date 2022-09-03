@@ -112,12 +112,6 @@ public class Vista {
 		this.frame.setVisible(true);
 	}
 
-	public void mostrarMensajeError() {
-		JOptionPane.showMessageDialog(null, "Los datos ingresados no son correctos", "Error Conexion",
-				JOptionPane.ERROR_MESSAGE);
-		Conexion.getConexion().cerrarConexion();
-	}
-
 	public JButton getBtnAgregar() {
 		return btnAgregar;
 	}

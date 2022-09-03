@@ -191,28 +191,24 @@ FROM personas
 				<reportElement x="430" y="11" width="100" height="30" uuid="b4376bb0-33c4-408c-a00b-c7a726f5f31e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1707a59b-6a19-4592-bfc4-42239e019cbf"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nombreEquipo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="314" y="9" width="100" height="30" uuid="83d4ccd6-0360-40ee-90dc-c1abb59920fe">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b2b48f37-2e72-46d9-981e-47917981e417"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nombreDeporte}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="166" y="7" width="100" height="30" uuid="0a1641d3-e26d-4aae-b1b8-d6b13e951a4b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b2a768f9-62c4-4487-bcc9-460a5d77f1af"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="17" y="5" width="100" height="30" uuid="ed14bfa3-4a7d-43fb-ad73-8fa374eb642a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="02f78f5a-e97f-4439-8039-b2b76689268b"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{idPersona}]]></textFieldExpression>
 			</textField>
 		</band>

@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -55,6 +56,7 @@ public class VentanaEditarLocalidad extends JFrame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setResizable(false);
 		
 		
 		JPanel panel = new JPanel();
@@ -142,6 +144,7 @@ public class VentanaEditarLocalidad extends JFrame
 
 	public void mostrarVentana(String titulo, boolean estado) {
 		this.setTitle(titulo);
+		this.setTxtNombre(null);
 		this.btnActualizarLocalidad.setVisible(estado);
 		this.btnAgregarLocalidad.setVisible(!estado);
 		this.setLocationRelativeTo(null);
@@ -156,6 +159,11 @@ public class VentanaEditarLocalidad extends JFrame
 		this.setVisible(true);
 	}
 	
+	public void mostrarMensaje() {
+		JOptionPane.showMessageDialog(null, "Debe seleccionar un registro a editar", "Editar Localidad",
+				JOptionPane.WARNING_MESSAGE);
+	}
+
 	public JTextField getTxtNombre() 
 	{
 		return txtNombre;
