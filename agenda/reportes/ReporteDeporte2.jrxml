@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="otro" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="80330b0e-8467-4d8c-ab2f-b50236e6a3df">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="agenda"/>
+	<subDataset name="Dataset1" uuid="eb8b6c51-e367-4d1a-a5d4-368e57986f96">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="agenda"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT personas.`idEquipo`, COUNT(nombre) AS nombre, equipos.nombreEquipo, 
+	( SELECT SUM(nombre) FROM 
+		( SELECT idEquipo,COUNT(nombre) AS nombre,COUNT(idEquipo) AS ce FROM personas 
+			GROUP BY idEquipo 
+		) AS S 
+	) AS total FROM personas 
+	left join equipos on personas.idEquipo = equipos.idEquipo 
+GROUP BY personas.idEquipo]]>
+		</queryString>
+		<field name="idEquipo" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="idEquipo"/>
+			<property name="com.jaspersoft.studio.field.label" value="idEquipo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+		</field>
+		<field name="nombre" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+			<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		</field>
+		<field name="nombreEquipo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nombreEquipo"/>
+			<property name="com.jaspersoft.studio.field.label" value="nombreEquipo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="equipos"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+		<variable name="Variable_1" class="java.lang.Long" calculation="Sum">
+			<variableExpression><![CDATA[$F{total}]]></variableExpression>
+		</variable>
+		<variable name="sumado" class="java.lang.Long" calculation="Count">
+			<variableExpression><![CDATA[$F{total}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[SELECT *
+FROM personas
+	left  join deportes ON 
+	 personas.`idDeporte` = deportes.`idDeporte` 
+	left  join equipos ON 
+	 personas.`idEquipo` = equipos.`idEquipo` 
+ORDER BY equipos. nombreEquipo,
+	personas.nombre, deportes.nombredeporte]]>
+	</queryString>
+	<field name="idPersona" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="idPersona"/>
+		<property name="com.jaspersoft.studio.field.label" value="idPersona"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+	</field>
+	<field name="Nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="Nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+	</field>
+	<field name="Telefono" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Telefono"/>
+		<property name="com.jaspersoft.studio.field.label" value="Telefono"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="email"/>
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+	</field>
+	<field name="nombreDeporte" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombreDeporte"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombreDeporte"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="deportes"/>
+	</field>
+	<field name="nombreEquipo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombreEquipo"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombreEquipo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="equipos"/>
+	</field>
+	<group name="nombreDeporte">
+		<groupExpression><![CDATA[$F{nombreDeporte}]]></groupExpression>
+	</group>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{nombreEquipo}]]></groupExpression>
+		<groupHeader>
+			<band height="42">
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="6" width="549" height="34" forecolor="#0090FF" backcolor="#0090FF" uuid="34c409a0-4504-4d71-bdb8-a846efa5acbe"/>
+				</rectangle>
+				<textField>
+					<reportElement x="10" y="10" width="100" height="30" forecolor="#FFFFFF" uuid="b4376bb0-33c4-408c-a00b-c7a726f5f31e">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1707a59b-6a19-4592-bfc4-42239e019cbf"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombreEquipo}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="36">
+				<textField>
+					<reportElement x="429" y="3" width="117" height="30" uuid="ada692b6-6482-447f-b448-d071eb571033"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{Group1_COUNT}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="325" y="3" width="100" height="30" uuid="174cc94b-4b20-40ce-b997-6906a8422be1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<text><![CDATA[Total ]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="84" splitType="Stretch">
+			<staticText>
+				<reportElement x="140" y="13" width="257" height="30" uuid="25b48e71-b8cd-4173-ac99-f3ce3e17b8ce"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Listado de contactos]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="410" y="0" width="150" height="20" forecolor="#050505" uuid="8a6539a9-6159-455a-87d5-2e77cf4c8d1f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="139" y="40" width="257" height="23" uuid="a8aa8573-42c8-4f79-b56b-6743ede490fd"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Agrupados por Equipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="139" y="57" width="257" height="23" uuid="264324e8-8e3e-4aff-adc9-6520b6b62c6c"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Ordenados Alfabeticamente]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="0" width="60" height="20" forecolor="#736343" uuid="7125b9d1-ca6d-4a45-8834-e75d229d70a1"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="62" y="0" width="23" height="20" forecolor="#736343" uuid="29a63851-2d5b-4134-8ec6-38dc89407d48"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="10" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="6" width="549" height="1" uuid="90fa613d-6362-448d-8859-4ad40eb5cf4e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="4" width="100" height="30" uuid="1344d25d-d29e-41ce-bff0-2e5df2977f6c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="02f78f5a-e97f-4439-8039-b2b76689268b"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Id Contacto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="6" width="100" height="30" uuid="59238e4a-26c1-412d-8d5b-cf550fbfd7a0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b2a768f9-62c4-4487-bcc9-460a5d77f1af"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="6" width="100" height="30" uuid="c8e1bab0-e854-4f93-8deb-ed27678667b4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b2b48f37-2e72-46d9-981e-47917981e417"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deporte preferido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="6" width="100" height="30" uuid="72925ccc-5832-4313-8b92-c9849fa348d0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5133511b-a61a-47fe-8e73-7a5ca73eafa5"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="6" width="100" height="30" uuid="b7d7eefb-d175-48af-98d0-b5f4b61002d9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1c3f7ec1-e0d6-4759-bab8-61e03717d4d4"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[email]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="1" y="3" width="549" height="34" forecolor="#0090FF" backcolor="#DCE8F2" uuid="8235edc8-013c-4b53-99e7-c4df433b4444"/>
+			</rectangle>
+			<textField>
+				<reportElement x="444" y="5" width="100" height="30" uuid="83d4ccd6-0360-40ee-90dc-c1abb59920fe">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b2b48f37-2e72-46d9-981e-47917981e417"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombreDeporte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="5" width="100" height="30" uuid="0a1641d3-e26d-4aae-b1b8-d6b13e951a4b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b2a768f9-62c4-4487-bcc9-460a5d77f1af"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="3" width="70" height="30" uuid="ed14bfa3-4a7d-43fb-ad73-8fa374eb642a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="02f78f5a-e97f-4439-8039-b2b76689268b"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{idPersona}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="5" width="100" height="30" uuid="6c91d1c0-4535-4544-910d-7b8de4d75630">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5133511b-a61a-47fe-8e73-7a5ca73eafa5"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="5" width="100" height="30" uuid="4ccdc27a-4bc9-4536-aa58-9c291b0c46c9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1c3f7ec1-e0d6-4759-bab8-61e03717d4d4"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="8" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="173" y="8" width="187" height="19" uuid="2df59184-52b1-4941-b745-e94da66dbeec"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Laboratorio de construcción de software]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="335" splitType="Stretch">
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="140" y="110" width="280" height="220" uuid="03187fb2-ff10-4106-9929-bbcebb623563"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="Dataset1" uuid="a4a8eb10-7aa5-4dcc-8f50-facd2322acf9">
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+					</dataset>
+					<keyExpression><![CDATA[$F{nombreEquipo}]]></keyExpression>
+					<valueExpression><![CDATA[$F{total}]]></valueExpression>
+					<labelExpression><![CDATA[($F{nombre}*100)/$F{total}.longValue() + "%"  ]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<staticText>
+				<reportElement x="80" y="29" width="400" height="30" uuid="8f2122dd-2e48-428f-a4f6-6fc754f232af"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Porcentaje de contactos por Equipo de Fútbol]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
