@@ -10,54 +10,9 @@ import persistencia.dao.interfaz.PersonaDomicilioDAO;
 import dto.PersonaDomicilioDTO;
 
 public class PersonaDomicilioDAOSQL implements PersonaDomicilioDAO {
-	//private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, email, Cumpleaños) VALUES(?, ?, ?, ?, ?)";
-	//private static final String delete = "delete personas,domicilio FROM personas inner join domicilio ON domicilio.idPersona = personas.idPersona  WHERE personas.idPersona = ?";
-	private static final String readall = "SELECT * FROM personas left join domicilio on personas.idPersona = domicilio.idPersona left join tipocontacto on personas.idContacto = tipocontacto.idtipocontacto left join localidad on domicilio.localidad = localidad.idlocalidad left join deportes on personas.idDeporte = deportes.idDeporte left join equipos on personas.idEquipo = equipos.idEquipo";
-	//private static final String edit = "UPDATE personas SET nombre=?, telefono=?, email=?, Cumpleaños=? WHERE idPersona = ?";
-/* 
-	public boolean insert(PersonaDomicilioDTO personadomicilio) {
-		PreparedStatement statement;
-		Connection conexion = Conexion.getConexion().getSQLConexion();
-		boolean isInsertExitoso = false;
-		try {
-			statement = conexion.prepareStatement(insert);
-			statement.setInt(1, personadomicilio.getIdPersona());
-			statement.setString(2, personadomicilio.getNombre());
-			statement.setString(3, personadomicilio.getTelefono());
-			statement.setString(4, personadomicilio.getEmail());
-			statement.setString(5, personadomicilio.getFechaCumpleaños());
-			if (statement.executeUpdate() > 0) {
-				conexion.commit();
-				isInsertExitoso = true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			try {
-				conexion.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-		}
-		return isInsertExitoso;
-	}
 
-	public boolean delete(PersonaDomicilioDTO persona_a_eliminar) {
-		PreparedStatement statement;
-		Connection conexion = Conexion.getConexion().getSQLConexion();
-		boolean isdeleteExitoso = false;
-		try {
-			statement = conexion.prepareStatement(delete);
-			statement.setString(1, Integer.toString(persona_a_eliminar.getIdPersona()));
-			if (statement.executeUpdate() > 0) {
-				conexion.commit();
-				isdeleteExitoso = true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return isdeleteExitoso;
-	}
-*/
+	private static final String readall = "SELECT * FROM personas left join domicilio on personas.idPersona = domicilio.idPersona left join tipocontacto on personas.idContacto = tipocontacto.idtipocontacto left join localidad on domicilio.localidad = localidad.idlocalidad left join deportes on personas.idDeporte = deportes.idDeporte left join equipos on personas.idEquipo = equipos.idEquipo";
+
 	public List<PersonaDomicilioDTO> readAll() {
 		PreparedStatement statement;
 		ResultSet resultSet; // Guarda el resultado de la query
@@ -95,35 +50,5 @@ public class PersonaDomicilioDAOSQL implements PersonaDomicilioDAO {
 				tipocontacto, deporte, equipo);
 
 	}
-/* 
-	public boolean edit(PersonaDomicilioDTO persona_a_editar) {
-		PreparedStatement statement;
-		Connection conexion = Conexion.getConexion().getSQLConexion();
-		boolean isEditExitoso = false;
 
-		try {
-			statement = conexion.prepareStatement(edit);
-
-			statement.setString(1, persona_a_editar.getNombre());
-			statement.setString(2, persona_a_editar.getTelefono());
-			statement.setString(3, persona_a_editar.getEmail());
-			statement.setString(4, persona_a_editar.getFechaCumpleaños());
-			statement.setString(5, Integer.toString(persona_a_editar.getIdPersona()));
-
-			if (statement.executeUpdate() > 0) {
-				conexion.commit();
-				isEditExitoso = true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			try {
-				conexion.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-		}
-
-		return isEditExitoso;
-	}
-*/
 }

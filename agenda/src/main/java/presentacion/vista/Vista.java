@@ -2,20 +2,15 @@ package presentacion.vista;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
 import dto.PersonaDomicilioDTO;
-
 import javax.swing.JButton;
-
 import persistencia.conexion.Conexion;
 
 public class Vista {
@@ -26,7 +21,6 @@ public class Vista {
 	private JButton btnEditar;
 	private JButton btnLocalidad;
 	private JButton btnContactos;
-	private JButton btnReporte;
 	private JButton btnReporteDeporte;
 	private DefaultTableModel modelPersonas;
 	private String[] nombreColumnas = { "Id", "Nombre y apellido", "Telefono", "Email", "Cumpleaños", "Calle", "Altura",
@@ -39,19 +33,19 @@ public class Vista {
 
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1100, 340);
+		frame.setBounds(100, 100, 1300, 340);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setTitle("AGENDA");
 		frame.setLocationRelativeTo(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 1100, 350);
+		panel.setBounds(0, 0, 1300, 350);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
 		JScrollPane spPersonas = new JScrollPane();
-		spPersonas.setBounds(10, 11, 1080, 200);
+		spPersonas.setBounds(10, 11, 1275, 200);
 		panel.add(spPersonas);
 
 		modelPersonas = new DefaultTableModel(null, nombreColumnas);
@@ -84,12 +78,8 @@ public class Vista {
 		btnContactos.setBounds(190, 260, 200, 30);
 		panel.add(btnContactos);
 
-		btnReporte = new JButton("Reporte");
-		btnReporte.setBounds(900, 260, 150, 30);
-		panel.add(btnReporte);
-
-		btnReporteDeporte = new JButton("Reporte Deporte");
-		btnReporteDeporte.setBounds(720, 260, 150, 30);
+		btnReporteDeporte = new JButton("Emitir Reporte");
+		btnReporteDeporte.setBounds(1125, 260, 150, 30);
 		panel.add(btnReporteDeporte);
 
 	}
@@ -126,10 +116,6 @@ public class Vista {
 
 	public JButton getBtnBorrar() {
 		return btnBorrar;
-	}
-
-	public JButton getBtnReporte() {
-		return btnReporte;
 	}
 
 	public JButton getBtnContactos() {

@@ -17,7 +17,6 @@ import dto.TipoContactoDTO;
 import modelo.Agenda;
 import persistencia.conexion.Conexion;
 import persistencia.dao.mysql.DAOSQLFactory;
-import presentacion.reportes.ReporteAgenda;
 import presentacion.reportes.ReporteDeporte;
 import presentacion.vista.VentanaConexion;
 import presentacion.vista.VentanaEditarLocalidad;
@@ -47,7 +46,6 @@ public class Controlador implements ActionListener {
 		this.vista.getBtnAgregar().addActionListener(a -> ventanaAgregarPersona(a));
 		this.vista.getBtnEditar().addActionListener(e -> ventanaEditarPersona(e));
 		this.vista.getBtnBorrar().addActionListener(s -> borrarPersona(s));
-		this.vista.getBtnReporte().addActionListener(r -> mostrarReporte(r));
 		this.vista.getBtnReporteDeporte().addActionListener(r -> mostrarReporteDeporte(r));
 		this.vista.getBtnLocalidad().addActionListener(a -> ventanaMostrarLocalidad(a));
 		this.vista.getBtnContactos().addActionListener(a -> ventanaMostrarTipoContacto(a));
@@ -232,11 +230,6 @@ public class Controlador implements ActionListener {
 	}
 
 	// -------------------------reporte------------------------------------
-
-	private void mostrarReporte(ActionEvent r) {
-		ReporteAgenda reporte = new ReporteAgenda(agenda.obtenerPersonas());
-		reporte.mostrar();
-	}
 
 	private void mostrarReporteDeporte(ActionEvent r) {
 		ReporteDeporte reporte = new ReporteDeporte();

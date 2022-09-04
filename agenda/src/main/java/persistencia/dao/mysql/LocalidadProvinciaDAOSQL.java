@@ -15,10 +15,8 @@ import persistencia.conexion.Conexion;
 import persistencia.dao.interfaz.LocalidadProvinciaDAO;
 
 public class LocalidadProvinciaDAOSQL implements LocalidadProvinciaDAO {
-	//private static final String insert = "INSERT INTO localidad (idlocalidad, nombrlocalidad,idprovincia, idpais) VALUES(?, ?, ?, ?)";
-//	private static final String delete = "DELETE FROM localidad WHERE idLocalidad = ?";
+	
 	private static final String readall = "SELECT * FROM localidad left join provincia on localidad.idprovincia = provincia.idprovincia left join pais on localidad.idpais = pais.idpais";
-//	private static final String edit = "UPDATE localidad SET nombre=?,idProvincia=?, idpais=? WHERE idlocalidad = ?";
 
 	public List<LocalidadProvinciaDTO> readAll() {
 		PreparedStatement statement;
