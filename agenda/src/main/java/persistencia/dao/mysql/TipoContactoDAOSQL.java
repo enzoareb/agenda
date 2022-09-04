@@ -19,7 +19,8 @@ public class TipoContactoDAOSQL implements TipoContactoDAO
 	private static final String delete = "DELETE FROM tipocontacto WHERE idtipocontacto = ?";
 	private static final String readall = "SELECT * FROM tipocontacto";
 	private static final String edit = "UPDATE tipocontacto SET nombretipo=? WHERE idtipocontacto = ?";
-	
+	private static final String findById = "SELECT * FROM tipocontacto WHERE idtipocontacto = ? ";
+
 	public boolean insert(TipoContactoDTO tipocontacto)
 	{
 		PreparedStatement statement;
@@ -102,8 +103,6 @@ public class TipoContactoDAOSQL implements TipoContactoDAO
 		return new TipoContactoDTO(idTipocontacto,nombreTipo);
 	}
 
-
-	//agrego funcion para editar tipo contacto
 	public boolean edit(TipoContactoDTO tipo_a_editar)
 	{
 		PreparedStatement statement;
@@ -133,5 +132,28 @@ public class TipoContactoDAOSQL implements TipoContactoDAO
 		}
 		
 		return isEditExitoso;
+	}
+
+	public TipoContactoDTO findById(int idTipoContacto)
+	{
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		TipoContactoDTO tipoContactoDTO = null;
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(findById);
+			statement.setString(1, Integer.toString(idTipoContacto));
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				tipoContactoDTO = getTipoContactoDTO(resultSet);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return tipoContactoDTO;
 	}
 }

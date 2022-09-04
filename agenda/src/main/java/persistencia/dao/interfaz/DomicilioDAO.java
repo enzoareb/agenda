@@ -15,5 +15,5 @@ public interface DomicilioDAO
 	
 	public List<DomicilioDTO> readAll();
 
-	public Integer findDomicilioByIdPerson(int idPersona);
+	public DomicilioDTO findById(int idPersona);
 }

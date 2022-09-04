@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import dto.DeporteDTO;
 import persistencia.conexion.Conexion;
 import persistencia.dao.interfaz.DeporteDAO;
@@ -17,7 +16,8 @@ public class DeporteDAOSQL implements DeporteDAO{
 	private static final String delete = "DELETE FROM deportes WHERE idDeporte = ?";
 	private static final String readall = "SELECT * FROM deportes";
 	private static final String edit = "UPDATE deportes SET nombre=? WHERE idDeporte = ?";
-	
+	private static final String findById = "SELECT * FROM deportes WHERE idDeporte = ? ";
+
 	public boolean insert(DeporteDTO deporte)
 	{
 		PreparedStatement statement;
@@ -100,8 +100,6 @@ public class DeporteDAOSQL implements DeporteDAO{
 		return new DeporteDTO(id, nombre);
 	}
 
-
-	//agrego funcion para editar contacto
 	public boolean edit(DeporteDTO deporte_a_editar)
 	{
 			PreparedStatement statement;
@@ -134,5 +132,28 @@ public class DeporteDAOSQL implements DeporteDAO{
 	
 		
 		return isEditExitoso;
+	}
+
+	public DeporteDTO findById(int idDeporte)
+	{
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		DeporteDTO deporteDTO = null;
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(findById);
+			statement.setString(1, Integer.toString(idDeporte));
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				deporteDTO = getDeporteDTO(resultSet);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return deporteDTO;
 	}
 }

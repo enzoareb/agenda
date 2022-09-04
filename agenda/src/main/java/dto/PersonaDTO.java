@@ -7,7 +7,6 @@ public class PersonaDTO
 	private int idPersona;
 	private String nombre;
 	private String telefono;
-	private DomicilioDTO domicilio;
 	private String email;
 	private String fechaCumpleaños;
 	private int idcontacto;
@@ -20,7 +19,6 @@ public class PersonaDTO
 		this.idPersona = idPersona;
 		this.nombre = nombre;
 		this.telefono = telefono;
-	
 		this.email = email;
 		this.fechaCumpleaños= fechaCumpleaños;
 		this.idcontacto = idcontacto;
@@ -73,14 +71,6 @@ public class PersonaDTO
 
 	public void setFechaCumpleaños(String fechaCumpleaños) {
 		this.fechaCumpleaños = fechaCumpleaños;
-	}
-
-	public DomicilioDTO getDomicilio() {
-		return domicilio;
-	}
-
-	public void setDomicilio(DomicilioDTO domicilio) {
-		this.domicilio = domicilio;
 	}
 
 	public int getIdcontacto() {

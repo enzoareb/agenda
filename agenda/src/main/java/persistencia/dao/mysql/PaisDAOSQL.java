@@ -19,6 +19,7 @@ public class PaisDAOSQL implements PaisDAO
 	private static final String delete = "DELETE FROM pais WHERE idpais = ?";
 	private static final String readall = "SELECT * FROM pais";
 	private static final String edit = "UPDATE pais SET nombrepais=? WHERE idpais = ?";
+	private static final String findById = "SELECT * FROM pais WHERE idPais = ?";
 	
 	public boolean insert(PaisDTO pais)
 	{
@@ -138,5 +139,29 @@ public class PaisDAOSQL implements PaisDAO
 		}
 		
 		return isEditExitoso;
+	}
+
+	public PaisDTO findById(int idPais)
+	{
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		PaisDTO paisDTO = null;
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(findById);
+			statement.setString(1, Integer.toString(idPais));
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				paisDTO = getPaisDTO(resultSet);
+				//localidades.add(getLocalidadDTO(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return paisDTO;
 	}
 }

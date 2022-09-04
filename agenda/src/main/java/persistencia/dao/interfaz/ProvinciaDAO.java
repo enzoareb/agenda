@@ -13,4 +13,6 @@ public interface ProvinciaDAO
 	public boolean edit(ProvinciaDTO domicilio_a_editar);
 	
 	public List<ProvinciaDTO> readAll();
+
+	public ProvinciaDTO findById(int idProv);
 }

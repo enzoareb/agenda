@@ -20,7 +20,8 @@ public class ProvinciaDAOSQL implements ProvinciaDAO
 	private static final String delete = "DELETE FROM provincia WHERE idProvincia = ?";
 	private static final String readall = "SELECT * FROM provincia";
 	private static final String edit = "UPDATE provincia SET nombreprovincia=? WHERE idProvincia = ?";
-	
+	private static final String findById = "SELECT * FROM provincia WHERE idProvincia = ?";
+
 	public boolean insert(ProvinciaDTO provincia)
 	{
 		PreparedStatement statement;
@@ -140,4 +141,31 @@ public class ProvinciaDAOSQL implements ProvinciaDAO
 		
 		return isEditExitoso;
 	}
+
+	public ProvinciaDTO findById(int idProv)
+	{
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		ProvinciaDTO provinciaDTO = null;
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(findById);
+			statement.setString(1, Integer.toString(idProv));
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				provinciaDTO = getProvinciaDTO(resultSet);
+				//localidades.add(getLocalidadDTO(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return provinciaDTO;
+	}
+
 }
+
+

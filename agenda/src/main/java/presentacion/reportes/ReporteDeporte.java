@@ -7,7 +7,6 @@ import java.sql.Connection;
 //import java.util.HashMap;
 //import java.util.List;
 
-
 import org.apache.log4j.Logger;
 
 import net.sf.jasperreports.engine.JRException;
@@ -21,43 +20,42 @@ import persistencia.conexion.Conexion;
 //import dto.PersonaDTO;
 //import dto.PersonaDomicilioDTO;
 
-public class ReporteDeporte
-{
+public class ReporteDeporte {
 	private JasperReport reporte;
 	private JasperViewer reporteViewer;
-	private JasperPrint	reporteLleno;
+	private JasperPrint reporteLleno;
 	private Logger log = Logger.getLogger(ReporteDeporte.class);
-	//Recibe la lista de personas para armar el reporte   File.separator
-	
+	// Recibe la lista de personas para armar el reporte File.separator
 
-    public ReporteDeporte()
-    {	
+	public ReporteDeporte() {
 
-    try		
-		{
+		try {
 
-		Connection conexion = Conexion.getConexion().getSQLConexion();
-		//00JasperPrint jasperPrintWindow = JasperFillManager.fillReport("C:\\PROYECTO\\agenda\\agenda\\reportes\\ReporteDeporte.jasper", null,conexion);
-		//00 JasperViewer jasperViewer = new JasperViewer(jasperPrintWindow);
-		//00 jasperViewer.setVisible(true);
+			Connection conexion = Conexion.getConexion().getSQLConexion();
+			// 00JasperPrint jasperPrintWindow =
+			// JasperFillManager.fillReport("C:\\PROYECTO\\agenda\\agenda\\reportes\\ReporteDeporte.jasper",
+			// null,conexion);
+			// 00 JasperViewer jasperViewer = new JasperViewer(jasperPrintWindow);
+			// 00 jasperViewer.setVisible(true);
 
-
-			this.reporte = (JasperReport) JRLoader.loadObjectFromFile("C:\\PROYECTO\\agenda\\agenda\\reportes" + File.separator + "ReporteDeporte.jasper" );
+			// this.reporte = (JasperReport)
+			// JRLoader.loadObjectFromFile("C:\\PROYECTO\\agenda\\agenda\\reportes" +
+			// File.separator + "ReporteDeporte.jasper" );
+			this.reporte = (JasperReport) JRLoader
+					.loadObjectFromFile("/home/enzo/proyectos_java/agenda/agenda/agenda/reportes" + File.separator
+							+ "ReporteDeporte2.jasper");
 			this.reporteLleno = JasperFillManager.fillReport(this.reporte, null, conexion);
-    		log.info("Se cargó correctamente el reporte");
+			this.reporteLleno = JasperFillManager.fillReport(this.reporte, null, conexion);
+			log.info("Se cargó correctamente el reporte");
 
-
-		}
-		catch( JRException ex ) 
-		{
+		} catch (JRException ex) {
 			log.error("Ocurrió un error mientras se cargaba el archivo ReporteAgenda.Jasper", ex);
 		}
-    }       
-    
-    public void mostrar()
-	{
-		this.reporteViewer = new JasperViewer(this.reporteLleno,false);
+	}
+
+	public void mostrar() {
+		this.reporteViewer = new JasperViewer(this.reporteLleno, false);
 		this.reporteViewer.setVisible(true);
 	}
-   
-}	
+
+}

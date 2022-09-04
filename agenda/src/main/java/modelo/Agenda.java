@@ -37,7 +37,7 @@ public class Agenda
 	private LocalidadProvinciaDAO localidadprovincia;
 	private ProvinciaDAO provincia;
 	private PaisDAO pais;
-	
+	//revisar declaraciones DAO
 	public Agenda(DAOAbstractFactory metodo_persistencia)
 	{
 		this.personaDAO = metodo_persistencia.createPersonaDAO();
@@ -52,11 +52,11 @@ public class Agenda
 		this.pais = metodo_persistencia.createPaisDAO();
 	}
 	
+	//persona
 	public void agregarPersona(PersonaDTO nuevaPersona)
 	{
 		this.personaDAO.insert(nuevaPersona);
 	}
-
 
 	public void borrarPersona(int id_persona_a_eliminar) 
 	{
@@ -73,6 +73,12 @@ public class Agenda
 		this.personaDAO.edit(persona_a_editar);
 	}
 
+	public PersonaDTO findPersonaById(int idPersona){
+		return this.personaDAO.findById(idPersona);
+	}
+
+
+	//domicilio
     public void agregarDomicilio(DomicilioDTO nuevoDomicilio) {
 		this.domicilioDAO.insert(nuevoDomicilio);
     }
@@ -90,6 +96,10 @@ public class Agenda
 	public void editarDomicilio(DomicilioDTO domicilio_a_editar)
 	{
 		this.domicilioDAO.edit(domicilio_a_editar);
+	}
+
+	public DomicilioDTO findDomicilioById(int idPersona){
+		return this.domicilioDAO.findById(idPersona);
 	}
 
 	// Localidad
@@ -113,11 +123,15 @@ public class Agenda
 		this.localidadDAO.edit(localidad_a_editar);
 	}
 
+	public LocalidadDTO findLocalidadById(int idLocalidad){
+		return this.localidadDAO.findById(idLocalidad);
+	}
+
+	//tipo de cntacto
 	public void agregarTipoContacto(TipoContactoDTO nuevoTipoContacto)
 	{
 		this.tipocontactoDao.insert(nuevoTipoContacto);
 	}
-
 	
 	public List<TipoContactoDTO> obtenerTipoContacto()
 	{
@@ -128,11 +142,17 @@ public class Agenda
 	{
 		this.tipocontactoDao.edit(tipo_a_editar);
 	}
-	
-	public Integer findDomicilioByIdPerson(int idpersona){
-		return this.domicilioDAO.findDomicilioByIdPerson(idpersona);
+
+	public void borrarTipoContacto(int tipo_a_eliminar) 
+	{
+		this.tipocontactoDao.delete(tipo_a_eliminar);
 	}
 
+	public TipoContactoDTO findTipoContactoById(int idTipoContacto){
+		return this.tipocontactoDao.findById(idTipoContacto);
+	}
+
+	//deporte
 	public void agregarDeporte(DeporteDTO nuevoDeporte)
 	{
 		this.deporteDAO.insert(nuevoDeporte);
@@ -153,6 +173,11 @@ public class Agenda
 		this.deporteDAO.edit(deporte_a_editar);
 	}
 
+	public DeporteDTO findDeporteById(int idDeporte){
+		return this.deporteDAO.findById(idDeporte);
+	}
+
+	//equipo
 	public void agregarEquipo(EquipoDTO nuevoEquipo)
 	{
 		this.equipoDAO.insert(nuevoEquipo);
@@ -161,11 +186,6 @@ public class Agenda
 	public void borrarEquipo(int id_equipo_a_eliminar) 
 	{
 		this.equipoDAO.delete(id_equipo_a_eliminar);
-	}
-
-	public void borrarTipoContacto(int tipo_a_eliminar) 
-	{
-		this.tipocontactoDao.delete(tipo_a_eliminar);
 	}
 	
 	public List<EquipoDTO> obtenerEquipo()
@@ -178,23 +198,39 @@ public class Agenda
 		this.equipoDAO.edit(equipo_a_editar);
 	}
 
+	public EquipoDTO findEquipoById(int idEquipo){
+		return this.equipoDAO.findById(idEquipo);
+	}
+
+	//personas domicilio
 	public List<PersonaDomicilioDTO> obtenerPersonasDomicilio()
 	{
 		return this.personadomicilio.readAll();		
 	}
 
+	//localidad provincia
 	public List<LocalidadProvinciaDTO> obtenerLocalidadProvincia()
 	{
 		return this.localidadprovincia.readAll();		
 	}
 
+	// provincia	
 	public List<ProvinciaDTO> obtenerProvincia()
 	{
 		return this.provincia.readAll();		
 	}
 
+	public ProvinciaDTO findProvById(int idProv){
+		return this.provincia.findById(idProv);
+	}
+
+	//pais
     public List<PaisDTO> obtenerPais() {
         return this.pais.readAll();
     }
+
+	public PaisDTO findPaisById(int idPais){
+		return this.pais.findById(idPais);
+	}
 
 }

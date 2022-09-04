@@ -17,7 +17,8 @@ public class EquipoDAOSQL implements EquipoDAO{
 	private static final String delete = "DELETE FROM equipos WHERE idEquipo = ?";
 	private static final String readall = "SELECT * FROM equipos";
 	private static final String edit = "UPDATE equipos SET nombre=? WHERE idEquipo = ?";
-	
+	private static final String findById = "SELECT * FROM equipos WHERE idEquipo = ? ";
+
 	public boolean insert(EquipoDTO equipo)
 	{
 		PreparedStatement statement;
@@ -100,7 +101,6 @@ public class EquipoDAOSQL implements EquipoDAO{
 		return new EquipoDTO(id, nombre);
 	}
 
-
 	public boolean edit(EquipoDTO equipo_a_editar)
 	{
 			PreparedStatement statement;
@@ -133,5 +133,28 @@ public class EquipoDAOSQL implements EquipoDAO{
 	
 		
 		return isEditExitoso;
+	}
+
+	public EquipoDTO findById(int idEquipo)
+	{
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		EquipoDTO equipoDTO = null;
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(findById);
+			statement.setString(1, Integer.toString(idEquipo));
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				equipoDTO = getEquipoDTO(resultSet);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return equipoDTO;
 	}
 }

@@ -12,4 +12,6 @@ public interface DeporteDAO {
 	public boolean edit(DeporteDTO deporte_a_editar);
 	
 	public List<DeporteDTO> readAll();
+
+	public DeporteDTO findById(int idDeporte);
 }

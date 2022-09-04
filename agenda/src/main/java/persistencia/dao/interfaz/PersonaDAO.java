@@ -15,5 +15,7 @@ public interface PersonaDAO
 	
 	public List<PersonaDTO> readAll();
 
+	public PersonaDTO findById(int idPersona);
+
 	
 }

@@ -14,4 +14,6 @@ public interface PaisDAO
 	public boolean edit(PaisDTO domicilio_a_editar);
 	
 	public List<PaisDTO> readAll();
+
+	public PaisDTO findById(int idPais);
 }

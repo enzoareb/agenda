@@ -1,8 +1,5 @@
 package presentacion.vista;
-
-
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -11,28 +8,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import dto.PaisDTO;
 import dto.ProvinciaDTO;
 
 public class VentanaEditarLocalidad extends JFrame 
 {
-
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtNombre;
-	
+	private JTextField txtNombre;	
 	private JTextField txtIdLocalidad;
 	private JTextField txtIdProvincia;
 	private JTextField txtIdPais;
-
 	private JComboBox<String> jcprovincia; 
 	private JComboBox<String> jcpais;
-
 	private JButton btnAgregarLocalidad;
 	private JButton btnActualizarLocalidad;
-
-	
 	private static VentanaEditarLocalidad INSTANCE;
 	
 	public static VentanaEditarLocalidad getInstance()
@@ -56,8 +46,7 @@ public class VentanaEditarLocalidad extends JFrame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setResizable(false);
-		
+		setResizable(false);	
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 400, 853);
@@ -198,7 +187,6 @@ public class VentanaEditarLocalidad extends JFrame
 		return btnAgregarLocalidad;
 	}
 
-
 	public JButton getBtnActualizarLocalidad() {
 		return btnActualizarLocalidad;
 	}
@@ -219,9 +207,6 @@ public class VentanaEditarLocalidad extends JFrame
 		this.txtIdPais.setText(idPais);
 	}
 
-
-
-
 	public void cerrar()
 	{
 		this.txtNombre.setText(null);
@@ -234,9 +219,7 @@ public class VentanaEditarLocalidad extends JFrame
 		this.txtNombre.setText(nombre);
 	}
 
-	
 	// Parra llenar combo 
-	
 	public void llenarComboPaises(List<PaisDTO> paises) {
 		for (PaisDTO pais : paises)
 		{
@@ -251,8 +234,6 @@ public class VentanaEditarLocalidad extends JFrame
 			this.jcprovincia.addItem(provincia.getNombreProvincia());
 		}
 	} 
-	
-
-	
+		
 }
 

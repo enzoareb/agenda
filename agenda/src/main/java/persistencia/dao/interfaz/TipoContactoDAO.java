@@ -13,4 +13,6 @@ public interface TipoContactoDAO
 	public boolean edit(TipoContactoDTO domicilio_a_editar);
 	
 	public List<TipoContactoDTO> readAll();
+
+	public TipoContactoDTO findById(int idTipoContacto);
 }

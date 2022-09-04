@@ -17,9 +17,9 @@ public class DomicilioDAOSQL implements DomicilioDAO
 	private static final String insert = "INSERT INTO domicilio(idDomicilio, idPersona, calle, altura, piso, depto, localidad) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM domicilio WHERE idDomicilio = ?";
 	private static final String readall = "SELECT * FROM domicilio";
-	private static final String findDomiciliiByIdPerson = "SELECT * FROM domicilio WHERE idPersona = ?";
 	private static final String edit = "UPDATE domicilio SET calle=?, altura=?, piso=?, depto=?, localidad=? WHERE idDomicilio = ?";
-	
+	private static final String findById = "SELECT * FROM domicilio WHERE idPersona = ?";
+
 	public boolean insert(DomicilioDTO domicilio)
 	{
 		PreparedStatement statement;
@@ -99,30 +99,6 @@ public class DomicilioDAOSQL implements DomicilioDAO
 		return domicilios;
 	}
 
-	public Integer findDomicilioByIdPerson(int idPersona)
-	{
-		PreparedStatement statement;
-		ResultSet resultSet; //Guarda el resultado de la query
-		Integer iddomicilio = null;
-		Conexion conexion = Conexion.getConexion();
-		try 
-		{
-			statement = conexion.getSQLConexion().prepareStatement(findDomiciliiByIdPerson);
-			statement.setString(1,Integer.toString(idPersona));
-			resultSet = statement.executeQuery();
-			while(resultSet.next())
-			{
-				iddomicilio = resultSet.getInt("idDomicilio");
-			}
-			
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		}
-		return iddomicilio;
-	}
-	
 	private DomicilioDTO getDomicilioDTO(ResultSet resultSet) throws SQLException
 	{
 		int idDom = resultSet.getInt("idDomicilio");
@@ -136,8 +112,6 @@ public class DomicilioDAOSQL implements DomicilioDAO
 		return new DomicilioDTO(idDom,idPer,calle,altura,piso,depto,idlocalidad);
 	}
 
-
-	//agrego funcion para editar domicilio
 	public boolean edit(DomicilioDTO domicilio_a_editar)
 	{
 		PreparedStatement statement;
@@ -171,5 +145,28 @@ public class DomicilioDAOSQL implements DomicilioDAO
 		}
 		
 		return isEditExitoso;
+	}
+
+	public DomicilioDTO findById(int idPersona)
+	{
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		DomicilioDTO domicilioDTO = null;
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(findById);
+			statement.setString(1, Integer.toString(idPersona));
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				domicilioDTO = getDomicilioDTO(resultSet);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return domicilioDTO;
 	}
 }

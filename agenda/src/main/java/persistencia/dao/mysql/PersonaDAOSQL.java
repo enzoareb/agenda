@@ -18,7 +18,7 @@ public class PersonaDAOSQL implements PersonaDAO
 	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = "SELECT * FROM personas";
 	private static final String edit = "UPDATE personas SET nombre=?, telefono=?, email=?, Cumpleaños=?, idcontacto=?, idDeporte=?, idEquipo=? WHERE idPersona = ?";
-
+	private static final String findById = "SELECT * FROM personas WHERE idPersona = ?";
 
 	public boolean insert(PersonaDTO persona)
 	{
@@ -113,9 +113,6 @@ public class PersonaDAOSQL implements PersonaDAO
 		return new PersonaDTO(id, nombre, tel,email,fechaCumpleaños,idContacto,idDeporte,idEquipo);
 	}
 
-	
-
-	//agrego funcion para editar contacto
 	public boolean edit(PersonaDTO persona_a_editar)
 	{
 			PreparedStatement statement;
@@ -156,4 +153,26 @@ public class PersonaDAOSQL implements PersonaDAO
 		return isEditExitoso;
 	}
 
+	public PersonaDTO findById(int idPersona)
+	{
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		PersonaDTO personaDTO = null;
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(findById);
+			statement.setString(1, Integer.toString(idPersona));
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				personaDTO = getPersonaDTO(resultSet);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return personaDTO;
+	}
 }

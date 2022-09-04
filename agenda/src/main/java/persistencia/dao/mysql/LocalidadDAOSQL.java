@@ -19,7 +19,8 @@ public class LocalidadDAOSQL implements LocalidadDAO
 	private static final String delete = "DELETE FROM localidad WHERE idLocalidad = ?";
 	private static final String readall = "SELECT * FROM localidad";
 	private static final String edit = "UPDATE localidad SET nombrelocalidad=?,idProvincia=?, idpais=? WHERE idlocalidad = ?";
-	
+	private static final String findById = "SELECT * FROM localidad WHERE idlocalidad = ? ";
+
 	public boolean insert(LocalidadDTO localidad)
 	{
 		PreparedStatement statement;
@@ -73,13 +74,11 @@ public class LocalidadDAOSQL implements LocalidadDAO
 		}
 		return isdeleteExitoso;
 	}
-
-
-		
+	
 	public List<LocalidadDTO> readAll()
 	{
 		PreparedStatement statement;
-		ResultSet resultSet; //Guarda el resultado de la query
+		ResultSet resultSet; 
 		ArrayList<LocalidadDTO> localidades = new ArrayList<LocalidadDTO>();
 		Conexion conexion = Conexion.getConexion();
 		try 
@@ -108,8 +107,6 @@ public class LocalidadDAOSQL implements LocalidadDAO
 		return new LocalidadDTO(idLocal,nombre,idProv,idpais);
 	}
 
-
-	//agrego funcion para editar localidad
 	public boolean edit(LocalidadDTO localidad_a_editar)
 	{
 		PreparedStatement statement;
@@ -142,4 +139,28 @@ public class LocalidadDAOSQL implements LocalidadDAO
 		
 		return isEditExitoso;
 	}
+
+	public LocalidadDTO findById(int idLocalidad)
+	{
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		LocalidadDTO localidadDTO = null;
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(findById);
+			statement.setString(1, Integer.toString(idLocalidad));
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				localidadDTO = getLocalidadDTO(resultSet);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return localidadDTO;
+	}
+
 }

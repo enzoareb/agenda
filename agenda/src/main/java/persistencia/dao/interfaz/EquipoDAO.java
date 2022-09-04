@@ -13,4 +13,6 @@ public interface EquipoDAO {
 	public boolean edit(EquipoDTO equipo_a_editar);
 	
 	public List<EquipoDTO> readAll();
+
+	public EquipoDTO findById(int idEquipo);
 }
