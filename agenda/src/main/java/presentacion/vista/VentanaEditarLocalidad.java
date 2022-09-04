@@ -207,13 +207,6 @@ public class VentanaEditarLocalidad extends JFrame
 		this.txtIdPais.setText(idPais);
 	}
 
-	public void cerrar()
-	{
-		this.txtNombre.setText(null);
-
-		this.dispose();
-	}
-
 	// Seters
     public void setTxtNombre(String nombre) {
 		this.txtNombre.setText(nombre);
@@ -234,6 +227,17 @@ public class VentanaEditarLocalidad extends JFrame
 			this.jcprovincia.addItem(provincia.getNombreProvincia());
 		}
 	} 
+
+	public void cerrar()
+	{
+		this.txtNombre.setText(null);
+		this.txtIdLocalidad.setText(null);
+		this.txtIdProvincia.setText(null);
+		this.txtIdPais.setText(null);
+		this.jcprovincia.setSelectedIndex(0);
+		this.jcpais.setSelectedIndex(0);
+		this.dispose();
+	}
 		
 }
 

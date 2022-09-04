@@ -343,6 +343,10 @@ public class VentanaPersona extends JFrame
 		this.txtDomicilioCalle.setText(null);
 		this.txtDomicilioPiso.setText(null);
 		this.txtDomicilioDpto.setText(null);
+		this.jcLocalidad.setSelectedIndex(0);
+		this.jcTipoContacto.setSelectedIndex(0);
+		this.jcDeporte.setSelectedIndex(0);
+		this.jcEquipo.setSelectedIndex(0);
 
 		this.dispose();
 	}
