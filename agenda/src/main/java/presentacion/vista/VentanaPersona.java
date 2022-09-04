@@ -1,6 +1,5 @@
 package presentacion.vista;
 
-
 import java.util.List;
 
 import javax.swing.JButton;
@@ -17,8 +16,7 @@ import dto.EquipoDTO;
 import dto.LocalidadDTO;
 import dto.TipoContactoDTO;
 
-public class VentanaPersona extends JFrame 
-{
+public class VentanaPersona extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -35,31 +33,26 @@ public class VentanaPersona extends JFrame
 	private JTextField txtDomicilioPiso;
 	private JTextField txtDomicilioDpto;
 
-	private JComboBox<String> jcLocalidad; 
+	private JComboBox<String> jcLocalidad;
 	private JComboBox<String> jcTipoContacto;
-	private JComboBox<String> jcDeporte; 
+	private JComboBox<String> jcDeporte;
 	private JComboBox<String> jcEquipo;
 	private JButton btnAgregarPersona;
 	private JButton btnActualizarPersona;
 
-
 	private static VentanaPersona INSTANCE;
-	
-	public static VentanaPersona getInstance()
-	{
-		if(INSTANCE == null)
-		{
-			INSTANCE = new VentanaPersona(); 	
+
+	public static VentanaPersona getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new VentanaPersona();
 			return new VentanaPersona();
-		}
-		else
+		} else
 			return INSTANCE;
 	}
 
-	private VentanaPersona() 
-	{
+	private VentanaPersona() {
 		super();
-		
+
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 643, 380);
 		contentPane = new JPanel();
@@ -67,17 +60,16 @@ public class VentanaPersona extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setResizable(false);
-		
-		
+
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 840, 380);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		JLabel lblNombreYApellido = new JLabel("Nombre y apellido");
 		lblNombreYApellido.setBounds(10, 11, 113, 14);
 		panel.add(lblNombreYApellido);
-		
+
 		JLabel lblTelfono = new JLabel("Telefono");
 		lblTelfono.setBounds(10, 52, 113, 14);
 		panel.add(lblTelfono);
@@ -93,15 +85,15 @@ public class VentanaPersona extends JFrame
 		JLabel lblDomicilio = new JLabel("Domicilio");
 		lblDomicilio.setBounds(10, 93, 113, 14);
 		panel.add(lblDomicilio);
-		
+
 		JLabel lblDomicilioCalle = new JLabel("Calle");
 		lblDomicilioCalle.setBounds(10, 134, 113, 14);
 		panel.add(lblDomicilioCalle);
-		
+
 		JLabel lblDomicilioAltura = new JLabel("Altura");
 		lblDomicilioAltura.setBounds(10, 175, 113, 14);
 		panel.add(lblDomicilioAltura);
-		
+
 		JLabel lblDomicilioPiso = new JLabel("Piso");
 		lblDomicilioPiso.setBounds(325, 134, 113, 14);
 		panel.add(lblDomicilioPiso);
@@ -109,7 +101,7 @@ public class VentanaPersona extends JFrame
 		JLabel lblDomicilioDpto = new JLabel("Dpto");
 		lblDomicilioDpto.setBounds(325, 175, 113, 14);
 		panel.add(lblDomicilioDpto);
-		
+
 		JLabel lblDomicilioLocalidad = new JLabel("Localidad");
 		lblDomicilioLocalidad.setBounds(10, 216, 113, 14);
 		panel.add(lblDomicilioLocalidad);
@@ -117,7 +109,7 @@ public class VentanaPersona extends JFrame
 		JLabel lblTipoContacto = new JLabel("Tipo Contacto");
 		lblTipoContacto.setBounds(325, 216, 113, 14);
 		panel.add(lblTipoContacto);
-		
+
 		JLabel lblDeporte = new JLabel("Deporte");
 		lblDeporte.setBounds(10, 257, 113, 14);
 		panel.add(lblDeporte);
@@ -144,7 +136,7 @@ public class VentanaPersona extends JFrame
 		txtIdDomicilio.setVisible(false);
 		panel.add(txtIdDomicilio);
 		txtIdDomicilio.setColumns(30);
-		
+
 		txtTelefono = new JTextField();
 		txtTelefono.setBounds(133, 49, 164, 20);
 		panel.add(txtTelefono);
@@ -179,7 +171,7 @@ public class VentanaPersona extends JFrame
 		txtDomicilioDpto.setBounds(430, 175, 164, 20);
 		panel.add(txtDomicilioDpto);
 		txtDomicilioDpto.setColumns(10);
-		
+
 		jcLocalidad = new JComboBox<>();
 		jcLocalidad.setBounds(133, 216, 164, 20);
 		panel.add(jcLocalidad);
@@ -213,16 +205,15 @@ public class VentanaPersona extends JFrame
 
 		this.setVisible(false);
 	}
-	
-	public void mostrarVentana()
-	{
+
+	public void mostrarVentana() {
 		this.setVisible(true);
 	}
 
 	public void mostrarMensaje() {
 		JOptionPane.showMessageDialog(null, "Debe seleccionar un registro a editar", "Editar Contacto",
 				JOptionPane.WARNING_MESSAGE);
-		
+
 	}
 
 	public void mostrarVentana(String titulo, boolean estado) {
@@ -241,7 +232,7 @@ public class VentanaPersona extends JFrame
 
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		
+
 	}
 
 	public void mostrarVentana2(String titulo, boolean estado) {
@@ -251,23 +242,20 @@ public class VentanaPersona extends JFrame
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
-	
-	public JTextField getTxtNombre() 
-	{
+
+	public JTextField getTxtNombre() {
 		return txtNombre;
 	}
 
-	public JTextField getTxtIdPersona() 
-	{
+	public JTextField getTxtIdPersona() {
 		return txtIdPersona;
 	}
 
-	public JTextField getTxtIdDomicilio(){
+	public JTextField getTxtIdDomicilio() {
 		return txtIdDomicilio;
 	}
 
-	public JTextField getTxtTelefono() 
-	{
+	public JTextField getTxtTelefono() {
 		return txtTelefono;
 	}
 
@@ -278,8 +266,6 @@ public class VentanaPersona extends JFrame
 	public JTextField getTxtFechaCumpleaños() {
 		return txtFechaCumpleaños;
 	}
-
-	
 
 	public JTextField getTxtDomicilioCalle() {
 		return txtDomicilioCalle;
@@ -304,7 +290,6 @@ public class VentanaPersona extends JFrame
 	public JComboBox<String> getJcTipoContacto() {
 		return jcTipoContacto;
 	}
-	
 
 	public JComboBox<String> getJcDeporte() {
 		return jcDeporte;
@@ -314,13 +299,11 @@ public class VentanaPersona extends JFrame
 		return jcEquipo;
 	}
 
-	public JButton getBtnAgregarPersona() 
-	{
+	public JButton getBtnAgregarPersona() {
 		return btnAgregarPersona;
 	}
 
-	public JButton getBtnActualizarPersona() 
-	{
+	public JButton getBtnActualizarPersona() {
 		return btnActualizarPersona;
 	}
 
@@ -332,8 +315,7 @@ public class VentanaPersona extends JFrame
 		this.txtIdDeporte.setText(idDeporte);
 	}
 
-	public void cerrar()
-	{
+	public void cerrar() {
 		this.txtNombre.setText(null);
 		this.txtTelefono.setText(null);
 		this.txtEmail.setText(null);
@@ -352,7 +334,7 @@ public class VentanaPersona extends JFrame
 	}
 
 	// Seters
-    public void setTxtNombre(String nombre) {
+	public void setTxtNombre(String nombre) {
 		this.txtNombre.setText(nombre);
 	}
 
@@ -365,17 +347,17 @@ public class VentanaPersona extends JFrame
 		this.txtIdDomicilio.setText(id);
 	}
 
-    public void setTxtEmail(String email) {
+	public void setTxtEmail(String email) {
 		this.txtEmail.setText(email);
 	}
 
-    public void setTxtTelefono(String telefono) {
+	public void setTxtTelefono(String telefono) {
 		this.txtTelefono.setText(telefono);
-    }
+	}
 
-    public void setTxtFechaCumpleaños(String fechaCumpleaños) {
+	public void setTxtFechaCumpleaños(String fechaCumpleaños) {
 		this.txtFechaCumpleaños.setText(fechaCumpleaños);
-    }
+	}
 
 	public void setTxtIdPersona(Integer idPersona) {
 		String id = idPersona.toString();
@@ -384,22 +366,28 @@ public class VentanaPersona extends JFrame
 
 	public void setTxtDomicilioCalle(String domicilioCalle) {
 		this.txtDomicilioCalle.setText(domicilioCalle);
-    }
+	}
+
 	public void setTxtDomicilioAltura(String domicilioAltura) {
 		this.txtDomicilioAltura.setText(domicilioAltura);
-    }
+	}
+
 	public void setTxtDomicilioPiso(String domicilioPiso) {
 		this.txtDomicilioPiso.setText(domicilioPiso);
-    }
+	}
+
 	public void setTxtDomicilioDpto(String domicilioDpto) {
 		this.txtDomicilioDpto.setText(domicilioDpto);
-    }
+	}
+
 	public void setJcTipoContacto(JComboBox<String> jcTipoContacto) {
 		this.jcTipoContacto = jcTipoContacto;
 	}
+
 	public void setJcLocalidad(JComboBox<String> jcLocalidad) {
 		this.jcLocalidad = jcLocalidad;
 	}
+
 	public void setJcDeporte(JComboBox<String> jcDeporte) {
 		this.jcDeporte = jcDeporte;
 	}
@@ -407,35 +395,32 @@ public class VentanaPersona extends JFrame
 	public void setJcEquipo(JComboBox<String> jcEquipo) {
 		this.jcEquipo = jcEquipo;
 	}
-    
-	// Parra llenar combo 
-	
+
+	// Parra llenar combo
+
 	public void llenarComboLocalidades(List<LocalidadDTO> localidades) {
-		for (LocalidadDTO localidad : localidades)
-		{
+		for (LocalidadDTO localidad : localidades) {
 			this.jcLocalidad.addItem(localidad.getNombre());
 		}
 	}
 
-	// Parra llenar combo 
+	// Parra llenar combo
 	public void llenarComboTipos(List<TipoContactoDTO> tiposcontactolList) {
-		for (TipoContactoDTO tipoContacto : tiposcontactolList)
-		{
+		for (TipoContactoDTO tipoContacto : tiposcontactolList) {
 			this.jcTipoContacto.addItem(tipoContacto.getNombreTipo());
 		}
-	} 
+	}
+
 	public void llenarComboDeportes(List<DeporteDTO> deporteslList) {
-			for (DeporteDTO deporte : deporteslList)
-			{
-				this.jcDeporte.addItem(deporte.getNombre());
-			}
+		for (DeporteDTO deporte : deporteslList) {
+			this.jcDeporte.addItem(deporte.getNombre());
 		}
+	}
+
 	public void llenarComboEquipos(List<EquipoDTO> equipoList) {
-		for (EquipoDTO equipo : equipoList)
-		{
+		for (EquipoDTO equipo : equipoList) {
 			this.jcEquipo.addItem(equipo.getNombre());
 		}
 	}
-	
-}
 
+}

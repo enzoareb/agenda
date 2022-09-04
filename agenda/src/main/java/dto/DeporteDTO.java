@@ -3,7 +3,7 @@ package dto;
 public class DeporteDTO {
     private int idDeporte;
     private String nombre;
-    
+
     public DeporteDTO(int idDeporte, String nombre) {
         this.idDeporte = idDeporte;
         this.nombre = nombre;
@@ -24,7 +24,5 @@ public class DeporteDTO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    
 
 }

@@ -1,17 +1,12 @@
 package dto;
 
-
-
-public class TipoContactoDTO 
-{
+public class TipoContactoDTO {
 	private int idTipoContacto;
 	private String nombreTipo;
 
-
-	public TipoContactoDTO(int idTipoContacto, String nombreTipo)
-	{
+	public TipoContactoDTO(int idTipoContacto, String nombreTipo) {
 		this.idTipoContacto = idTipoContacto;
-		this.nombreTipo =  nombreTipo;
+		this.nombreTipo = nombreTipo;
 
 	}
 
@@ -31,7 +26,4 @@ public class TipoContactoDTO
 		this.nombreTipo = nombreTipo;
 	}
 
-	
-
-	
 }

@@ -12,12 +12,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-//import dto.LocalidadDTO;
 import dto.LocalidadProvinciaDTO;
 
-
-public class VentanaLocalidad extends JFrame 
-{ 
+public class VentanaLocalidad extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtLocalidad;
@@ -26,25 +23,21 @@ public class VentanaLocalidad extends JFrame
 	private JButton btnBorrar;
 	private JTable tablaLocalidades;
 	private DefaultTableModel modelLocalidades;
-	private  String[] nombreColumnas = {"Id","Nombre","Provincia","Pais"};
+	private String[] nombreColumnas = { "Id", "Nombre", "Provincia", "Pais" };
 
 	private static VentanaLocalidad INSTANCE;
-	
-	public static VentanaLocalidad getInstance()
-	{
-		if(INSTANCE == null)
-		{
-			INSTANCE = new VentanaLocalidad(); 	
+
+	public static VentanaLocalidad getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new VentanaLocalidad();
 			return new VentanaLocalidad();
-		}
-		else
+		} else
 			return INSTANCE;
 	}
 
-	private VentanaLocalidad() 
-	{
+	private VentanaLocalidad() {
 		super();
-		
+
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 440, 310);
 		contentPane = new JPanel();
@@ -52,12 +45,12 @@ public class VentanaLocalidad extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setResizable(false);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 500, 307);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		JLabel lblLocalidad = new JLabel("Localidad");
 		lblLocalidad.setBounds(10, 11, 113, 14);
 		lblLocalidad.setVisible(false);
@@ -68,7 +61,7 @@ public class VentanaLocalidad extends JFrame
 		txtLocalidad.setVisible(false);
 		panel.add(txtLocalidad);
 		txtLocalidad.setColumns(10);
-		
+
 		btnAgregar = new JButton("Agregar");
 		btnAgregar.setBounds(50, 220, 100, 25);
 		panel.add(btnAgregar);
@@ -85,50 +78,44 @@ public class VentanaLocalidad extends JFrame
 		spPersonas.setBounds(10, 11, 400, 200);
 		panel.add(spPersonas);
 
-		modelLocalidades = new DefaultTableModel(null,nombreColumnas);
+		modelLocalidades = new DefaultTableModel(null, nombreColumnas);
 		tablaLocalidades = new JTable(modelLocalidades);
-		
+
 		tablaLocalidades.getColumnModel().getColumn(0).setPreferredWidth(103);
 		tablaLocalidades.getColumnModel().getColumn(0).setResizable(false);
 		tablaLocalidades.getColumnModel().getColumn(1).setPreferredWidth(200);
 		tablaLocalidades.getColumnModel().getColumn(1).setResizable(false);
-		
+
 		spPersonas.setViewportView(tablaLocalidades);
 
-	
 		this.setVisible(false);
 	}
-	
-	public void mostrarVentana(String titulo, boolean estado)
-	{
+
+	public void mostrarVentana(String titulo, boolean estado) {
 		this.setTitle(titulo);
 		this.btnAgregar.setVisible(!estado);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 	}
 
-	public DefaultTableModel getModelLocalidades() 
-	{
+	public DefaultTableModel getModelLocalidades() {
 		return modelLocalidades;
 	}
-	
-	public JTable getTablaLocalidades()
-	{
+
+	public JTable getTablaLocalidades() {
 		return tablaLocalidades;
 	}
 
-	public String[] getNombreColumnas() 
-	{
+	public String[] getNombreColumnas() {
 		return nombreColumnas;
 	}
 
 	public void llenarTabla(List<LocalidadProvinciaDTO> localidadesEnTabla) {
-		this.getModelLocalidades().setRowCount(0); //Para vaciar la tabla
+		this.getModelLocalidades().setRowCount(0); // Para vaciar la tabla
 		this.getModelLocalidades().setColumnCount(0);
 		this.getModelLocalidades().setColumnIdentifiers(this.getNombreColumnas());
 
-		for (LocalidadProvinciaDTO p : localidadesEnTabla)
-		{
+		for (LocalidadProvinciaDTO p : localidadesEnTabla) {
 			int idlocalidad = p.getIdLocalidad();
 			String nombre = p.getNombre();
 			int idprovincia = p.getIdProvincia();
@@ -136,19 +123,17 @@ public class VentanaLocalidad extends JFrame
 			String nombreprovincia = p.getNombreProvincia();
 			String nombrepais = p.getNombrePais();
 
-			Object[] fila = {idlocalidad, nombre, nombreprovincia, nombrepais,idprovincia,idpais};
-			
-
+			Object[] fila = { idlocalidad, nombre, nombreprovincia, nombrepais, idprovincia, idpais };
 			this.getModelLocalidades().addRow(fila);
-			
-		
+
 		}
-		
+
 	}
-		
+
 	public JButton getBtnAgregar() {
 		return btnAgregar;
 	}
+
 	public JButton getBtnEditar() {
 		return btnEditar;
 	}
@@ -157,17 +142,11 @@ public class VentanaLocalidad extends JFrame
 		return btnBorrar;
 	}
 
+	public void cerrar() {
 
-	public void cerrar()
-	{
-	
 		this.txtLocalidad.setText(null);
 		this.btnAgregar.setEnabled(false);
 		this.dispose();
 	}
 
-
-	
-	
 }
-

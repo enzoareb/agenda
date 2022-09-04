@@ -1,24 +1,17 @@
 package dto;
 
-
-
-public class LocalidadDTO 
-{
+public class LocalidadDTO {
 	private int idLocalidad;
 	private String nombre;
 	private int idProvincia;
-	private  int idPais;
+	private int idPais;
 
-
-
-	public LocalidadDTO(int idLocalidad, String nombre, int idProvincia, int idPais)
-	{
+	public LocalidadDTO(int idLocalidad, String nombre, int idProvincia, int idPais) {
 		this.idLocalidad = idLocalidad;
 		this.nombre = nombre;
 		this.idProvincia = idProvincia;
 		this.idPais = idPais;
 	}
-
 
 	public int getIdProvincia() {
 		return idProvincia;
@@ -35,29 +28,21 @@ public class LocalidadDTO
 	public void setIdPais(int idPais) {
 		this.idPais = idPais;
 	}
-	
-	public int getIdLocalidad() 
-	{
+
+	public int getIdLocalidad() {
 		return this.idLocalidad;
 	}
 
-	public void setIdLocalidad(int idLocalidad) 
-	{
+	public void setIdLocalidad(int idLocalidad) {
 		this.idLocalidad = idLocalidad;
 	}
 
-	public String getNombre() 
-	{
+	public String getNombre() {
 		return this.nombre;
 	}
 
-	public void setNombre(String nombre) 
-	{
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	
-	
-
-	
 }

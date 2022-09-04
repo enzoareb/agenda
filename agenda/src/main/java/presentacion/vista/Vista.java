@@ -154,7 +154,7 @@ public class Vista {
 
 	// Llenar Tabla. Controlador.
 	public void llenarTabla(List<PersonaDomicilioDTO> personasEnTabla) {
-		this.getModelPersonas().setRowCount(0); // Para vaciar la tabla
+		this.getModelPersonas().setRowCount(0);
 		this.getModelPersonas().setColumnCount(0);
 		this.getModelPersonas().setColumnIdentifiers(this.getNombreColumnas());
 

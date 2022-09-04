@@ -1,4 +1,5 @@
 package presentacion.vista;
+
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -11,52 +12,47 @@ import javax.swing.border.EmptyBorder;
 import dto.PaisDTO;
 import dto.ProvinciaDTO;
 
-public class VentanaEditarLocalidad extends JFrame 
-{
+public class VentanaEditarLocalidad extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtNombre;	
+	private JTextField txtNombre;
 	private JTextField txtIdLocalidad;
 	private JTextField txtIdProvincia;
 	private JTextField txtIdPais;
-	private JComboBox<String> jcprovincia; 
+	private JComboBox<String> jcprovincia;
 	private JComboBox<String> jcpais;
 	private JButton btnAgregarLocalidad;
 	private JButton btnActualizarLocalidad;
 	private static VentanaEditarLocalidad INSTANCE;
-	
-	public static VentanaEditarLocalidad getInstance()
-	{
-		if(INSTANCE == null)
-		{
-			INSTANCE = new VentanaEditarLocalidad(); 	
+
+	public static VentanaEditarLocalidad getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new VentanaEditarLocalidad();
 			return new VentanaEditarLocalidad();
-		}
-		else
+		} else
 			return INSTANCE;
 	}
 
-	private VentanaEditarLocalidad() 
-	{
+	private VentanaEditarLocalidad() {
 		super();
-		
+
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 330, 230);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setResizable(false);	
-		
+		setResizable(false);
+
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 400, 853);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setBounds(10, 10, 113, 14);
 		panel.add(lblNombre);
-		
+
 		JLabel lblIdLocalidad = new JLabel("IdLocalidad");
 		lblIdLocalidad.setBounds(10, 33, 113, 14);
 		lblIdLocalidad.setVisible(false);
@@ -98,8 +94,8 @@ public class VentanaEditarLocalidad extends JFrame
 		txtIdProvincia.setVisible(false);
 		panel.add(txtIdProvincia);
 		txtIdProvincia.setColumns(30);
-		
-		//IdPais OCULTO
+
+		// IdPais OCULTO
 		txtIdPais = new JTextField();
 		txtIdPais.setBounds(133, 77, 164, 20);
 		txtIdPais.setVisible(false);
@@ -124,9 +120,8 @@ public class VentanaEditarLocalidad extends JFrame
 
 		this.setVisible(false);
 	}
-	
-	public void mostrarVentana()
-	{
+
+	public void mostrarVentana() {
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
@@ -147,14 +142,13 @@ public class VentanaEditarLocalidad extends JFrame
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
-	
+
 	public void mostrarMensaje() {
 		JOptionPane.showMessageDialog(null, "Debe seleccionar un registro a editar", "Editar Localidad",
 				JOptionPane.WARNING_MESSAGE);
 	}
 
-	public JTextField getTxtNombre() 
-	{
+	public JTextField getTxtNombre() {
 		return txtNombre;
 	}
 
@@ -162,11 +156,9 @@ public class VentanaEditarLocalidad extends JFrame
 		return txtIdProvincia;
 	}
 
-
 	public JTextField getTxtIdPais() {
 		return txtIdPais;
 	}
-
 
 	public JComboBox<String> getJcpais() {
 		return jcpais;
@@ -175,6 +167,7 @@ public class VentanaEditarLocalidad extends JFrame
 	public void setJcpais(JComboBox<String> jcpais) {
 		this.jcpais = jcpais;
 	}
+
 	public JComboBox<String> getJcprovincia() {
 		return jcprovincia;
 	}
@@ -208,28 +201,25 @@ public class VentanaEditarLocalidad extends JFrame
 	}
 
 	// Seters
-    public void setTxtNombre(String nombre) {
+	public void setTxtNombre(String nombre) {
 		this.txtNombre.setText(nombre);
 	}
 
-	// Parra llenar combo 
+	// Parra llenar combo
 	public void llenarComboPaises(List<PaisDTO> paises) {
-		for (PaisDTO pais : paises)
-		{
+		for (PaisDTO pais : paises) {
 			this.jcpais.addItem(pais.getNombrePais());
 		}
 	}
 
-	// Parra llenar combo 
+	// Parra llenar combo
 	public void llenarComboProvincias(List<ProvinciaDTO> provinciaList) {
-		for (ProvinciaDTO provincia : provinciaList)
-		{
+		for (ProvinciaDTO provincia : provinciaList) {
 			this.jcprovincia.addItem(provincia.getNombreProvincia());
 		}
-	} 
+	}
 
-	public void cerrar()
-	{
+	public void cerrar() {
 		this.txtNombre.setText(null);
 		this.txtIdLocalidad.setText(null);
 		this.txtIdProvincia.setText(null);
@@ -238,6 +228,5 @@ public class VentanaEditarLocalidad extends JFrame
 		this.jcpais.setSelectedIndex(0);
 		this.dispose();
 	}
-		
-}
 
+}

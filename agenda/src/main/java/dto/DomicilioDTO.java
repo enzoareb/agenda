@@ -9,8 +9,8 @@ public class DomicilioDTO {
     private String depto;
     private int idLocalidad;
 
-
-    public DomicilioDTO(int idDomicilio,int idPersona,String calle, String altura, String piso, String depto, int IdLocalidad) {
+    public DomicilioDTO(int idDomicilio, int idPersona, String calle, String altura, String piso, String depto,
+            int IdLocalidad) {
         this.idPersona = idPersona;
         this.idDomicilio = idDomicilio;
         this.calle = calle;
@@ -18,7 +18,7 @@ public class DomicilioDTO {
         this.piso = piso;
         this.depto = depto;
         this.idLocalidad = IdLocalidad;
- 
+
     }
 
     public int getidPersona() {
@@ -32,7 +32,6 @@ public class DomicilioDTO {
     public int getidDomicilio() {
         return idDomicilio;
     }
-
 
     public void setIdDomicilio(int idDomicilio) {
         this.idDomicilio = idDomicilio;
@@ -70,8 +69,6 @@ public class DomicilioDTO {
         this.depto = depto;
     }
 
-  
-
     public int getIdLocalidad() {
         return idLocalidad;
     }
@@ -82,13 +79,7 @@ public class DomicilioDTO {
 
     @Override
     public String toString() {
-        return calle+" "+altura;
+        return calle + " " + altura;
     }
-
-
-
-    
-
-    
 
 }
