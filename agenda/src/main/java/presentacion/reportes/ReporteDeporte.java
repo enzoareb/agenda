@@ -20,7 +20,8 @@ public class ReporteDeporte {
 		try {
 			Connection conexion = Conexion.getConexion().getSQLConexion();
 		//	this.reporte = (JasperReport) JRLoader.loadObjectFromFile("C:\\PROYECTO\\agenda\\agenda\\reportes" + File.separator + "ReporteAgenda.jasper" );
-			this.reporte = (JasperReport) JRLoader.loadObjectFromFile("/home/enzo/proyectos_java/agenda/agenda/agenda/reportes" + File.separator+ "ReporteDeporte2.jasper");
+		//	this.reporte = (JasperReport) JRLoader.loadObjectFromFile("/home/enzo/proyectos_java/agenda/agenda/agenda/reportes" + File.separator+ "ReporteDeporte2.jasper");
+			this.reporte = (JasperReport) JRLoader.loadObjectFromFile( "reportes" + File.separator + "ReporteDeporte2.jasper" );
 			this.reporteLleno = JasperFillManager.fillReport(this.reporte, null, conexion);
 			this.reporteLleno = JasperFillManager.fillReport(this.reporte, null, conexion);
 			log.info("Se cargó correctamente el reporte");
