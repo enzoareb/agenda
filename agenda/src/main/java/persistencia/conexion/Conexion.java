@@ -22,10 +22,11 @@ public class Conexion {
 			String servidor = (ventanaConexion.getTxtServidor().getText()).trim();
 			String usuario = (ventanaConexion.getTxtUsuario().getText()).trim();
 			String pass = (ventanaConexion.getTxtContraseña().getText()).trim();
+			String puerto = (ventanaConexion.getTxtPuerto().getText()).trim();
 
 			Class.forName("com.mysql.jdbc.Driver");
 
-			this.connection = DriverManager.getConnection("jdbc:mysql://" + servidor + ":3306/agenda", usuario, pass);
+			this.connection = DriverManager.getConnection("jdbc:mysql://" + servidor + ":"+puerto+"/agenda", usuario, pass);
 
 			this.connection.setAutoCommit(false);
 			log.info("Conexión exitosa");
