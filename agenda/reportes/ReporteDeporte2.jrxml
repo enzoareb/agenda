@@ -82,7 +82,7 @@ ORDER BY equipos. nombreEquipo,
 		<property name="com.jaspersoft.studio.field.tree.path" value="equipos"/>
 	</field>
 	<group name="nombreDeporte">
-		<groupExpression><![CDATA[$F{nombreDeporte}]]></groupExpression>
+		<groupExpression><![CDATA[$F{nombreEquipo}]]></groupExpression>
 	</group>
 	<group name="Group1">
 		<groupExpression><![CDATA[$F{nombreEquipo}]]></groupExpression>
@@ -300,7 +300,7 @@ ORDER BY equipos. nombreEquipo,
 					</dataset>
 					<keyExpression><![CDATA[$F{nombreEquipo}]]></keyExpression>
 					<valueExpression><![CDATA[$F{total}]]></valueExpression>
-					<labelExpression><![CDATA[($F{nombre}*100)/$F{total}.longValue() + "%"  ]]></labelExpression>
+					<labelExpression><![CDATA[($F{nombre}*100)/$F{total}.longValue() + "%"]]></labelExpression>
 				</pieDataset>
 				<piePlot>
 					<plot/>
