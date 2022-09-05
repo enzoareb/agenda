@@ -33,19 +33,19 @@ public class Vista {
 
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1300, 340);
+		frame.setBounds(100, 100, 1200, 340);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setTitle("AGENDA");
 		frame.setLocationRelativeTo(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 1300, 350);
+		panel.setBounds(0, 0, 1200, 350);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
 		JScrollPane spPersonas = new JScrollPane();
-		spPersonas.setBounds(10, 11, 1275, 200);
+		spPersonas.setBounds(10, 11, 1175, 200);
 		panel.add(spPersonas);
 
 		modelPersonas = new DefaultTableModel(null, nombreColumnas);
@@ -79,7 +79,7 @@ public class Vista {
 		panel.add(btnContactos);
 
 		btnReporteDeporte = new JButton("Emitir Reporte");
-		btnReporteDeporte.setBounds(1125, 260, 150, 30);
+		btnReporteDeporte.setBounds(1025, 260, 150, 30);
 		panel.add(btnReporteDeporte);
 
 	}
