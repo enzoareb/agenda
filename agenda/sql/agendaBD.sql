@@ -116,8 +116,8 @@ INSERT INTO `localidad` (`idlocalidad`, `nombrelocalidad`, `idprovincia`, `idpai
 (1, 'SAN MIGUEL', 1, 1),
 (2, 'MALVINAS', 1, 1),
 (3, 'HURLINGHAM', 1, 1),
-(4, 'JOSE C PAZ', 0, 0),
-(7, 'MORENO', 0, 0),
+(4, 'JOSE C PAZ', 1, 1),
+(7, 'MORENO', 1, 1),
 (8, 'VILLA BALLETER', 1, 1),
 (10, 'CASTELAR', 1, 1);
 
